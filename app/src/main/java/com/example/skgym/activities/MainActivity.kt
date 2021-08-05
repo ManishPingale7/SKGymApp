@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.skgym.R
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.ActivityMainBinding
@@ -33,6 +38,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        setSupportActionBar(binding.toolbarMain)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar.setHomeButtonEnabled(true)
+
+        val navController = findNavController(R.id.ContainerViewMain)
+        val appBarConfigration = AppBarConfiguration(setOf(R.id.homeFrag, R.id.nav_settings))
+        setupActionBarWithNavController(navController, appBarConfigration)
+        binding.bottomNavigation.setupWithNavController(navController)
+
     }
 
     private fun init() {
@@ -58,10 +73,6 @@ class MainActivity : AppCompatActivity() {
         checkUser()
 
 
-
-
-
-
     }
 
     private fun checkUser() {
@@ -72,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun sendUserToHomeActivity() {
         Intent(this, HomeAuth::class.java).also {
             startActivity(it)
