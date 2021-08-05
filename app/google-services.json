@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "632218923521",
+    "project_id": "sk-gym-app",
+    "storage_bucket": "sk-gym-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632218923521:android:3f772055e44da1b9984600",
+        "android_client_info": {
+          "package_name": "com.example.skgym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632218923521-brfpud69oun6u2auqm3oa3mafi9rpv81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyBoMRAQ6T43IE4zl7GgWm5vnDKBfFahY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632218923521-brfpud69oun6u2auqm3oa3mafi9rpv81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
