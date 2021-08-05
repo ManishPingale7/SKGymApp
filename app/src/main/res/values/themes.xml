@@ -14,4 +14,9 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
         <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
     </style>
+
+    <style name="ToolbarColoredBackArrow" parent="Theme.SkGym">
+        <item name="android:textColorSecondary">@color/white</item>
+
+    </style>
 </resources>

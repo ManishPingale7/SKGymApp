@@ -21,17 +21,9 @@
     <string name="signout">SignOut</string>
 
 
-
     <string name="todo">TODO</string>
 
 
-
-
-
-
-
-
-
-
     <string name="sign_out">Sign Out</string>
+    <string name="accessGymAnywhere">Access Gym Anywhere</string>
 </resources>

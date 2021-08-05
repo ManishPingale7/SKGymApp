@@ -22,7 +22,9 @@ class AuthViewModel(
         repository.forgotPassword(email)
     }
 
-
+    fun sendUserToMainActivity() {
+        repository.sendUserToMainActivity()
+    }
 
 
 }
