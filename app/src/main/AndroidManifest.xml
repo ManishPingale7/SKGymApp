@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkGym">
         <activity
+            android:name=".auth.HomeAuth"
+            android:exported="true" />
+        <activity
+            android:name=".auth.ForgotPassword"
+            android:exported="true" />
+        <activity
             android:name=".auth.RegisterActivity"
             android:exported="true" />
         <activity
