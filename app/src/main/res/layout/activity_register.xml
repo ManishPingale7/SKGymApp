@@ -136,20 +136,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_reg_lg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_reg_lg"
         android:layout_below="@id/log_pass_edit_lay"
-        android:background="@drawable/btn_circular"
-        android:text="@string/register"
         android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
         android:layout_marginTop="50dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="20sp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/btn_circular"
         android:fontFamily="@font/montserratsemibold"
-        />
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="wrap_content"
