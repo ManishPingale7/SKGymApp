@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="@string/a_positive_a"/>
+    <item android:title="@string/a_negative_a" />
+    <item android:title="@string/b_positive_b" />
+    <item android:title="@string/b_negative_b" />
+    <item android:title="@string/o_positive_o" />
+    <item android:title="@string/o_negati_ve_o" />
+    <item android:title="@string/ab_positive_ab" />
+    <item android:title="@string/ab_negative_ab" />
+
+</menu>
+
