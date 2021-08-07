@@ -1,6 +1,6 @@
 package com.example.skgym.Fragments.datacollection
 
-import android.content.ContentValues.TAG
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,9 +29,10 @@ class DataStage2 : Fragment() {
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
+    private val TAG = "DataStage2"
     var gender = "male"
     var memberThis = Member()
-    val args:DataStage2Args by navArgs()
+    private val Args:DataStage2Args by navArgs()
 
 
     override fun onCreateView(
@@ -102,7 +103,7 @@ class DataStage2 : Fragment() {
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser!!
-        memberThis=args.member
+        memberThis=Args.member
 
         Log.d(
             TAG,
