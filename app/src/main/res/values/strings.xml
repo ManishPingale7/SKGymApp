@@ -28,4 +28,27 @@
     <string name="settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="continuestr">Continue</string>
+    <string name="add_your_profile_image">Add Your Profile Image</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="a_positive_a">A positive (A+)</string>
+    <string name="a_negative_a">A negative (A-)</string>
+    <string name="b_positive_b">B positive (B+)</string>
+    <string name="b_negative_b">B negative (B-)</string>
+    <string name="o_positive_o">O positive (O+)</string>
+    <string name="o_negati_ve_o">O negati ve (O-)</string>
+    <string name="ab_positive_ab">AB positive (AB+)</string>
+    <string name="ab_negative_ab">AB negative (AB-)</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="fill_your_details">Fill Your Details</string>
+    <string name="pick_birthdate">Pick Birthdate</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender</string>
+    <string name="guardian_optional">Guardian (Optional)</string>
+    <string name="address">Address</string>
+    <string name="blood_report_if_available">Blood Report if Available</string>
+    <string name="pick_report">Pick Report</string>
 </resources>
