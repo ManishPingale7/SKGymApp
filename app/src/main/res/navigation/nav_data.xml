@@ -8,15 +8,23 @@
     <fragment
         android:id="@+id/generalData"
         android:name="com.example.skgym.Fragments.datacollection.GeneralData"
-        android:label="fragment_general_data"
+        android:label="Gym Form"
         tools:layout="@layout/fragment_general_data" >
         <action
             android:id="@+id/action_generalData_to_dataStage2"
-            app:destination="@id/dataStage2" />
+            app:destination="@id/dataStage2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/dataStage2"
         android:name="com.example.skgym.Fragments.datacollection.DataStage2"
-        android:label="fragment_data_stage2"
-        tools:layout="@layout/fragment_data_stage2" />
+        android:label="General Data"
+        tools:layout="@layout/fragment_data_stage2" >
+        <argument
+            android:name="Member"
+            app:argType="com.example.skgym.data.Member" />
+    </fragment>
 </navigation>

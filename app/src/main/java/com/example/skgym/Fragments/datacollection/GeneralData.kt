@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
-import com.example.skgym.R
+import androidx.navigation.Navigation
 import com.example.skgym.data.Member
 import com.example.skgym.databinding.FragmentGeneralDataBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -30,7 +30,7 @@ class GeneralData : Fragment() {
     var imageUri: Uri? = null
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
-    var member= Member()
+    var member = Member()
 
 
     override fun onCreateView(
@@ -48,29 +48,29 @@ class GeneralData : Fragment() {
         }
 
         binding.btnContinueGeneral1.setOnClickListener {
-            val firstname=binding.firstNameGeneral.text.toString()
-            val middleName=binding.middleNameGeneral.text.toString()
-            val lastname=binding.lastNameGeneral.text.toString()
+            val firstname = binding.firstNameGeneral.text.toString()
+            val middleName = binding.middleNameGeneral.text.toString()
+            val lastname = binding.lastNameGeneral.text.toString()
 
-            if (firstname.isNotEmpty()&&middleName.isNotEmpty()&&lastname.isNotEmpty())
-            {
-                if (imageUri!=null)
-                {
-                    member.firstname=firstname
-                    member.middleName=middleName
-                    member.lastname=lastname
-                    member.imgUrl=imageUri
-                }else{
-                    Toast.makeText(requireContext(), "Select Profile Image", Toast.LENGTH_SHORT).show()
+            if (firstname.isNotEmpty() && middleName.isNotEmpty() && lastname.isNotEmpty()) {
+                if (imageUri != null) {
+                    member.firstname = firstname
+                    member.middleName = middleName
+                    member.lastname = lastname
+                    member.imgUrl = imageUri
+                    //Passing Data
+                    val action = GeneralDataDirections.actionGeneralDataToDataStage2(member)
+                    Navigation.findNavController(binding.root).navigate(action)
+                } else {
+                    Toast.makeText(requireContext(), "Select Profile Image", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(requireContext(), "Fill the Fields", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
     }
-
 
 
     private fun init() {
@@ -81,11 +81,11 @@ class GeneralData : Fragment() {
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-        currentUser=mAuth.currentUser!!
+        currentUser = mAuth.currentUser!!
 
     }
 
-    private fun pickImage(){
+    private fun pickImage() {
         val galleryIntent = Intent()
         galleryIntent.apply {
             action = Intent.ACTION_GET_CONTENT

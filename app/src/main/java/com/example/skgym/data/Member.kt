@@ -1,8 +1,11 @@
 package com.example.skgym.data
 
 import android.net.Uri
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class Member(
     var imgUrl:Uri?=null,
     var firstname: String="empty",
@@ -14,4 +17,4 @@ data class Member(
     var gender: String="empty",
     var guardian:String="None",
     var medicalDocuments:Uri?=null
-)
+): Parcelable
