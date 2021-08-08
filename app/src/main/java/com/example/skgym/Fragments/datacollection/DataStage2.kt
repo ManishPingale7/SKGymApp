@@ -1,12 +1,16 @@
 package com.example.skgym.Fragments.datacollection
 
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.skgym.R
@@ -24,6 +28,7 @@ import java.util.*
 
 
 class DataStage2 : Fragment() {
+
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentDataStage2Binding? = null
     private val binding get() = _binding!!
@@ -31,8 +36,11 @@ class DataStage2 : Fragment() {
     var mAuth = FirebaseAuth.getInstance()
     private val TAG = "DataStage2"
     var gender = "male"
+    lateinit var bloodReport:Uri
     var memberThis = Member()
-    private val Args:DataStage2Args by navArgs()
+
+
+    private val Args: DataStage2Args by navArgs()
 
 
     override fun onCreateView(
@@ -41,6 +49,9 @@ class DataStage2 : Fragment() {
     ): View {
         _binding = FragmentDataStage2Binding.inflate(inflater, container, false)
         init()
+        val bloodGroups=resources.getStringArray(R.array.bloodGroups)
+        val arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdownitem,bloodGroups)
+        binding.bloodgrpData.setAdapter(arrayAdapter)
         val builder =
             MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
@@ -51,11 +62,17 @@ class DataStage2 : Fragment() {
             picker.show(requireActivity().supportFragmentManager, "DATE-PICKER")
         }
 
+        binding.pickBloodReport.setOnClickListener {
+            val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
+            fileIntent.type = "application/pdf"
+            startActivityForResult(fileIntent, 21)
+        }
+
         picker.addOnPositiveButtonClickListener {
             Log.d(TAG, "onCreateView: Header Date =${picker.headerText}")
             Log.d(TAG, "onCreateView: Selection =${picker.selection}")
-            val date= Date(picker.headerText)
-            memberThis.dob=date
+            val date = Date(picker.headerText)
+            memberThis.dob = date
         }
         picker.addOnNegativeButtonClickListener {
             Log.d(TAG, "onCreateView: NEGATIVE")
@@ -68,25 +85,25 @@ class DataStage2 : Fragment() {
         when (binding.radioGroupGender.checkedRadioButtonId) {
             R.id.radio_button_male -> {
                 gender = "male"
-                memberThis.gender=gender
+                memberThis.gender = gender
             }
             R.id.radio_button_female -> {
                 gender = "female"
-                memberThis.gender=gender
+                memberThis.gender = gender
             }
         }
         Log.d(TAG, "onCreateView: Gender $gender")
         binding.radioButtonMale.setOnCheckedChangeListener { buttonView, isChecked ->
             if (binding.radioButtonMale.isChecked) {
                 gender = "male"
-                memberThis.gender=gender
+                memberThis.gender = gender
             }
             Log.d(TAG, "onCreateView: Gender $gender")
         }
         binding.radioButtonFemale.setOnCheckedChangeListener { buttonView, isChecked ->
             if (binding.radioButtonFemale.isChecked) {
                 gender = "female"
-                memberThis.gender=gender
+                memberThis.gender = gender
             }
             Log.d(TAG, "onCreateView: Gender $gender")
         }
@@ -103,12 +120,29 @@ class DataStage2 : Fragment() {
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser!!
-        memberThis=Args.member
+        memberThis = Args.member
 
         Log.d(
             TAG,
             "init: Member Details are \n Name = ${memberThis.firstname} ${memberThis.middleName} ${memberThis.lastname} \n" +
-                    "ImageUri is ${memberThis.imgUrl}")
+                    "ImageUri is ${memberThis.imgUrl}"
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            21 -> {
+                if (resultCode == RESULT_OK) {
+                    bloodReport = data!!.data!!
+                    memberThis.medicalDocuments=bloodReport
+                }
+            }
+            else -> {
+                Log.d(TAG, "onActivityResult: ELSE")
+
+            }
+        }
     }
 
 }

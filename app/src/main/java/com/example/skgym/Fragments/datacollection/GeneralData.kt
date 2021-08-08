@@ -1,3 +1,5 @@
+
+
 package com.example.skgym.Fragments.datacollection
 
 import android.app.Activity.RESULT_OK
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.skgym.data.Member
 import com.example.skgym.databinding.FragmentGeneralDataBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -60,7 +63,7 @@ class GeneralData : Fragment() {
                     member.imgUrl = imageUri
                     //Passing Data
                     val action = GeneralDataDirections.actionGeneralDataToDataStage2(member)
-                    Navigation.findNavController(binding.root).navigate(action)
+                    it.findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(), "Select Profile Image", Toast.LENGTH_SHORT)
                         .show()
