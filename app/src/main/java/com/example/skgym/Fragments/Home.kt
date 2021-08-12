@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
 import com.example.skgym.activities.GetUserData
@@ -63,14 +64,9 @@ class Home : Fragment() {
 
         if (isTaken) {
             Log.d(TAG, "onCreateView: Branch taken")
+            Toast.makeText(requireContext(), "Taken", Toast.LENGTH_SHORT).show()
         } else {
-            val builder = AlertDialog.Builder(requireContext())
-            val mView = layoutInflater.inflate(R.layout.dialogspinner, null)
-            builder.setTitle("Select Your Branch")
-            val spinner = mView.findViewById<Spinner>(R.id.spinnerBranches)
-
-
-
+            Toast.makeText(requireContext(), " Not Taken", Toast.LENGTH_SHORT).show()
             branchesNameRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     branchesList.clear()
@@ -79,28 +75,8 @@ class Home : Fragment() {
                         Log.d(TAG, "onDataChange: ${dataSnapshot.value.toString()}")
                         Log.d(TAG, "onDataChange: ${branchesList.size}")
                     }
-                    val list = branchesList.toArray()
-                    Log.d(TAG, "onCreateView: size ${list.size}")
-                    val adapter = ArrayAdapter(
-                        requireContext(), android.R.layout.simple_spinner_item,
-                        list
-                    )
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                    builder.setPositiveButton(
-                        "ok"
-                    ) { dialog, which ->
-
-                    }
-
-                    builder.setNegativeButton(
-                        "Cancel"
-                    ) { dialog, which ->
-
-                    }
-                    builder.setView(mView)
-                    builder.show()
+                    editor.putBoolean("isBranchTaken", true)
+                    editor.apply()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -109,14 +85,7 @@ class Home : Fragment() {
 
             })
 
-            for (i in 0 until branchesList.size) {
-                Log.d(TAG, "onCreateView: Array ${branchesList[i]}")
-            }
-
         }
-
-
-
         return binding.root
     }
 
