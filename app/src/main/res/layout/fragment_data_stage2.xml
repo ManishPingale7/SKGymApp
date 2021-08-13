@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".Fragments.datacollection.DataStage2">
@@ -11,21 +11,23 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:id="@+id/menuBlood"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/blood_group">
+        android:layout_marginTop="20dp"
+        android:drawablePadding="12dp"
+        app:hintEnabled="false">
 
         <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/bloodgrp_data"
-            android:inputType="none"
+            android:layout_width="match_parent"
+            android:hint="@string/blood_group"
+            android:fontFamily="@font/montserratsemibold"
+            android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_weight="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,6 +51,27 @@
             android:inputType="textMultiLine">
 
         </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuBranch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="12dp"
+        app:hintEnabled="false">
+
+        <AutoCompleteTextView
+            android:id="@+id/branch_data"
+            android:layout_width="match_parent"
+            android:hint="@string/branch"
+            android:fontFamily="@font/montserratsemibold"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_weight="1" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -164,7 +187,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/btn_circular"
         android:fontFamily="@font/montserratsemibold"

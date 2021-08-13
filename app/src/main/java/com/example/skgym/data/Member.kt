@@ -7,6 +7,7 @@ import java.util.*
 
 @Parcelize
 data class Member(
+    var branch:String="",
     var imgUrl:Uri?=null,
     var firstname: String="empty",
     var middleName: String="empty",

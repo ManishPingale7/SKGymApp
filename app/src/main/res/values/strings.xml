@@ -33,14 +33,18 @@
     <string name="first_name">First Name</string>
     <string name="middle_name">Middle Name</string>
     <string name="last_name">Last Name</string>
-    <string name="a_positive_a">A positive (A+)</string>
-    <string name="a_negative_a">A negative (A-)</string>
-    <string name="b_positive_b">B positive (B+)</string>
-    <string name="b_negative_b">B negative (B-)</string>
-    <string name="o_positive_o">O positive (O+)</string>
-    <string name="o_negati_ve_o">O negati ve (O-)</string>
-    <string name="ab_positive_ab">AB positive (AB+)</string>
-    <string name="ab_negative_ab">AB negative (AB-)</string>
+
+    <string-array name="bloodGroups">
+        <item name="a_positive_a">A positive (A+)</item>
+        <item name="a_negative_a">A negative (A-)</item>
+        <item name="b_positive_b">B positive (B+)</item>
+        <item name="b_negative_b">B negative (B-)</item>
+        <item name="o_positive_o">O positive (O+)</item>
+        <item name="o_negati_ve_o">O negati ve (O-)</item>
+        <item name="ab_positive_ab">AB positive (AB+)</item>
+        <item name="ab_negative_ab">AB negative (AB-)</item>
+    </string-array>
+
     <string name="blood_group">Blood Group</string>
     <string name="fill_your_details">Fill Your Details</string>
     <string name="pick_birthdate">Pick Birthdate</string>
@@ -51,4 +55,6 @@
     <string name="address">Address</string>
     <string name="blood_report_if_available">Blood Report if Available</string>
     <string name="pick_report">Pick Report</string>
+    <string name="textview">TextView</string>
+    <string name="branch">Branch</string>
 </resources>

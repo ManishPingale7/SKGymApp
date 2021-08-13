@@ -26,6 +26,7 @@ class AuthRepository(var context: Context) : BaseRepository(context) {
                                 context.startActivity(it)
                             }
                         } else {
+                            mAuth.currentUser!!.sendEmailVerification()
                             Toast.makeText(context, "First Verify Your Email", Toast.LENGTH_SHORT)
                                 .show()
                         }
