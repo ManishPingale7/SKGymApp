@@ -42,11 +42,10 @@ class DataStage2 : Fragment() {
     var mAuth = FirebaseAuth.getInstance()
     private val TAG = "DataStage2"
     var gender = "male"
-    lateinit var bloodReport:Uri
+    lateinit var bloodReport: Uri
     var memberThis = Member()
     private val fDatabase = FirebaseDatabase.getInstance()
-    var branchesList = ArrayList<String>()
-    var branchesNameRef = fDatabase.getReference(Constants.BRANCHES_SPINNER)
+
 
 
     private val Args: DataStage2Args by navArgs()
@@ -58,8 +57,8 @@ class DataStage2 : Fragment() {
     ): View {
         _binding = FragmentDataStage2Binding.inflate(inflater, container, false)
         init()
-        val bloodGroups=resources.getStringArray(R.array.bloodGroups)
-        val arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdownitem,bloodGroups)
+        val bloodGroups = resources.getStringArray(R.array.bloodGroups)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdownitem, bloodGroups)
         binding.bloodgrpData.setAdapter(arrayAdapter)
         val builder =
             MaterialDatePicker.Builder.datePicker()
@@ -70,6 +69,18 @@ class DataStage2 : Fragment() {
         binding.pickDateData.setOnClickListener {
             picker.show(requireActivity().supportFragmentManager, "DATE-PICKER")
         }
+
+        viewModel.fetchBranchNames().observe(viewLifecycleOwner, {
+
+            Log.d(TAG, "onCreateView: Size ${it.size}")
+            val arrayAdapter = ArrayAdapter(
+                requireContext(), R.layout.dropdownitem,
+                it.toArray()
+            )
+
+            arrayAdapter.notifyDataSetChanged()
+            binding.branchData.setAdapter(arrayAdapter)
+        })
 
         binding.pickBloodReport.setOnClickListener {
             val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -134,7 +145,7 @@ class DataStage2 : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser!!
         memberThis = Args.member
-        getBranches()
+
         Log.d(
             TAG,
             "init: Member Details are \n Name = ${memberThis.firstname} ${memberThis.middleName} ${memberThis.lastname} \n" +
@@ -148,7 +159,7 @@ class DataStage2 : Fragment() {
             21 -> {
                 if (resultCode == RESULT_OK) {
                     bloodReport = data!!.data!!
-                    memberThis.medicalDocuments=bloodReport
+                    memberThis.medicalDocuments = bloodReport
                 }
             }
             else -> {
@@ -159,25 +170,6 @@ class DataStage2 : Fragment() {
     }
 
 
-    fun getBranches(){
-        branchesNameRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                branchesList.clear()
-                for (dataSnapshot: DataSnapshot in snapshot.children) {
-                    branchesList.add(dataSnapshot.value.toString())
-                    Log.d(ContentValues.TAG, "onDataChange: ${dataSnapshot.value.toString()}")
-                    Log.d(ContentValues.TAG, "onDataChange: ${branchesList.size}")
-                }
-                val branches=branchesList.toArray()
-                val arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdownitem,branches)
-                binding.branchData.setAdapter(arrayAdapter)
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(ContentValues.TAG, "onCancelled: $error")
-            }
-
-        })
-    }
 
 }
