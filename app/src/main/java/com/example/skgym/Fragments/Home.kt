@@ -38,9 +38,8 @@ class Home : Fragment() {
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
-    var branchesList = ArrayList<String>()
-    private val fDatabase = FirebaseDatabase.getInstance()
-    var branchesNameRef = fDatabase.getReference(BRANCHES_SPINNER)
+
+
 
 
     override fun onCreateView(
@@ -67,23 +66,7 @@ class Home : Fragment() {
             Toast.makeText(requireContext(), "Taken", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(requireContext(), " Not Taken", Toast.LENGTH_SHORT).show()
-            branchesNameRef.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    branchesList.clear()
-                    for (dataSnapshot: DataSnapshot in snapshot.children) {
-                        branchesList.add(dataSnapshot.value.toString())
-                        Log.d(TAG, "onDataChange: ${dataSnapshot.value.toString()}")
-                        Log.d(TAG, "onDataChange: ${branchesList.size}")
-                    }
-                    editor.putBoolean("isBranchTaken", true)
-                    editor.apply()
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                    Log.d(TAG, "onCancelled: $error")
-                }
-
-            })
 
         }
         return binding.root

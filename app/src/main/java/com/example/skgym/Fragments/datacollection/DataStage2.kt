@@ -2,6 +2,7 @@ package com.example.skgym.Fragments.datacollection
 
 
 import android.app.Activity.RESULT_OK
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -21,9 +22,14 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
+import com.example.skgym.utils.Constants
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 
@@ -38,6 +44,9 @@ class DataStage2 : Fragment() {
     var gender = "male"
     lateinit var bloodReport:Uri
     var memberThis = Member()
+    private val fDatabase = FirebaseDatabase.getInstance()
+    var branchesList = ArrayList<String>()
+    var branchesNameRef = fDatabase.getReference(Constants.BRANCHES_SPINNER)
 
 
     private val Args: DataStage2Args by navArgs()
@@ -107,6 +116,10 @@ class DataStage2 : Fragment() {
             }
             Log.d(TAG, "onCreateView: Gender $gender")
         }
+
+        binding.btnContinueDatastage.setOnClickListener {
+
+        }
         return binding.root
     }
 
@@ -121,7 +134,7 @@ class DataStage2 : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser!!
         memberThis = Args.member
-
+        getBranches()
         Log.d(
             TAG,
             "init: Member Details are \n Name = ${memberThis.firstname} ${memberThis.middleName} ${memberThis.lastname} \n" +
@@ -143,6 +156,28 @@ class DataStage2 : Fragment() {
 
             }
         }
+    }
+
+
+    fun getBranches(){
+        branchesNameRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                branchesList.clear()
+                for (dataSnapshot: DataSnapshot in snapshot.children) {
+                    branchesList.add(dataSnapshot.value.toString())
+                    Log.d(ContentValues.TAG, "onDataChange: ${dataSnapshot.value.toString()}")
+                    Log.d(ContentValues.TAG, "onDataChange: ${branchesList.size}")
+                }
+                val branches=branchesList.toArray()
+                val arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdownitem,branches)
+                binding.branchData.setAdapter(arrayAdapter)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(ContentValues.TAG, "onCancelled: $error")
+            }
+
+        })
     }
 
 }

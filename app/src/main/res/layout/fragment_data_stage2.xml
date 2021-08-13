@@ -23,6 +23,7 @@
             android:id="@+id/bloodgrp_data"
             android:layout_width="match_parent"
             android:hint="@string/blood_group"
+            android:fontFamily="@font/montserratsemibold"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
@@ -50,6 +51,27 @@
             android:inputType="textMultiLine">
 
         </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuBranch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="12dp"
+        app:hintEnabled="false">
+
+        <AutoCompleteTextView
+            android:id="@+id/branch_data"
+            android:layout_width="match_parent"
+            android:hint="@string/branch"
+            android:fontFamily="@font/montserratsemibold"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_weight="1" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -165,7 +187,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/btn_circular"
         android:fontFamily="@font/montserratsemibold"
