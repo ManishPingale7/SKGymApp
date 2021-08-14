@@ -11,21 +11,27 @@
         android:theme="@style/Theme.SkGym">
         <activity
             android:name=".activities.GetUserData"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".auth.HomeAuth"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".auth.ForgotPassword"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".auth.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".auth.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

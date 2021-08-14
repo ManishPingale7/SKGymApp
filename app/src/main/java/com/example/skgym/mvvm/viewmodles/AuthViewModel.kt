@@ -1,5 +1,6 @@
 package com.example.skgym.mvvm.viewmodles
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.skgym.mvvm.repository.AuthRepository
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,10 @@ class AuthViewModel(
 
     fun sendUserToMainActivity() {
         repository.sendUserToMainActivity()
+    }
+
+    fun fetchBranchNames(): MutableLiveData<ArrayList<String>> {
+        return repository.fetchBranchNames()
     }
 
 

@@ -3,15 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.Home">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/homedata"
-        android:gravity="center"
-        android:text="@string/home" />
+        android:id="@+id/nomemberLayout"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/lottieView"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            app:lottie_rawRes="@raw/animhome"-->
+<!--            app:lottie_loop="true"-->
+<!--            app:lottie_autoPlay="true"/>-->
+
+        <TextView
+            android:id="@+id/notice_GymMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/montserratsemibold"
+            android:text="@string/you_are_not_gym_member_yet"
+            android:textColor="@color/black" />
+
+        <Button
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/become_Member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notice_GymMember"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/become_a_member"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

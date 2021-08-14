@@ -34,10 +34,7 @@ class Home : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         init()
 
-        binding.homedata.setOnClickListener {
-            val intent = Intent(requireContext(), GetUserData::class.java)
-            startActivity(intent)
-        }
+
 
         return binding.root
     }
