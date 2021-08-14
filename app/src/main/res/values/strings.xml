@@ -57,4 +57,11 @@
     <string name="pick_report">Pick Report</string>
     <string name="textview">TextView</string>
     <string name="branch">Branch</string>
+    <string name="plans">Plans</string>
+    <string name="view_current_plan">View Current Plan</string>
+    <string name="view_all_plans">View All Plans</string>
+    <string name="plans_bought_before">Plans Bought Before</string>
+    <string name="rate_our_app_on_playstore">Rate Our App on PlayStore</string>
+    <string name="rate">Rate</string>
+    <string name="current_plan">Current Plan</string>
 </resources>
