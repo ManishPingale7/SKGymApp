@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
 import com.example.skgym.activities.GetBranch
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser
 class Home : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentHomeBinding? = null
+    var branch=""
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
@@ -37,12 +39,17 @@ class Home : Fragment() {
         //Is branch Taken
         val isBranchTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isBranchTaken", MODE_PRIVATE)
-        val editor2 = isBranchTaken.edit()
+        val userBranch: SharedPreferences =
+            requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
+//        val editor2 = isBranchTaken.edit()
+//        val editor3=userBranch.edit()
 
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
+            branch= userBranch.getString("userBranch","").toString()
+            Toast.makeText(requireContext(), branch, Toast.LENGTH_SHORT).show()
         } else {
             binding.becomeMember.text = resources.getString(R.string.selectBranch)
         }

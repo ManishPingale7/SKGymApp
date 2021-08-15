@@ -1,6 +1,8 @@
 package com.example.skgym.activities
 
 import android.content.ContentValues.TAG
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -34,6 +36,12 @@ class GetBranch : AppCompatActivity() {
         binding = ActivityGetBranchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        val isBranchTaken: SharedPreferences =
+            getSharedPreferences("isBranchTaken", MODE_PRIVATE)
+        val editor2 = isBranchTaken.edit()
+        val userBranch: SharedPreferences =
+            getSharedPreferences("userBranch", MODE_PRIVATE)
+        val editor3 = userBranch.edit()
 
         val handler = Handler()
         handler.postDelayed({ // Do something after 5s = 5000ms
@@ -59,6 +67,13 @@ class GetBranch : AppCompatActivity() {
             if (branch.isNotEmpty()) {
                 if (branchList.contains(branch)) {
                     Log.d(TAG, "onCreate: $branch")
+                    editor2.putBoolean("isBranchTaken", true)
+                    editor2.apply()
+                    editor3.putString("userBranch", branch)
+                    editor3.apply()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
                 } else {
                     Toast.makeText(this, "Enter a Verified Branch", Toast.LENGTH_SHORT).show()
                 }
