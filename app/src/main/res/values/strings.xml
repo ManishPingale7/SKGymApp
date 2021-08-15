@@ -66,4 +66,5 @@
     <string name="current_plan">Current Plan</string>
     <string name="you_are_not_gym_member_yet">You are not Gym Member Yet</string>
     <string name="become_a_member">Become a Member</string>
+    <string name="selectBranch">Select Branch</string>
 </resources>
