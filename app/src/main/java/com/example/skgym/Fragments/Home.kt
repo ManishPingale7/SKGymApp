@@ -1,36 +1,25 @@
 package com.example.skgym.Fragments
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.ContentValues.TAG
+
 import android.content.Context.MODE_PRIVATE
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
-import com.example.skgym.activities.GetUserData
+import com.example.skgym.activities.GetBranch
 import com.example.skgym.databinding.FragmentHomeBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
-import com.example.skgym.utils.Constants.BRANCHES_SPINNER
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
-
 
 class Home : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -39,36 +28,35 @@ class Home : Fragment() {
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         init()
-
-        binding.homedata.setOnClickListener {
-            val intent = Intent(requireContext(), GetUserData::class.java)
-            startActivity(intent)
-        }
-
-        //Dark Mode Settings
+        //Is branch Taken
         val isBranchTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isBranchTaken", MODE_PRIVATE)
-        val editor = isBranchTaken.edit()
+        val editor2 = isBranchTaken.edit()
 
-        val isTaken = isBranchTaken.getBoolean("isBranchTaken", false)
+        val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
-        if (isTaken) {
-            Log.d(TAG, "onCreateView: Branch taken")
-            Toast.makeText(requireContext(), "Taken", Toast.LENGTH_SHORT).show()
+        if (isBTaken) {
+            binding.becomeMember.text = resources.getString(R.string.become_a_member)
         } else {
-            Toast.makeText(requireContext(), " Not Taken", Toast.LENGTH_SHORT).show()
-
-
+            binding.becomeMember.text = resources.getString(R.string.selectBranch)
         }
+
+        binding.becomeMember.setOnClickListener {
+            val text=binding.becomeMember.text.toString()
+            if (text == resources.getString(R.string.become_a_member)){
+
+            }else if (text==resources.getString(R.string.selectBranch)){
+                val intent= Intent(requireContext(),GetBranch::class.java)
+                startActivity(intent)
+            }
+        }
+
         return binding.root
     }
 

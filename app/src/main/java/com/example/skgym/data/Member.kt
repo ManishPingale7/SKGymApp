@@ -17,5 +17,6 @@ data class Member(
     var dob: Date=Date(1,1,1),
     var gender: String="empty",
     var guardian:String="None",
-    var medicalDocuments:Uri?=null
+    var medicalDocuments:Uri?=null,
+    var plan:String=""
 ): Parcelable
