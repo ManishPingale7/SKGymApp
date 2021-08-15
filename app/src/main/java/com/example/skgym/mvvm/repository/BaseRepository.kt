@@ -1,12 +1,15 @@
 package com.example.skgym.mvvm.repository
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.skgym.activities.MainActivity
 import com.example.skgym.utils.Constants
+import com.example.skgym.utils.Constants.ISMEMBER
+import com.example.skgym.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 abstract class BaseRepository(private var contextBase: Context) {
 
     val branchesList = MutableLiveData<java.util.ArrayList<String>>()
+
 
     private var mAuthBase = FirebaseAuth.getInstance()
     var curUser = mAuthBase.currentUser
@@ -40,7 +44,7 @@ abstract class BaseRepository(private var contextBase: Context) {
                 for (dataSnapshot: DataSnapshot in snapshot.children) {
                     list.add(dataSnapshot.value.toString())
                 }
-                branchesList.value=list
+                branchesList.value = list
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -49,6 +53,31 @@ abstract class BaseRepository(private var contextBase: Context) {
 
         })
         return branchesList
+    }
+
+    fun checkUserIsMember(branch: String): Boolean {
+        val fDatabase = FirebaseDatabase.getInstance()
+        val memberRef = fDatabase.getReference(branch)
+        val userId = mAuthBase.uid
+        var result = false
+        memberRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild(USERS)) {
+                    if (snapshot.child(USERS).hasChild(userId.toString())) {
+                        if (snapshot.child(USERS).child(userId.toString())
+                                .child(ISMEMBER).value == true
+                        ) {
+                            result = true
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
+            }
+        })
+        return result
     }
 
 

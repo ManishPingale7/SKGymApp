@@ -47,7 +47,6 @@ class DataStage2 : Fragment() {
     private val fDatabase = FirebaseDatabase.getInstance()
 
 
-
     private val Args: DataStage2Args by navArgs()
 
 
@@ -130,6 +129,10 @@ class DataStage2 : Fragment() {
 
         binding.btnContinueDatastage.setOnClickListener {
 
+            memberThis.bloodGroup = binding.bloodgrpData.text.toString()
+
+
+            Log.d(TAG, "onCreateView: $memberThis")
         }
         return binding.root
     }
@@ -168,8 +171,6 @@ class DataStage2 : Fragment() {
             }
         }
     }
-
-
 
 
 }
