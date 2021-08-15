@@ -13,4 +13,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun fetchBranchNames(): MutableLiveData<ArrayList<String>> {
         return repository.fetchBranchNames()
     }
+
+    fun checkUserIsMember(branch: String): Boolean {
+        return repository.checkUserIsMember(branch)
+    }
 }

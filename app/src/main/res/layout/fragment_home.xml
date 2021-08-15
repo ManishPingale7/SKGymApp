@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:id="@+id/nomemberLayout"
         android:orientation="vertical"
+        android:visibility="gone"
         tools:ignore="UselessParent">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -28,9 +29,9 @@
             android:id="@+id/notice_GymMember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_below="@id/lottieView"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/montserratsemibold"
             android:text="@string/you_are_not_gym_member_yet"
             android:textColor="@color/black" />
@@ -47,6 +48,19 @@
             android:textAllCaps="false" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progressBar_Home"
+        >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
 
 
 </LinearLayout>

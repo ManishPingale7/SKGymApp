@@ -18,5 +18,6 @@ data class Member(
     var gender: String="empty",
     var guardian:String="None",
     var medicalDocuments:Uri?=null,
-    var plan:String=""
+    var plan:String="",
+    var isMember:Boolean=false
 ): Parcelable

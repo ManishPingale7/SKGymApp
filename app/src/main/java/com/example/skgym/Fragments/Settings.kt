@@ -1,5 +1,8 @@
 package com.example.skgym.Fragments
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
+import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.FragmentSettingsBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -20,8 +24,9 @@ class Settings : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    lateinit var currentUser: FirebaseUser
+    private var currentUser: FirebaseUser? = null
     var mAuth = FirebaseAuth.getInstance()
+    var branch=""
 
 
     override fun onCreateView(
@@ -31,8 +36,17 @@ class Settings : Fragment() {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         init()
+        val userBranch: SharedPreferences =
+            requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
+        branch= userBranch.getString("userBranch","").toString()
+        binding.currentBranchSettings.text=branch
         binding.SignOutSettings.setOnClickListener {
-            viewModel.signOut()
+            mAuth.signOut()
+            val intent = Intent(
+                requireContext(), HomeAuth::class.java
+            )
+            startActivity(intent)
+            requireActivity().finish()
         }
         return binding.root
     }
@@ -43,10 +57,9 @@ class Settings : Fragment() {
             .factoryModule(FactoryModule(MainRepository(requireContext())))
             .build() as DaggerFactoryComponent
         viewModel =
-            ViewModelProviders.of(this@Settings, component.getFactory()).get(MainViewModel::class.java)
+            ViewModelProviders.of(this@Settings, component.getFactory())
+                .get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-        currentUser = mAuth.currentUser!!
-
-
+        currentUser = mAuth.currentUser
     }
 }
