@@ -14,20 +14,22 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-<!--        <com.airbnb.lottie.LottieAnimationView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/lottieView"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            app:lottie_rawRes="@raw/animhome"-->
-<!--            app:lottie_loop="true"-->
-<!--            app:lottie_autoPlay="true"/>-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animhome" />
 
         <TextView
             android:id="@+id/notice_GymMember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/lottieView"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/montserratsemibold"
             android:text="@string/you_are_not_gym_member_yet"
