@@ -132,7 +132,7 @@ class DataStage2 : Fragment() {
             memberThis.bloodGroup = binding.bloodgrpData.text.toString()
 
 
-            Log.d(TAG, "onCreateView: $memberThis")
+            Log.d(TAG, "onCreateView: Member = $memberThis")
         }
         return binding.root
     }

@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.setHomeButtonEnabled(true)
-
         val navController = findNavController(R.id.ContainerViewMain)
         val appBarConfigration = AppBarConfiguration(setOf(R.id.homeFrag, R.id.nav_settings))
         setupActionBarWithNavController(navController, appBarConfigration)
