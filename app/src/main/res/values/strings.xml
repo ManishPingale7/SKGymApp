@@ -71,4 +71,8 @@
     <string name="view_current_branch">View Current Branch</string>
     <string name="current_branch">Current Branch</string>
     <string name="change_your_current_branch">Change Your Current Branch</string>
+    <string name="plan_name">Plan Name</string>
+    <string name="description">Description</string>
+    <string name="duration">Duration</string>
+    <string name="_30">30</string>
 </resources>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkGym">
         <activity
+            android:name=".activities.ViewPlan"
+            android:exported="true" />
+        <activity
             android:name=".activities.GetBranch"
             android:exported="true" />
         <activity
