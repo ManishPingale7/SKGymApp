@@ -7,6 +7,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.skgym.activities.MainActivity
+import com.example.skgym.activities.ViewPlan
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.ISMEMBER
 import com.example.skgym.utils.Constants.USERS
@@ -78,6 +79,13 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
         })
         return result
+    }
+
+
+    fun sendUserToViewPlanActivity() {
+        Intent(contextBase, ViewPlan::class.java).also {
+            contextBase.startActivity(it)
+        }
     }
 
 

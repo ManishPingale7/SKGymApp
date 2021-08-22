@@ -4,12 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.skgym.R
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.FragmentSettingsBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -38,8 +37,8 @@ class Settings : Fragment() {
         init()
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
-        branch= userBranch.getString("userBranch","").toString()
-        binding.currentBranchSettings.text=branch
+        branch = userBranch.getString("userBranch", "").toString()
+        binding.currentBranchSettings.text = branch
         binding.SignOutSettings.setOnClickListener {
             mAuth.signOut()
             val intent = Intent(
@@ -47,6 +46,9 @@ class Settings : Fragment() {
             )
             startActivity(intent)
             requireActivity().finish()
+        }
+        binding.viewAllPlans.setOnClickListener {
+            viewModel.sendUserToViewPlanActivity()
         }
         return binding.root
     }

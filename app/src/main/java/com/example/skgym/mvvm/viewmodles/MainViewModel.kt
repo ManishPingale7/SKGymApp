@@ -17,4 +17,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun checkUserIsMember(branch: String): Boolean {
         return repository.checkUserIsMember(branch)
     }
+
+    fun sendUserToViewPlanActivity() {
+        repository.sendUserToViewPlanActivity()
+    }
 }
