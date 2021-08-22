@@ -25,8 +25,6 @@ class ViewPlans : Fragment() {
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
-    var isMem = false
-    var isMemCheck = false
 
 
     override fun onCreateView(
@@ -35,9 +33,10 @@ class ViewPlans : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentViewPlansBinding.inflate(inflater, container, false)
-        init()
-        return binding.root
 
+        init()
+
+        return binding.root
     }
 
     private fun init() {
