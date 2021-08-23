@@ -1,6 +1,5 @@
 package com.example.skgym.data
 
-import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -14,7 +13,7 @@ data class Member(
     var lastname: String="empty",
     var bloodGroup:String="empty",
     var address: String="empty",
-    var dob: Date=Date(1,1,1),
+    var dob: String="",
     var gender: String="empty",
     var guardian:String="None",
     var medicalDocuments:String?="null",

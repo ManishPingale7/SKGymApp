@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.ArrayList
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
+import kotlin.time.days
 
 
 class DataStage2 : Fragment() {
@@ -94,10 +96,11 @@ class DataStage2 : Fragment() {
         picker.addOnPositiveButtonClickListener {
             Log.d(TAG, "onCreateView: Header Date =${picker.headerText}")
             Log.d(TAG, "onCreateView: Selection =${picker.selection}")
-            val date = Date(picker.headerText)
+            val date = picker.headerText
             dateTaken = true
             memberThis.dob = date
         }
+
         picker.addOnNegativeButtonClickListener {
             Log.d(TAG, "onCreateView: NEGATIVE")
             dateTaken = false
@@ -221,7 +224,7 @@ class DataStage2 : Fragment() {
 
     }
 
-    fun getFileExtention(uri: Uri): String {
+    private fun getFileExtention(uri: Uri): String {
         val cr = requireContext().contentResolver
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cr.getType(uri)).toString()
