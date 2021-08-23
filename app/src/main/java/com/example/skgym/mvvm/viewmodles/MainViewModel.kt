@@ -21,4 +21,12 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUserToViewPlanActivity() {
         repository.sendUserToViewPlanActivity()
     }
+
+    fun sendUserToDataActivity() {
+        repository.sendUserToDataActivity()
+    }
+
+    fun checkUserStatus(branch: String): String {
+        return repository.checkUserStatus(branch)
+    }
 }

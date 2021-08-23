@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
 import com.example.skgym.activities.ViewPlan
 import com.example.skgym.utils.Constants
@@ -86,6 +87,51 @@ abstract class BaseRepository(private var contextBase: Context) {
         Intent(contextBase, ViewPlan::class.java).also {
             contextBase.startActivity(it)
         }
+    }
+
+    fun sendUserToDataActivity() {
+        Intent(contextBase, GetUserData::class.java).also {
+            contextBase.startActivity(it)
+        }
+    }
+
+
+    fun checkUserStatus(branch: String): String {
+        val fDatabase = FirebaseDatabase.getInstance()
+        val memberRef = fDatabase.getReference(branch)
+        val userId = mAuthBase.uid
+        var result = ""
+
+
+        fDatabase.reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild(branch)) {
+                    result = "branchPresent"
+                    Log.d(TAG, "onDataChange: Branch Present")
+
+                } else {
+                    result = "NoBranch"
+                    sendUserToDataActivity()
+                }
+                if (snapshot.child(branch).hasChild(USERS)) {
+                    if (snapshot.child(branch).child(USERS).hasChild(userId.toString())) {
+                        result = "dataPresent"
+                        if (snapshot.child(branch).child(USERS).child(userId.toString())
+                                .child(ISMEMBER).value == true
+                        ) {
+                            result = "member"
+                        }
+                    } else {
+                        result = "noData"
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
+            }
+        })
+        return result
     }
 
 
