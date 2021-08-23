@@ -60,7 +60,7 @@ class GeneralData : Fragment() {
                     member.firstname = firstname
                     member.middleName = middleName
                     member.lastname = lastname
-                    member.imgUrl = imageUri
+                    member.imgUrl = imageUri.toString()
                     //Passing Data
                     val action = GeneralDataDirections.actionGeneralDataToDataStage2(member)
                     it.findNavController().navigate(action)

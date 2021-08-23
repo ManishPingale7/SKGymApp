@@ -8,7 +8,7 @@ import java.util.*
 @Parcelize
 data class Member(
     var branch:String="",
-    var imgUrl:Uri?=null,
+    var imgUrl:String?="null",
     var firstname: String="empty",
     var middleName: String="empty",
     var lastname: String="empty",
@@ -17,7 +17,7 @@ data class Member(
     var dob: Date=Date(1,1,1),
     var gender: String="empty",
     var guardian:String="None",
-    var medicalDocuments:Uri?=null,
+    var medicalDocuments:String?="null",
     var plan:String="",
     var isMember:Boolean=false
 ): Parcelable

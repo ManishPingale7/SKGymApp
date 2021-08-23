@@ -5,4 +5,5 @@ object Constants {
     const val USERS="Users"
     const val ISMEMBER="isMember"
 
+    const val PROFILE_IMAGE="imgUrl"
 }

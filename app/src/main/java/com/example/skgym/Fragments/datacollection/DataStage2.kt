@@ -1,17 +1,17 @@
 package com.example.skgym.Fragments.datacollection
 
 
-import android.app.Activity.RESULT_OK
-import android.content.ContentValues
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.skgym.R
@@ -26,11 +26,10 @@ import com.example.skgym.utils.Constants
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DataStage2 : Fragment() {
@@ -39,12 +38,15 @@ class DataStage2 : Fragment() {
     private var _binding: FragmentDataStage2Binding? = null
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
-    var mAuth = FirebaseAuth.getInstance()
+    private var mAuth = FirebaseAuth.getInstance()
     private val TAG = "DataStage2"
-    var gender = "male"
-    lateinit var bloodReport: Uri
-    var memberThis = Member()
-    private val fDatabase = FirebaseDatabase.getInstance()
+    private var gender = "male"
+    private var branches = ArrayList<String>()
+    private var memberThis = Member()
+    private var dateTaken = false
+    private val storageRef = FirebaseStorage.getInstance().reference
+    private val userId = mAuth.uid
+    private var downloadUrl: Uri? = null
 
 
     private val Args: DataStage2Args by navArgs()
@@ -75,30 +77,34 @@ class DataStage2 : Fragment() {
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.dropdownitem,
                 it.toArray()
-            )
 
+            )
+            branches = it
+            Log.d(TAG, "onCreateView: Size ${branches.size}")
             arrayAdapter.notifyDataSetChanged()
             binding.branchData.setAdapter(arrayAdapter)
         })
 
-        binding.pickBloodReport.setOnClickListener {
-            val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
-            fileIntent.type = "application/pdf"
-            startActivityForResult(fileIntent, 21)
-        }
+//        binding.pickBloodReport.setOnClickListener {
+//            val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
+//            fileIntent.type = "application/pdf"
+//            startActivityForResult(fileIntent, 21)
+//        }
 
         picker.addOnPositiveButtonClickListener {
             Log.d(TAG, "onCreateView: Header Date =${picker.headerText}")
             Log.d(TAG, "onCreateView: Selection =${picker.selection}")
             val date = Date(picker.headerText)
+            dateTaken = true
             memberThis.dob = date
         }
         picker.addOnNegativeButtonClickListener {
             Log.d(TAG, "onCreateView: NEGATIVE")
+            dateTaken = false
         }
         picker.addOnCancelListener {
             Log.d(TAG, "onCreateView: Cancel")
-
+            dateTaken = false
         }
 
         when (binding.radioGroupGender.checkedRadioButtonId) {
@@ -129,10 +135,35 @@ class DataStage2 : Fragment() {
 
         binding.btnContinueDatastage.setOnClickListener {
 
-            memberThis.bloodGroup = binding.bloodgrpData.text.toString()
+            val bloodGroup = binding.bloodgrpData.text.toString()
+            val address = binding.addressData.text.toString()
+            val branch = binding.branchData.text.toString()
+            if (bloodGroup.isNotEmpty()) {
+                if (address.isNotEmpty()) {
+                    if (branch.isNotEmpty() && branches.contains(branch)) {
+                        memberThis.bloodGroup = bloodGroup
+                        memberThis.address = address
+                        memberThis.branch = branch
+                        memberThis.isMember = false
+                        Log.d(TAG, "onCreateView: $memberThis")
+                        uploadProfileImage(memberThis.imgUrl.toString())
+                        memberThis.imgUrl = downloadUrl.toString()
+                        requireActivity().finish()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Enter a Valid Branch $branch",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Enter Address", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Select BloodGroup", Toast.LENGTH_SHORT).show()
+            }
 
-
-            Log.d(TAG, "onCreateView: Member = $memberThis")
         }
         return binding.root
     }
@@ -156,21 +187,43 @@ class DataStage2 : Fragment() {
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            21 -> {
-                if (resultCode == RESULT_OK) {
-                    bloodReport = data!!.data!!
-                    memberThis.medicalDocuments = bloodReport
-                }
-            }
-            else -> {
-                Log.d(TAG, "onActivityResult: ELSE")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        when (requestCode) {
+//            21 -> {
+//                if (resultCode == RESULT_OK) {
+//                    bloodReport = data!!.data!!
+//                    memberThis.medicalDocuments = bloodReport.toString()
+//                }
+//            }
+//            else -> {
+//                Log.d(TAG, "onActivityResult: ELSE")
+//
+//            }
+//        }
+//    }
 
+    private fun uploadProfileImage(imgUrl: String) {
+        val uri = imgUrl.toUri()
+        val extention = getFileExtention(uri)
+        val fileRef = storageRef.child(userId.toString()).child(Constants.PROFILE_IMAGE)
+
+        fileRef.putFile(uri).addOnSuccessListener {
+            fileRef.downloadUrl.addOnSuccessListener {
+                downloadUrl = it
+                memberThis.imgUrl=downloadUrl.toString()
+                Log.d(TAG, "uploadProfileImage: $downloadUrl")
+                viewModel.uploadUserdata(memberThis)
+                viewModel.sendUserToMainActivity()
             }
         }
+
+
     }
 
-
+    fun getFileExtention(uri: Uri): String {
+        val cr = requireContext().contentResolver
+        val mime = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cr.getType(uri)).toString()
+    }
 }
