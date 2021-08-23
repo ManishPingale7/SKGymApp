@@ -71,33 +71,7 @@ class Home : Fragment() {
         }
 
         if (!isDatatakenB) {
-            val result=viewModel.checkUserStatus(branch)
-            when (result) {
-                "dataPresent" -> {
-                    binding.nomemberLayout.visibility = View.VISIBLE
-                    binding.progressBarHome.visibility = View.GONE
-                    editMem.putBoolean("isMember", false)
-                    editMem.apply()
-                    Log.d(TAG, "onCreateView: Data Taken Normal Member")
-                    Toast.makeText(requireContext(), "Upgrade to Member", Toast.LENGTH_SHORT).show()
-                }
-                "member" -> {
-                    Log.d(TAG, "onCreateView:Member")
-                    editMem.putBoolean("isMember", true)
-                    editMem.apply()
-                    editDatataken.putBoolean("isDataTaken", true)
-                    editDatataken.apply()
-                }
-                "noData" -> {
-                    Log.d(TAG, "onCreateView: No data")
-                    Toast.makeText(requireContext(), "No Data", Toast.LENGTH_SHORT).show()
-                    viewModel.sendUserToDataActivity()
-                }
-                
-                else->{
-                    Log.d(TAG, "onCreateView: $result")
-                }
-            }
+            viewModel.isBranchExists(branch)
         }else{
             Log.d(TAG, "onCreateView: Data Taken")
         }

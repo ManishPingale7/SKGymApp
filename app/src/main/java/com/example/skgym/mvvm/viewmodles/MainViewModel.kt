@@ -27,8 +27,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
         repository.sendUserToDataActivity()
     }
 
-    fun checkUserStatus(branch: String): String {
-        return repository.checkUserStatus(branch)
+    fun doesUserExists(branch: String) {
+         repository.doesUserExists(branch)
     }
 
     fun uploadUserdata(memberThis: Member) {
@@ -36,6 +36,10 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     }
     fun sendUserToMainActivity(){
         repository.sendUserToMainActivity()
+    }
+
+    fun isBranchExists(branch: String) {
+        repository.doesBranchExists(branch)
     }
 
 

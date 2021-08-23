@@ -1,13 +1,10 @@
 package com.example.skgym.mvvm.repository
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
-import android.webkit.MimeTypeMap
-import androidx.core.net.toUri
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
@@ -15,23 +12,19 @@ import com.example.skgym.activities.ViewPlan
 import com.example.skgym.data.Member
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.ISMEMBER
-import com.example.skgym.utils.Constants.PROFILE_IMAGE
 import com.example.skgym.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
 
 abstract class BaseRepository(private var contextBase: Context) {
-    val fDatabase = FirebaseDatabase.getInstance()
+    var fDatabase = FirebaseDatabase.getInstance()
     val branchesList = MutableLiveData<java.util.ArrayList<String>>()
-    val storageRef = FirebaseStorage.getInstance().reference
 
     private var mAuthBase = FirebaseAuth.getInstance()
-    var curUser = mAuthBase.currentUser
-    val userId = mAuthBase.uid
+    private val userId = mAuthBase.uid.toString()
 
 
     fun signOut() {
@@ -58,7 +51,7 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d(ContentValues.TAG, "onCancelled: $error")
+                Log.d(TAG, "onCancelled: $error")
             }
 
         })
@@ -104,32 +97,23 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
 
-    fun checkUserStatus(branch: String): String {
-
+    fun doesUserExists(branch: String) {
+        fDatabase = FirebaseDatabase.getInstance()
         val memberRef = fDatabase.getReference(branch)
         val userId = mAuthBase.uid
         var result = ""
-        fDatabase.reference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild(branch)) {
-                    result = "branchPresent"
-                    Log.d(TAG, "onDataChange: Branch Present")
 
+        memberRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d(TAG, "onDataChange: $userId")
+                val user = snapshot.hasChild(userId.toString())
+                Log.d(TAG, "onDataChange: OnDataChange user is $user")
+                if (user) {
+                    result = "dataPresent"
+                    Log.d(TAG, "onDataChange: Result upper is $result")
                 } else {
-                    result = "NoBranch"
                     sendUserToDataActivity()
-                }
-                if (snapshot.child(branch).hasChild(USERS)) {
-                    if (snapshot.child(branch).child(USERS).hasChild(userId.toString())) {
-                        result = "dataPresent"
-                        if (snapshot.child(branch).child(USERS).child(userId.toString())
-                                .child(ISMEMBER).value == true
-                        ) {
-                            result = "member"
-                        }
-                    } else {
-                        result = "noData"
-                    }
+                    Toast.makeText(contextBase, "No User Data", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -137,20 +121,27 @@ abstract class BaseRepository(private var contextBase: Context) {
                 Log.d(TAG, "onCancelled: ${error.message}")
             }
         })
-        return result
-    }
-
-    fun addUserDocumentToStorage(imageUri: Uri, pdf: Uri) {
-
     }
 
     fun uploadUserdata(memberThis: Member) {
-        fDatabase.reference.child(memberThis.branch).child(userId.toString()).setValue(memberThis)
+        fDatabase.reference.child(memberThis.branch).child(userId).setValue(memberThis)
     }
 
+    fun doesBranchExists(branch: String) {
+        fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild(branch))
+                    doesUserExists(branch)
+                else
+                    sendUserToDataActivity()
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
+            }
 
-
+        })
+    }
 
 
 }
