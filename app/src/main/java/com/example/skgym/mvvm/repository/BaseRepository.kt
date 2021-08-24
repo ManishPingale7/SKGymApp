@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
 import com.example.skgym.activities.ViewPlan
+import com.example.skgym.auth.HomeAuth
 import com.example.skgym.data.Member
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.ISMEMBER
@@ -128,20 +129,28 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun doesBranchExists(branch: String) {
-        fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild(branch))
-                    doesUserExists(branch)
-                else
-                    sendUserToDataActivity()
-            }
+        if (mAuthBase.currentUser!=null){
+            fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChild(branch))
+                        doesUserExists(branch)
+                    else
+                        sendUserToDataActivity()
+                }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "onCancelled: ${error.message}")
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d(TAG, "onCancelled: ${error.message}")
+                }
 
-        })
+            })
+        }
     }
+
+    fun sendUserToHomeAuth() {
+        Intent(contextBase, HomeAuth::class.java).also {
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            contextBase.startActivity(it)
+        }    }
 
 
 }

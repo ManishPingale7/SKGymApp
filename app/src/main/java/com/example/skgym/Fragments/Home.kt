@@ -36,6 +36,7 @@ class Home : Fragment() {
     var isMem = false
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,27 +65,28 @@ class Home : Fragment() {
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
             Toast.makeText(requireContext(), branch, Toast.LENGTH_SHORT).show()
+            if (!isDatatakenB) {
+                viewModel.isBranchExists(branch)
+            } else {
+                Log.d(TAG, "onCreateView: Data Taken")
+            }
+
+            if (isMem) {
+                binding.nomemberLayout.visibility = View.GONE
+                binding.progressBarHome.visibility = View.GONE
+                //Log.d(TAG, "onCreateView: Member")
+            } else {
+                binding.nomemberLayout.visibility = View.VISIBLE
+                binding.progressBarHome.visibility = View.GONE
+                //Log.d(TAG, "onCreateView: No Member")
+            }
         } else {
             binding.becomeMember.text = resources.getString(R.string.selectBranch)
             val intent = Intent(requireContext(), GetBranch::class.java)
             startActivity(intent)
         }
 
-        if (!isDatatakenB) {
-            viewModel.isBranchExists(branch)
-        }else{
-            Log.d(TAG, "onCreateView: Data Taken")
-        }
 
-        if (isMem) {
-            binding.nomemberLayout.visibility = View.GONE
-            binding.progressBarHome.visibility = View.GONE
-            //Log.d(TAG, "onCreateView: Member")
-        } else {
-            binding.nomemberLayout.visibility = View.VISIBLE
-            binding.progressBarHome.visibility = View.GONE
-            //Log.d(TAG, "onCreateView: No Member")
-        }
 
 
 
@@ -108,7 +110,9 @@ class Home : Fragment() {
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-
+        if (mAuth.currentUser == null) {
+            viewModel.sendUserToHomeAuth()
+        }
     }
 
 

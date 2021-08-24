@@ -42,5 +42,9 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
         repository.doesBranchExists(branch)
     }
 
+    fun sendUserToHomeAuth() {
+        repository.sendUserToHomeAuth()
+    }
+
 
 }
