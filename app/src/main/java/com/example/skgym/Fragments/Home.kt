@@ -50,10 +50,7 @@ class Home : Fragment() {
             requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
         val isDataTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isDataTaken", MODE_PRIVATE)
-        val isMember: SharedPreferences =
-            requireActivity().getSharedPreferences("isMember", MODE_PRIVATE)
-        val editMem = isMember.edit()
-        val editDatataken = isDataTaken.edit()
+
 
 
         isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
