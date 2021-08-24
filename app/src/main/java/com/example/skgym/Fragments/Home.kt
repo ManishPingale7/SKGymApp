@@ -88,11 +88,7 @@ class Home : Fragment() {
 
 
         binding.becomeMember.setOnClickListener {
-            val text = binding.becomeMember.text.toString()
-            if (text == resources.getString(R.string.become_a_member)) {
-                val intent = Intent(requireContext(), GetUserData::class.java)
-                startActivity(intent)
-            }
+            viewModel.sendUserToViewPlanActivity()
         }
 
         return binding.root
