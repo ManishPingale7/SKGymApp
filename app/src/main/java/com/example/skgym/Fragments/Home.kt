@@ -7,11 +7,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
 import com.example.skgym.activities.GetBranch
@@ -28,12 +28,13 @@ import com.google.firebase.auth.FirebaseUser
 class Home : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentHomeBinding? = null
-    var branch=""
+    var branch = ""
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
-    var isMem=false
-    var isMemCheck=false
+    var isDatatakenB = false
+    var isMem = false
+
 
 
     override fun onCreateView(
@@ -47,65 +48,49 @@ class Home : Fragment() {
             requireActivity().getSharedPreferences("isBranchTaken", MODE_PRIVATE)
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
-        val isMember: SharedPreferences =
-            requireActivity().getSharedPreferences("isMember", MODE_PRIVATE)
-        val isMemberCheck: SharedPreferences =
-            requireActivity().getSharedPreferences("isMemberCheck", MODE_PRIVATE)
-        val checkEdit=isMemberCheck.edit()
+        val isDataTaken: SharedPreferences =
+            requireActivity().getSharedPreferences("isDataTaken", MODE_PRIVATE)
 
-        isMemCheck=isMember.getBoolean("isMemberCheck",false)
-        isMem=isMember.getBoolean("isMember",false)
-        
-        
+
+
+        isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
 
 
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
-            branch= userBranch.getString("userBranch","").toString()
+            branch = userBranch.getString("userBranch", "").toString()
             Toast.makeText(requireContext(), branch, Toast.LENGTH_SHORT).show()
+            if (!isDatatakenB) {
+                viewModel.isBranchExists(branch)
+            } else {
+                Log.d(TAG, "onCreateView: Data Taken")
+            }
+
+            if (isMem) {
+                binding.nomemberLayout.visibility = View.GONE
+                binding.progressBarHome.visibility = View.GONE
+                //Log.d(TAG, "onCreateView: Member")
+            } else {
+                binding.nomemberLayout.visibility = View.VISIBLE
+                binding.progressBarHome.visibility = View.GONE
+                //Log.d(TAG, "onCreateView: No Member")
+            }
         } else {
             binding.becomeMember.text = resources.getString(R.string.selectBranch)
-            val intent= Intent(requireContext(),GetBranch::class.java)
+            val intent = Intent(requireContext(), GetBranch::class.java)
             startActivity(intent)
         }
 
-        if (isMemCheck){
-            Log.d(TAG, "onCreateView: Checked")
-            if (isMem){
-                binding.nomemberLayout.visibility=View.GONE
-                binding.progressBarHome.visibility=View.GONE
-            }
-            else{
-                Log.d(TAG, "onCreateView: No Checked")
-                binding.nomemberLayout.visibility=View.VISIBLE
-                binding.progressBarHome.visibility=View.GONE
-            }
-        }else{
-            Log.d(TAG, "onCreateView: branch $branch")
-            isMem = viewModel.checkUserIsMember(branch)
-            Log.d(TAG, "onCreateView: No mem $isMem")
 
-            if (isMem){
-                binding.nomemberLayout.visibility=View.GONE
-                binding.progressBarHome.visibility=View.GONE
-                checkEdit.putBoolean("isMemberCheck",true)
-            }
-            else{
-                Log.d(TAG, "onCreateView: No mem $isMem")
-                binding.nomemberLayout.visibility=View.VISIBLE
-                binding.progressBarHome.visibility=View.GONE
-            }
-        }
+
+
 
         binding.becomeMember.setOnClickListener {
-            val text=binding.becomeMember.text.toString()
-            if (text == resources.getString(R.string.become_a_member)){
-                val intent=Intent(requireContext(),GetUserData::class.java)
-                startActivity(intent)
-            }else if (text==resources.getString(R.string.selectBranch)){
-                val intent= Intent(requireContext(),GetBranch::class.java)
+            val text = binding.becomeMember.text.toString()
+            if (text == resources.getString(R.string.become_a_member)) {
+                val intent = Intent(requireContext(), GetUserData::class.java)
                 startActivity(intent)
             }
         }
@@ -122,7 +107,9 @@ class Home : Fragment() {
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-
+        if (mAuth.currentUser == null) {
+            viewModel.sendUserToHomeAuth()
+        }
     }
 
 

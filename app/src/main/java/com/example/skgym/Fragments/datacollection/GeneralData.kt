@@ -31,7 +31,7 @@ class GeneralData : Fragment() {
     private var _binding: FragmentGeneralDataBinding? = null
     private val binding get() = _binding!!
     var imageUri: Uri? = null
-    lateinit var currentUser: FirebaseUser
+    private var currentUser: FirebaseUser? = null
     var mAuth = FirebaseAuth.getInstance()
     var member = Member()
 
@@ -60,7 +60,7 @@ class GeneralData : Fragment() {
                     member.firstname = firstname
                     member.middleName = middleName
                     member.lastname = lastname
-                    member.imgUrl = imageUri
+                    member.imgUrl = imageUri.toString()
                     //Passing Data
                     val action = GeneralDataDirections.actionGeneralDataToDataStage2(member)
                     it.findNavController().navigate(action)
@@ -84,7 +84,7 @@ class GeneralData : Fragment() {
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-        currentUser = mAuth.currentUser!!
+        currentUser = mAuth.currentUser
 
     }
 

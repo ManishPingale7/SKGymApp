@@ -35,12 +35,24 @@ class Settings : Fragment() {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         init()
+        val isBranchTaken: SharedPreferences =
+            requireActivity().getSharedPreferences("isBranchTaken", Context.MODE_PRIVATE)
+        val branchTakenEdit = isBranchTaken.edit()
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
+        val branchEdit = userBranch.edit()
+
+
+
+
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
         binding.SignOutSettings.setOnClickListener {
             mAuth.signOut()
+            branchTakenEdit.putBoolean("isBranchTaken", false)
+            branchTakenEdit.apply()
+            branchEdit.putString("userBranch", "")
+            branchEdit.apply()
             val intent = Intent(
                 requireContext(), HomeAuth::class.java
             )
