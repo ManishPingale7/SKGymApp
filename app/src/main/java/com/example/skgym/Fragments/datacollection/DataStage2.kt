@@ -26,12 +26,7 @@ import com.example.skgym.utils.Constants
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import java.util.*
-import kotlin.collections.ArrayList
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
-import kotlin.time.days
 
 
 class DataStage2 : Fragment() {
@@ -143,23 +138,25 @@ class DataStage2 : Fragment() {
             val branch = binding.branchData.text.toString()
             if (bloodGroup.isNotEmpty()) {
                 if (address.isNotEmpty()) {
-                    if (branch.isNotEmpty() && branches.contains(branch)) {
-                        memberThis.bloodGroup = bloodGroup
-                        memberThis.address = address
-                        memberThis.branch = branch
-                        memberThis.isMember = false
-                        Log.d(TAG, "onCreateView: $memberThis")
-                        uploadProfileImage(memberThis.imgUrl.toString())
-                        memberThis.imgUrl = downloadUrl.toString()
-                        requireActivity().finish()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "Enter a Valid Branch $branch",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
+                    if (dateTaken) {
+                        if (branch.isNotEmpty() && branches.contains(branch)) {
+                            memberThis.bloodGroup = bloodGroup
+                            memberThis.address = address
+                            memberThis.branch = branch
+                            memberThis.isMember = false
+                            Log.d(TAG, "onCreateView: $memberThis")
+                            uploadProfileImage(memberThis.imgUrl.toString())
+                            memberThis.imgUrl = downloadUrl.toString()
+                            requireActivity().finish()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Enter a Valid Branch $branch",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }else{Toast.makeText(requireContext(), "Select Date", Toast.LENGTH_SHORT).show()}
                 } else {
                     Toast.makeText(requireContext(), "Enter Address", Toast.LENGTH_SHORT).show()
                 }
@@ -185,7 +182,7 @@ class DataStage2 : Fragment() {
 
         Log.d(
             TAG,
-            "init: Member Details are \n Name = ${memberThis.firstname} ${memberThis.middleName} ${memberThis.lastname} \n" +
+            "init: Member Details are \n Name = ${memberThis.name}   \n" +
                     "ImageUri is ${memberThis.imgUrl}"
         )
     }
