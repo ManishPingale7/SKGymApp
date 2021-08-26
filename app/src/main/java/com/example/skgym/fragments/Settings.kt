@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.auth.HomeAuth
@@ -41,6 +42,9 @@ class Settings : Fragment() {
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
         val branchEdit = userBranch.edit()
+        val isUserMemberChecked: SharedPreferences =
+            requireActivity().getSharedPreferences("isUserMemberChecked", Context.MODE_PRIVATE)
+        val isUserMemberCheckedEdit = isUserMemberChecked.edit()
 
 
 
@@ -53,11 +57,23 @@ class Settings : Fragment() {
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
+            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked",false)
+            isUserMemberCheckedEdit.apply()
             val intent = Intent(
                 requireContext(), HomeAuth::class.java
             )
             startActivity(intent)
             requireActivity().finish()
+        }
+        binding.refreshMemberStatus.setOnClickListener {
+            Toast.makeText(requireContext(), "Checking", Toast.LENGTH_SHORT).show()
+            branchTakenEdit.putBoolean("isBranchTaken", false)
+            branchTakenEdit.apply()
+            branchEdit.putString("userBranch", "")
+            branchEdit.apply()
+            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked",false)
+            isUserMemberCheckedEdit.apply()
+            viewModel.sendUserToMainActivity()
         }
         binding.viewAllPlans.setOnClickListener {
             viewModel.sendUserToViewPlanActivity()
