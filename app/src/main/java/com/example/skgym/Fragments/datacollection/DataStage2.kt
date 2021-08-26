@@ -44,9 +44,7 @@ class DataStage2 : Fragment() {
     private val storageRef = FirebaseStorage.getInstance().reference
     private val userId = mAuth.uid
     private var downloadUrl: Uri? = null
-
-
-    private val Args: DataStage2Args by navArgs()
+    private val argsData: DataStage2Args by navArgs()
 
 
     override fun onCreateView(
@@ -116,14 +114,14 @@ class DataStage2 : Fragment() {
             }
         }
         Log.d(TAG, "onCreateView: Gender $gender")
-        binding.radioButtonMale.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.radioButtonMale.setOnCheckedChangeListener { _, _ ->
             if (binding.radioButtonMale.isChecked) {
                 gender = "male"
                 memberThis.gender = gender
             }
             Log.d(TAG, "onCreateView: Gender $gender")
         }
-        binding.radioButtonFemale.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.radioButtonFemale.setOnCheckedChangeListener { _, _ ->
             if (binding.radioButtonFemale.isChecked) {
                 gender = "female"
                 memberThis.gender = gender
@@ -132,7 +130,6 @@ class DataStage2 : Fragment() {
         }
 
         binding.btnContinueDatastage.setOnClickListener {
-
             val bloodGroup = binding.bloodgrpData.text.toString()
             val address = binding.addressData.text.toString()
             val branch = binding.branchData.text.toString()
@@ -140,6 +137,7 @@ class DataStage2 : Fragment() {
                 if (address.isNotEmpty()) {
                     if (dateTaken) {
                         if (branch.isNotEmpty() && branches.contains(branch)) {
+                            binding.progressBarDataStage.visibility=View.VISIBLE
                             memberThis.bloodGroup = bloodGroup
                             memberThis.address = address
                             memberThis.branch = branch
@@ -162,6 +160,7 @@ class DataStage2 : Fragment() {
                 }
             } else {
                 Toast.makeText(requireContext(), "Select BloodGroup", Toast.LENGTH_SHORT).show()
+
             }
 
         }
@@ -178,7 +177,7 @@ class DataStage2 : Fragment() {
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser!!
-        memberThis = Args.member
+        memberThis = argsData.member
 
         Log.d(
             TAG,
@@ -187,21 +186,7 @@ class DataStage2 : Fragment() {
         )
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        when (requestCode) {
-//            21 -> {
-//                if (resultCode == RESULT_OK) {
-//                    bloodReport = data!!.data!!
-//                    memberThis.medicalDocuments = bloodReport.toString()
-//                }
-//            }
-//            else -> {
-//                Log.d(TAG, "onActivityResult: ELSE")
-//
-//            }
-//        }
-//    }
+
 
     private fun uploadProfileImage(imgUrl: String) {
         val uri = imgUrl.toUri()
@@ -211,10 +196,16 @@ class DataStage2 : Fragment() {
         fileRef.putFile(uri).addOnSuccessListener {
             fileRef.downloadUrl.addOnSuccessListener {
                 downloadUrl = it
-                memberThis.imgUrl=downloadUrl.toString()
+                memberThis.imgUrl = downloadUrl.toString()
                 Log.d(TAG, "uploadProfileImage: $downloadUrl")
+                binding.progressBarDataStage.visibility=View.GONE
                 viewModel.uploadUserdata(memberThis)
                 viewModel.sendUserToMainActivity()
+                requireActivity().finish()
+            }.addOnFailureListener {
+                Log.d(TAG, "uploadProfileImage: ${it.message}")
+                Toast.makeText(requireContext(), "Try Again Later", Toast.LENGTH_SHORT).show()
+                binding.progressBarDataStage.visibility=View.GONE
             }
         }
 

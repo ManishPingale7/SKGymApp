@@ -1,6 +1,6 @@
 package com.example.skgym.data
 
-data class Plans(
+data class Plan(
     var planName: String,
     var planDesc: String,
     var planDuration: String,
