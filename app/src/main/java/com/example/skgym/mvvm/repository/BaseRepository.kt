@@ -114,6 +114,8 @@ abstract class BaseRepository(private var contextBase: Context) {
                 Log.d(TAG, "onDataChange: OnDataChange user is $user")
                 if (user) {
                     result = "dataPresent"
+                    dataEdit.putBoolean("isDataTaken",true)
+                    dataEdit.apply()
                     Log.d(TAG, "onDataChange: Result upper is $result")
                 } else {
                     sendUserToDataActivity()
@@ -137,7 +139,6 @@ abstract class BaseRepository(private var contextBase: Context) {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(branch)){
                         doesUserExists(branch)
-                        dataEdit.putBoolean("isDataTaken",true)
                     }
                     else
                         sendUserToDataActivity()

@@ -65,13 +65,14 @@ class Home : Fragment() {
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
+            Log.d(TAG, "onCreateView: Branch Taken")
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
-            Toast.makeText(requireContext(), branch, Toast.LENGTH_SHORT).show()
             if (!isDatatakenB) {
-                Log.d(TAG, "onCreateView: Checking barnch Exists")
+                Log.d(TAG, "onCreateView: Not data taken Checking data and branch Exists")
                 viewModel.isBranchExists(branch)
             } else {
+                binding.progressBarHome.visibility = View.GONE
                 Log.d(TAG, "onCreateView: Data Taken")
                 if (isMemChecked) {
                     Log.d(TAG, "onCreateView: Checked Member")
@@ -85,6 +86,7 @@ class Home : Fragment() {
                         Log.d(TAG, "onCreateView: No Member")
                     }
                 } else {
+                    Log.d(TAG, "onCreateView: Checking Member")
                     val mem = viewModel.checkUserIsMember(branch)
                     if (mem) {
                         isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", true)
