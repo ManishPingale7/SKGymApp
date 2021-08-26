@@ -45,6 +45,7 @@ class Settings : Fragment() {
 
 
 
+
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
         binding.SignOutSettings.setOnClickListener {

@@ -3,6 +3,7 @@ package com.example.skgym.mvvm.repository
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -27,7 +28,9 @@ abstract class BaseRepository(private var contextBase: Context) {
     private var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
-
+    val isDataTaken: SharedPreferences =
+        contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
+    val dataEdit=isDataTaken.edit()
     fun signOut() {
         mAuthBase.signOut()
     }
@@ -132,8 +135,10 @@ abstract class BaseRepository(private var contextBase: Context) {
         if (mAuthBase.currentUser!=null){
             fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.hasChild(branch))
+                    if (snapshot.hasChild(branch)){
                         doesUserExists(branch)
+                        dataEdit.putBoolean("isDataTaken",true)
+                    }
                     else
                         sendUserToDataActivity()
                 }
