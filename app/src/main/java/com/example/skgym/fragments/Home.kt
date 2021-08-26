@@ -72,17 +72,14 @@ class Home : Fragment() {
                 Log.d(TAG, "onCreateView: Not data taken Checking data and branch Exists")
                 viewModel.isBranchExists(branch)
             } else {
-                binding.progressBarHome.visibility = View.GONE
                 Log.d(TAG, "onCreateView: Data Taken")
                 if (isMemChecked) {
                     Log.d(TAG, "onCreateView: Checked Member")
                     if (isMem) {
                         binding.nomemberLayout.visibility = View.GONE
-                        binding.progressBarHome.visibility = View.GONE
                         Log.d(TAG, "onCreateView: Member")
                     } else {
                         binding.nomemberLayout.visibility = View.VISIBLE
-                        binding.progressBarHome.visibility = View.GONE
                         Log.d(TAG, "onCreateView: No Member")
                     }
                 } else {

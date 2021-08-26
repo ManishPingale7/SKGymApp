@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:id="@+id/nomemberLayout"
         android:orientation="vertical"
-        android:visibility="gone"
         tools:ignore="UselessParent">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -49,17 +48,6 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/progressBar_Home"
-        >
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            />
-    </RelativeLayout>
 
 
 
