@@ -73,7 +73,7 @@ class GetBranch : AppCompatActivity() {
                     editor3.apply()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-
+                    finish()
                 } else {
                     Toast.makeText(this, "Enter a Verified Branch", Toast.LENGTH_SHORT).show()
                 }

@@ -4,12 +4,11 @@ package com.example.skgym.fragments.datacollection
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -169,6 +168,11 @@ class GymData : Fragment() {
 
 
     private fun init() {
+        val window: Window = requireActivity().window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.my_statusbar_color)
+
         val component: DaggerFactoryComponent = DaggerFactoryComponent.builder()
             .repositoryModule(RepositoryModule(requireContext()))
             .factoryModule(FactoryModule(MainRepository(requireContext())))
