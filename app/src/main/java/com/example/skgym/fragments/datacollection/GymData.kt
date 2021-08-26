@@ -1,4 +1,4 @@
-package com.example.skgym.Fragments.datacollection
+package com.example.skgym.fragments.datacollection
 
 
 import android.net.Uri
@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.skgym.R
 import com.example.skgym.data.Member
-import com.example.skgym.databinding.FragmentDataStage2Binding
+import com.example.skgym.databinding.GymdataBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
@@ -29,10 +29,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 
 
-class DataStage2 : Fragment() {
+class GymData : Fragment() {
 
     private lateinit var viewModel: MainViewModel
-    private var _binding: FragmentDataStage2Binding? = null
+    private var _binding: GymdataBinding? = null
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     private var mAuth = FirebaseAuth.getInstance()
@@ -44,14 +44,14 @@ class DataStage2 : Fragment() {
     private val storageRef = FirebaseStorage.getInstance().reference
     private val userId = mAuth.uid
     private var downloadUrl: Uri? = null
-    private val argsData: DataStage2Args by navArgs()
+    private val argsData: GymDataArgs by navArgs()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDataStage2Binding.inflate(inflater, container, false)
+        _binding = GymdataBinding.inflate(inflater, container, false)
         init()
         val bloodGroups = resources.getStringArray(R.array.bloodGroups)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdownitem, bloodGroups)

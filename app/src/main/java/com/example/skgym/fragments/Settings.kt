@@ -1,4 +1,4 @@
-package com.example.skgym.Fragments
+package com.example.skgym.fragments
 
 import android.content.Context
 import android.content.Intent

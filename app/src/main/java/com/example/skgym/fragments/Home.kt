@@ -1,4 +1,4 @@
-package com.example.skgym.Fragments
+package com.example.skgym.fragments
 
 
 import android.content.ContentValues.TAG
@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
 import com.example.skgym.activities.GetBranch
-import com.example.skgym.activities.GetUserData
 import com.example.skgym.databinding.FragmentHomeBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule

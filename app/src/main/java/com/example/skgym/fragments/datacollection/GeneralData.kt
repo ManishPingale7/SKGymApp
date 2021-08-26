@@ -1,6 +1,6 @@
 
 
-package com.example.skgym.Fragments.datacollection
+package com.example.skgym.fragments.datacollection
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -59,7 +59,7 @@ class GeneralData : Fragment() {
                     member.name = "$firstname $middleName $lastname"
                     member.imgUrl = imageUri.toString()
                     //Passing Data
-                    val action = GeneralDataDirections.actionGeneralDataToDataStage2(member)
+                    val action = GeneralDataDirections.actionGeneralDataToGymData(member)
                     it.findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(), "Select Profile Image", Toast.LENGTH_SHORT)
