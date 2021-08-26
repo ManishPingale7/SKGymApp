@@ -8,9 +8,7 @@ import java.util.*
 data class Member(
     var branch:String="",
     var imgUrl:String?="null",
-    var firstname: String="empty",
-    var middleName: String="empty",
-    var lastname: String="empty",
+    var name: String="empty",
     var bloodGroup:String="empty",
     var address: String="empty",
     var dob: String="",
