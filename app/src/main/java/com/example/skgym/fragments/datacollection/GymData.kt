@@ -205,7 +205,6 @@ class GymData : Fragment() {
                 binding.progressBarDataStage.visibility=View.GONE
                 viewModel.uploadUserdata(memberThis)
                 viewModel.sendUserToMainActivity()
-                requireActivity().finish()
             }.addOnFailureListener {
                 Log.d(TAG, "uploadProfileImage: ${it.message}")
                 Toast.makeText(requireContext(), "Try Again Later", Toast.LENGTH_SHORT).show()
