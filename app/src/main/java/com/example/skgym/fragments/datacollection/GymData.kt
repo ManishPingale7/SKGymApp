@@ -66,7 +66,6 @@ class GymData : Fragment() {
         }
 
         viewModel.fetchBranchNames().observe(viewLifecycleOwner, {
-
             Log.d(TAG, "onCreateView: Size ${it.size}")
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.dropdownitem,

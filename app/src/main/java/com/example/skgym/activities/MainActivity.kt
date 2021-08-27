@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "mActivity"
     private var currentuser: FirebaseUser? = null
 
-
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

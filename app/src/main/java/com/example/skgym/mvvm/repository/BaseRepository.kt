@@ -4,7 +4,6 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -44,8 +43,7 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun fetchBranchNames(): MutableLiveData<ArrayList<String>> {
-        val fDatabase = FirebaseDatabase.getInstance()
-        val list = java.util.ArrayList<String>()
+        val list = ArrayList<String>()
         val branchesNameRef = fDatabase.getReference(Constants.BRANCHES_SPINNER)
         branchesNameRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

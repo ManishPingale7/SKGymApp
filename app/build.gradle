@@ -57,10 +57,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha03"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
 
+    implementation 'id.zelory:compressor:3.0.1'
+
+    implementation 'com.github.Shouheng88:compressor:1.4.0'
 
     //Firebase
     implementation 'com.google.firebase:firebase-auth:21.0.1'

@@ -3,7 +3,6 @@ package com.example.skgym.activities
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -12,11 +11,11 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
 import com.example.skgym.databinding.ActivityGetBranchBinding
-import com.example.skgym.databinding.ActivityMainBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
@@ -24,7 +23,9 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class GetBranch : AppCompatActivity() {
+class
+GetBranch : AppCompatActivity() {
+
     private lateinit var mAuth: FirebaseAuth
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
@@ -46,9 +47,9 @@ class GetBranch : AppCompatActivity() {
         val handler = Handler()
         handler.postDelayed({ // Do something after 5s = 5000ms
             binding.progressBarBranch.visibility = View.GONE
-        }, 3000)
+        }, 1500)
 
-        viewModel.fetchBranchNames().observe(this, {
+        viewModel.fetchBranchNames().observe(this) {
             Log.d(TAG, "onCreateView: Size ${it.size}")
             val arrayAdapter = ArrayAdapter(
                 this, R.layout.dropdownitem,
@@ -58,7 +59,7 @@ class GetBranch : AppCompatActivity() {
 
             arrayAdapter.notifyDataSetChanged()
             binding.branchDataGet.setAdapter(arrayAdapter)
-        })
+        }
 
 
         binding.continueBranch.setOnClickListener {
