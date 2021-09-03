@@ -8,7 +8,6 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
     fun signOut() = repository.signOut()
 
-
     fun fetchBranchNames() = repository.fetchBranchNames()
 
 
@@ -34,6 +33,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
 
     fun sendUserToHomeAuth() = repository.sendUserToHomeAuth()
+
+    fun getAllPlans() = repository.fetchAllPlans()
 
 
 }

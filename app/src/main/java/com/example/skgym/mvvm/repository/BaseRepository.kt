@@ -12,8 +12,10 @@ import com.example.skgym.activities.MainActivity
 import com.example.skgym.activities.ViewPlan
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.data.Member
+import com.example.skgym.data.Plan
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.ISMEMBER
+import com.example.skgym.utils.Constants.PLANS
 import com.example.skgym.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,14 +25,15 @@ import com.google.firebase.database.ValueEventListener
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
-    val branchesList = MutableLiveData<java.util.ArrayList<String>>()
+    val branchesList = MutableLiveData<ArrayList<String>>()
+    val plansRef = fDatabase.getReference(PLANS)
 
     private var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
     val isDataTaken: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
-    val dataEdit=isDataTaken.edit()
+    val dataEdit = isDataTaken.edit()
     fun signOut() {
         mAuthBase.signOut()
     }
@@ -60,6 +63,30 @@ abstract class BaseRepository(private var contextBase: Context) {
         })
         return branchesList
     }
+
+    fun fetchAllPlans(): MutableLiveData<ArrayList<Plan>> {
+        var plans: MutableLiveData<ArrayList<Plan>>? = MutableLiveData<ArrayList<Plan>>()
+        var tempList = ArrayList<Plan>(10)
+        tempList.clear()
+        plansRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                plans?.value?.clear()
+                dataSnapshot.children.forEach {
+                    Log.d(TAG, "onDataChange: $it")
+                    tempList.add(it.getValue(Plan::class.java)!!)
+                    Log.d("TAG", "onDataChange: $tempList")
+                }
+                plans?.value = tempList
+                Log.d("TAG", "onDataChange:${plans?.value} ")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("HENLO", "onCancelled: $error")
+            }
+        })
+        return plans!!
+    }
+
 
     fun checkUserIsMember(branch: String): Boolean {
         val fDatabase = FirebaseDatabase.getInstance()
@@ -113,7 +140,7 @@ abstract class BaseRepository(private var contextBase: Context) {
                 Log.d(TAG, "onDataChange: OnDataChange user is $user")
                 if (user) {
                     result = "dataPresent"
-                    dataEdit.putBoolean("isDataTaken",true)
+                    dataEdit.putBoolean("isDataTaken", true)
                     dataEdit.apply()
                     Log.d(TAG, "onDataChange: Result upper is $result")
                 } else {
@@ -132,14 +159,14 @@ abstract class BaseRepository(private var contextBase: Context) {
         fDatabase.reference.child(memberThis.branch).child(userId).setValue(memberThis)
     }
 
+
     fun doesBranchExists(branch: String) {
-        if (mAuthBase.currentUser!=null){
+        if (mAuthBase.currentUser != null) {
             fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.hasChild(branch)){
+                    if (snapshot.hasChild(branch)) {
                         doesUserExists(branch)
-                    }
-                    else
+                    } else
                         sendUserToDataActivity()
                 }
 
@@ -155,7 +182,7 @@ abstract class BaseRepository(private var contextBase: Context) {
         Intent(contextBase, HomeAuth::class.java).also {
             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             contextBase.startActivity(it)
-        }    }
-
+        }
+    }
 
 }

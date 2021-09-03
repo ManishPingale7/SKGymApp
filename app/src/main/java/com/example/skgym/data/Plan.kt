@@ -1,9 +1,11 @@
 package com.example.skgym.data
 
 data class Plan(
-    var planName: String,
-    var planDesc: String,
-    var planDuration: String,
-    var planType: String,
-    var planFees: String
-)
+    val name: String,
+    val desc: String,
+    val timeNumber: String,
+    val timetype: String,
+    val fees: String
+) {
+    constructor() : this("", "", "", "", "")
+}

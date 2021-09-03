@@ -1,32 +1,52 @@
 package com.example.skgym.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skgym.Adapters.ViewPlansAdapter
 import com.example.skgym.R
-import com.example.skgym.databinding.ActivityMainBinding
 import com.example.skgym.databinding.ActivityViewPlanBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
-import com.google.firebase.auth.FirebaseAuth
 
 class ViewPlan : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
     lateinit var binding: ActivityViewPlanBinding
+    private var viewPlansAdapter = ViewPlansAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        init()
+        binding.apply {
+            recyclerViewPlans.apply {
+                adapter = viewPlansAdapter
+                layoutManager = LinearLayoutManager(this@ViewPlan)
+                setHasFixedSize(true)
+            }
+        }
 
+        init()
+        setupRecycler()
+    }
+
+    private fun setupRecycler() {
+
+        viewModel.getAllPlans().observe(this) {
+            viewPlansAdapter.submitList(it)
+            Log.d("TAG", "init:$it ")
+            viewPlansAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun init() {
@@ -40,5 +60,7 @@ class ViewPlan : AppCompatActivity() {
             .build() as DaggerFactoryComponent
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
+
+
     }
 }

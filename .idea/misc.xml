@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/activity_get_branch.xml" value="0.3671875" />
+        <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/activity_view_plan.xml" value="0.24166666666666667" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/dropdownitem.xml" value="0.3671875" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/fragment_data_stage2.xml" value="0.3671875" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/fragment_general_data.xml" value="0.3671875" />
+        <entry key="..\:/Android Apps/SkGym/app/src/main/res/layout/planlistitem.xml" value="0.2546875" />
         <entry key="app/src/main/res/drawable/btn_circular.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/btn_circular_nor.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/camera_logo.xml" value="0.4197916666666667" />
@@ -21,8 +23,6 @@
         <entry key="app/src/main/res/layout/activity_view_plan.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/dialogspinner.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/dropdownitem.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_data_stage2.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_data_stage2.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_data_stage2.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_general_data.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
