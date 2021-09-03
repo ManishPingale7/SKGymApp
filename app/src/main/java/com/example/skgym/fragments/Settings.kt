@@ -47,8 +47,6 @@ class Settings : Fragment() {
         val isUserMemberCheckedEdit = isUserMemberChecked.edit()
 
 
-
-
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
         binding.SignOutSettings.setOnClickListener {
