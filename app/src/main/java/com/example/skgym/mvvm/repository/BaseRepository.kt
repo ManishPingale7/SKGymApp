@@ -14,6 +14,7 @@ import com.example.skgym.auth.HomeAuth
 import com.example.skgym.data.Member
 import com.example.skgym.data.Plan
 import com.example.skgym.utils.Constants
+import com.example.skgym.utils.Constants.BRANCHES
 import com.example.skgym.utils.Constants.ISMEMBER
 import com.example.skgym.utils.Constants.PLANS
 import com.example.skgym.utils.Constants.USERS
@@ -129,11 +130,11 @@ abstract class BaseRepository(private var contextBase: Context) {
 
     fun doesUserExists(branch: String) {
         fDatabase = FirebaseDatabase.getInstance()
-        val memberRef = fDatabase.getReference(branch)
+        val memberRef = fDatabase.getReference(BRANCHES)
         val userId = mAuthBase.uid
         var result = ""
 
-        memberRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        memberRef.child(branch).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d(TAG, "onDataChange: $userId")
                 val user = snapshot.hasChild(userId.toString())
@@ -156,7 +157,8 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun uploadUserdata(memberThis: Member) {
-        fDatabase.reference.child(memberThis.branch).child(userId).setValue(memberThis)
+        fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId)
+            .setValue(memberThis)
     }
 
 
@@ -164,8 +166,13 @@ abstract class BaseRepository(private var contextBase: Context) {
         if (mAuthBase.currentUser != null) {
             fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.hasChild(branch)) {
-                        doesUserExists(branch)
+                    if (snapshot.hasChild(BRANCHES)) {
+                        Log.d(TAG, "onDataChange: Branch Node")
+                        if (snapshot.child(BRANCHES).hasChild(branch)) {
+                            Log.d(TAG, "onDataChange: Branch Present")
+                            doesUserExists(branch)
+                        }
+
                     } else
                         sendUserToDataActivity()
                 }

@@ -6,4 +6,6 @@ object Constants {
     const val ISMEMBER = "isMember"
     const val PROFILE_IMAGE = "imgUrl"
     const val PLANS = "plan"
+
+    const val BRANCHES="branches"
 }
