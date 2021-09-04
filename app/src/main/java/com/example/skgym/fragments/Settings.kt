@@ -50,13 +50,13 @@ class Settings : Fragment() {
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
         binding.SignOutSettings.setOnClickListener {
-            mAuth.signOut()
             branchTakenEdit.putBoolean("isBranchTaken", false)
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
             isUserMemberCheckedEdit.putBoolean("isUserMemberChecked",false)
             isUserMemberCheckedEdit.apply()
+            mAuth.signOut()
             val intent = Intent(
                 requireContext(), HomeAuth::class.java
             )
@@ -90,4 +90,6 @@ class Settings : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         currentUser = mAuth.currentUser
     }
+
+
 }

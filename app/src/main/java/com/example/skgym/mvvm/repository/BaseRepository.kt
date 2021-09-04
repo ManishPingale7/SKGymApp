@@ -171,8 +171,9 @@ abstract class BaseRepository(private var contextBase: Context) {
                         if (snapshot.child(BRANCHES).hasChild(branch)) {
                             Log.d(TAG, "onDataChange: Branch Present")
                             doesUserExists(branch)
+                        }else{
+                            sendUserToDataActivity()
                         }
-
                     } else
                         sendUserToDataActivity()
                 }
