@@ -28,7 +28,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_view_plans.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/planlistitem.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/gymdata.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/planlistitem.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bloodgroups.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4036458333333333" />
       </map>

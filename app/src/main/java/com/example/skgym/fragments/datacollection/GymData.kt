@@ -78,11 +78,7 @@ class GymData : Fragment() {
             binding.branchData.setAdapter(arrayAdapter)
         })
 
-//        binding.pickBloodReport.setOnClickListener {
-//            val fileIntent = Intent(Intent.ACTION_GET_CONTENT)
-//            fileIntent.type = "application/pdf"
-//            startActivityForResult(fileIntent, 21)
-//        }
+
 
         picker.addOnPositiveButtonClickListener {
             Log.d(TAG, "onCreateView: Header Date =${picker.headerText}")
