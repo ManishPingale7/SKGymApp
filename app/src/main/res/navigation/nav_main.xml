@@ -10,13 +10,16 @@
         android:id="@+id/homeFrag"
         android:name="com.example.skgym.fragments.Home"
         android:label="Home"
-        tools:layout="@layout/fragment_home">
-
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.example.skgym.fragments.Settings"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+    <activity
+        android:id="@+id/paymentActivity2"
+        android:name="com.example.skgym.activities.PaymentActivity"
+        android:label="activity_payment"
+        tools:layout="@layout/activity_payment" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.skgym.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.ViewPlansAdapter
 import com.example.skgym.R
+import com.example.skgym.data.Plan
 import com.example.skgym.databinding.ActivityViewPlanBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -22,6 +24,7 @@ class ViewPlan : AppCompatActivity() {
     private lateinit var component: DaggerFactoryComponent
     lateinit var binding: ActivityViewPlanBinding
     private var viewPlansAdapter = ViewPlansAdapter()
+    private lateinit var plansList: ArrayList<Plan>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +44,20 @@ class ViewPlan : AppCompatActivity() {
     }
 
     private fun setupRecycler() {
-
         viewModel.getAllPlans().observe(this) {
-            viewPlansAdapter.submitList(it)
+            plansList = it
+            viewPlansAdapter.submitList(plansList)
             Log.d("TAG", "init:$it ")
             viewPlansAdapter.notifyDataSetChanged()
         }
+        viewPlansAdapter.setOnItemClickListener(object : ViewPlansAdapter.onItemClickedListener {
+            override fun onItemClicked(position: Int) {
+                val intent = Intent(this@ViewPlan, PaymentActivity::class.java)
+                intent.putExtra("Plan", plansList[position])
+                startActivity(intent)
+            }
+
+        })
     }
 
     private fun init() {
