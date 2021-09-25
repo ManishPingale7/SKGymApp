@@ -9,6 +9,15 @@ import com.example.skgym.data.Plan
 import com.example.skgym.databinding.PlanlistitemBinding
 
 class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(DiffCallBack()) {
+    private lateinit var mListener: onItemClickedListener
+
+    interface onItemClickedListener {
+        fun onItemClicked(position: Int)
+    }
+
+    fun setOnItemClickListener(onItemClickedListener: onItemClickedListener) {
+        mListener = onItemClickedListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlansViewHolder {
         return PlansViewHolder(
@@ -24,9 +33,10 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
         holder.bind(getItem(position))
     }
 
-    inner class PlansViewHolder(val binding: PlanlistitemBinding) :
+    inner class PlansViewHolder(
+        val binding: PlanlistitemBinding,
+    ) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(plan: Plan) {
             binding.apply {
                 cardPlanName.text = plan.name
@@ -34,6 +44,13 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
                 cardDuration.text = plan.timeNumber
                 cardType.text = plan.timetype
                 cardFees.text = plan.fees
+            }
+            binding.apply {
+                plansLayout.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION)
+                        mListener.onItemClicked(adapterPosition)
+
+                }
             }
         }
     }
