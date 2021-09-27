@@ -1,6 +1,5 @@
 package com.example.skgym.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -52,9 +51,9 @@ class ViewPlan : AppCompatActivity() {
         }
         viewPlansAdapter.setOnItemClickListener(object : ViewPlansAdapter.onItemClickedListener {
             override fun onItemClicked(position: Int) {
-                val intent = Intent(this@ViewPlan, PaymentActivity::class.java)
-                intent.putExtra("Plan", plansList[position])
-                startActivity(intent)
+//                val intent = Intent(this@ViewPlan, PaymentActivity::class.java)
+//                intent.putExtra("Plan", plansList[position])
+//                startActivity(intent)
             }
 
         })
