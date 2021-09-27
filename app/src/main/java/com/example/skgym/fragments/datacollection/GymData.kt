@@ -189,7 +189,6 @@ class GymData : Fragment() {
 
     private fun uploadProfileImage(imgUrl: String) {
         val uri = imgUrl.toUri()
-        val extention = getFileExtention(uri)
         val fileRef = storageRef.child(userId.toString()).child(Constants.PROFILE_IMAGE)
 
         fileRef.putFile(uri).addOnSuccessListener {

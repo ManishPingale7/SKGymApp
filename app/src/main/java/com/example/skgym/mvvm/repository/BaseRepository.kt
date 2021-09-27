@@ -66,8 +66,8 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun fetchAllPlans(): MutableLiveData<ArrayList<Plan>> {
-        var plans: MutableLiveData<ArrayList<Plan>>? = MutableLiveData<ArrayList<Plan>>()
-        var tempList = ArrayList<Plan>(10)
+        val plans: MutableLiveData<ArrayList<Plan>>? = MutableLiveData<ArrayList<Plan>>()
+        val tempList = ArrayList<Plan>(10)
         tempList.clear()
         plansRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -157,8 +157,15 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun uploadUserdata(memberThis: Member) {
-        fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId)
-            .setValue(memberThis)
+        fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId).setValue(memberThis).addOnCompleteListener { 
+            if (it.isSuccessful)
+                Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()    
+            else{
+                Toast.makeText(contextBase, "Error occured", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "uploadUserdata: ${it.exception}")
+            }
+                    
+        }
     }
 
 
