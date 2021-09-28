@@ -27,12 +27,12 @@ import com.google.firebase.database.ValueEventListener
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
     val branchesList = MutableLiveData<ArrayList<String>>()
-    val plansRef = fDatabase.getReference(PLANS)
+    private val plansRef = fDatabase.getReference(PLANS)
 
     private var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
-    val isDataTaken: SharedPreferences =
+    private val isDataTaken: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
     val dataEdit = isDataTaken.edit()
     fun signOut() {
@@ -66,26 +66,26 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun fetchAllPlans(): MutableLiveData<ArrayList<Plan>> {
-        val plans: MutableLiveData<ArrayList<Plan>>? = MutableLiveData<ArrayList<Plan>>()
+        val plans: MutableLiveData<ArrayList<Plan>> = MutableLiveData<ArrayList<Plan>>()
         val tempList = ArrayList<Plan>(10)
         tempList.clear()
         plansRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                plans?.value?.clear()
+                plans.value?.clear()
                 dataSnapshot.children.forEach {
                     Log.d(TAG, "onDataChange: $it")
                     tempList.add(it.getValue(Plan::class.java)!!)
                     Log.d("TAG", "onDataChange: $tempList")
                 }
-                plans?.value = tempList
-                Log.d("TAG", "onDataChange:${plans?.value} ")
+                plans.value = tempList
+                Log.d("TAG", "onDataChange:${plans.value} ")
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d("HENLO", "onCancelled: $error")
             }
         })
-        return plans!!
+        return plans
     }
 
 
@@ -161,7 +161,7 @@ abstract class BaseRepository(private var contextBase: Context) {
             if (it.isSuccessful)
                 Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()    
             else{
-                Toast.makeText(contextBase, "Error occured", Toast.LENGTH_SHORT).show()
+                Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "uploadUserdata: ${it.exception}")
             }
                     

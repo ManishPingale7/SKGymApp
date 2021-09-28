@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_home.xml" value="0.13020833333333334" />
-        <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/checkout_with_googlepay_button.xml" value="0.13020833333333334" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/drawable/checkout_with_googlepay_button_content.xml" value="0.26666666666666666" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/drawable/googlepay_button_background.xml" value="0.26666666666666666" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/drawable/googlepay_button_overlay.xml" value="0.26666666666666666" />
@@ -41,7 +39,9 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_view_plans.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/gymdata.xml" value="0.1" />
         <entry key="app/src/main/res/layout/planlistitem.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/progress_btn_layout.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bloodgroups.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4036458333333333" />
       </map>

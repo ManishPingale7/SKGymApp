@@ -3,9 +3,10 @@ package com.example.skgym.fragments.datacollection
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
-import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -22,6 +23,7 @@ import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.example.skgym.utils.Constants
+import com.example.skgym.utils.ProgressBtn
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -45,6 +47,11 @@ class GymData : Fragment() {
     private var downloadUrl: Uri? = null
     private val argsData: GymDataArgs by navArgs()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -123,7 +130,12 @@ class GymData : Fragment() {
             Log.d(TAG, "onCreateView: Gender $gender")
         }
 
-        binding.btnContinueDatastage.setOnClickListener {
+
+        val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
+
+
+        view.setOnClickListener {
+            val progressBtn = ProgressBtn(requireContext(), view)
             val bloodGroup = binding.bloodgrpData.text.toString()
             val address = binding.addressData.text.toString()
             val branch = binding.branchData.text.toString()
@@ -131,7 +143,7 @@ class GymData : Fragment() {
                 if (address.isNotEmpty()) {
                     if (dateTaken) {
                         if (branch.isNotEmpty() && branches.contains(branch)) {
-                            binding.progressBarDataStage.visibility=View.VISIBLE
+                            progressBtn.buttonActivated()
                             memberThis.bloodGroup = bloodGroup
                             memberThis.address = address
                             memberThis.branch = branch
@@ -139,7 +151,10 @@ class GymData : Fragment() {
                             Log.d(TAG, "onCreateView: $memberThis")
                             uploadProfileImage(memberThis.imgUrl.toString())
                             memberThis.imgUrl = downloadUrl.toString()
-                            requireActivity().finish()
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                progressBtn.buttonfinished()
+                                requireActivity().finish()
+                            }, 3000)
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -156,8 +171,9 @@ class GymData : Fragment() {
                 Toast.makeText(requireContext(), "Select BloodGroup", Toast.LENGTH_SHORT).show()
 
             }
-
         }
+
+
         return binding.root
     }
 
@@ -196,22 +212,15 @@ class GymData : Fragment() {
                 downloadUrl = it
                 memberThis.imgUrl = downloadUrl.toString()
                 Log.d(TAG, "uploadProfileImage: $downloadUrl")
-                binding.progressBarDataStage.visibility=View.GONE
                 viewModel.uploadUserdata(memberThis)
-                viewModel.sendUserToMainActivity()
             }.addOnFailureListener {
                 Log.d(TAG, "uploadProfileImage: ${it.message}")
                 Toast.makeText(requireContext(), "Try Again Later", Toast.LENGTH_SHORT).show()
-                binding.progressBarDataStage.visibility=View.GONE
             }
         }
 
 
     }
 
-    private fun getFileExtention(uri: Uri): String {
-        val cr = requireContext().contentResolver
-        val mime = MimeTypeMap.getSingleton()
-        return mime.getExtensionFromMimeType(cr.getType(uri)).toString()
-    }
+
 }
