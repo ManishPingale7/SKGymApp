@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
@@ -17,16 +18,23 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
+import org.json.JSONObject
 
-class ViewPlan : AppCompatActivity() {
+
+class ViewPlan : AppCompatActivity(), PaymentResultListener {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
     lateinit var binding: ActivityViewPlanBinding
     private var viewPlansAdapter = ViewPlansAdapter()
     private lateinit var plansList: ArrayList<Plan>
+    private lateinit var checkout: Checkout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        checkout = Checkout()
         binding = ActivityViewPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -51,8 +59,22 @@ class ViewPlan : AppCompatActivity() {
         }
         viewPlansAdapter.setOnItemClickListener(object : ViewPlansAdapter.onItemClickedListener {
             override fun onItemClicked(position: Int) {
-//                val intent = Intent(this@ViewPlan, PaymentActivity::class.java)
-//                intent.putExtra("Plan", plansList[position])
+                checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+
+                var jsonObject = JSONObject()
+                jsonObject.put("name", "Test Payment")
+                jsonObject.put("description", "This is the description")
+                jsonObject.put("theme.color", "#0093DD")
+                jsonObject.put("currency", "INR")
+                jsonObject.put("amount", 6900)
+                jsonObject.put("prefill.contact", 9142662000)
+                jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
+
+                checkout.open(this@ViewPlan, jsonObject)
+
+
+//                viewModel.changeMemberStatus()
+//                val intent = Intent(this@ViewPlan, MainActivity::class.java)
 //                startActivity(intent)
             }
 
@@ -71,6 +93,15 @@ class ViewPlan : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
+
+    }
+
+    override fun onPaymentSuccess(p0: String?) {
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPaymentError(int: Int, p1: String?) {
+        Toast.makeText(this, "Failed: $p1", Toast.LENGTH_SHORT).show()
 
     }
 }

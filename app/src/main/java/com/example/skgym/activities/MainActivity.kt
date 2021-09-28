@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
         currentuser = mAuth.currentUser
 
         checkUser()
-
-
     }
 
     private fun checkUser() {

@@ -2,7 +2,6 @@ package com.example.skgym.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.util.*
 
 @Parcelize
 data class Member(
@@ -16,5 +15,5 @@ data class Member(
     var guardian:String="None",
     var medicalDocuments:String?="null",
     var plan:String="",
-    var isMember:Boolean=false
+    var member: Boolean = false
 ): Parcelable

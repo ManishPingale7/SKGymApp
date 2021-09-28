@@ -35,6 +35,7 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUserToHomeAuth() = repository.sendUserToHomeAuth()
 
     fun getAllPlans() = repository.fetchAllPlans()
+//    fun changeMemberStatus()=repository.changeMemberToTrue()
 
 
 }

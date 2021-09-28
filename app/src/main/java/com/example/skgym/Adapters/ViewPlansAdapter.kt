@@ -47,9 +47,10 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
             }
             binding.apply {
                 plansLayout.setOnClickListener {
-                    if (adapterPosition != RecyclerView.NO_POSITION)
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
                         mListener.onItemClicked(adapterPosition)
 
+                    }
                 }
             }
         }

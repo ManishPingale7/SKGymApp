@@ -23,8 +23,7 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class
-GetBranch : AppCompatActivity() {
+class GetBranch : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var viewModel: MainViewModel

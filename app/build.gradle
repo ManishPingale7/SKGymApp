@@ -93,8 +93,9 @@ dependencies {
 
     //Animations
     implementation 'com.airbnb.android:lottie:4.0.0'
-    
-    //Google Pay
-    implementation "com.google.android.gms:play-services-wallet:16.0.1"
+
+
+    //RazorPay
+    implementation 'com.razorpay:checkout:1.6.12'
 
 }

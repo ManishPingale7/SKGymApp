@@ -48,11 +48,6 @@ class GymData : Fragment() {
     private val argsData: GymDataArgs by navArgs()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -147,7 +142,7 @@ class GymData : Fragment() {
                             memberThis.bloodGroup = bloodGroup
                             memberThis.address = address
                             memberThis.branch = branch
-                            memberThis.isMember = false
+                            memberThis.member = false
                             Log.d(TAG, "onCreateView: $memberThis")
                             uploadProfileImage(memberThis.imgUrl.toString())
                             memberThis.imgUrl = downloadUrl.toString()
