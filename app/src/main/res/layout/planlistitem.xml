@@ -13,6 +13,7 @@
         android:id="@+id/plansLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg1"
         android:orientation="vertical">
 
         <TextView
@@ -22,7 +23,7 @@
             android:layout_margin="15dp"
             android:fontFamily="@font/montserratsemibold"
             android:text="@string/plan_name"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -33,7 +34,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserratregular"
             android:text="@string/description"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -61,7 +62,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="@string/duration"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
 
                     <TextView
@@ -72,7 +73,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="@string/_30"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -90,7 +91,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="Type"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
 
                     <TextView
@@ -101,7 +102,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="Normal"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -119,7 +120,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="Fees"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
 
                     <TextView
@@ -130,7 +131,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserratsemibold"
                         android:text="Rs.4599"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
                 </LinearLayout>
 
