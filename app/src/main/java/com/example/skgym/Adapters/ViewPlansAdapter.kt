@@ -40,7 +40,7 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
         fun bind(plan: Plan) {
             binding.apply {
                 cardPlanName.text = plan.name
-                cardPlanDesc.text = plan.desc
+              //  cardPlanDesc.text = plan.desc
                 cardDuration.text = plan.timeNumber
                 cardType.text = plan.timetype
                 cardFees.text = plan.fees
