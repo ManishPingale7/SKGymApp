@@ -1,5 +1,7 @@
 package com.example.skgym.Adapters
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -37,19 +39,26 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
         val binding: PlanlistitemBinding,
     ) :
         RecyclerView.ViewHolder(binding.root) {
+        var text=""
         fun bind(plan: Plan) {
+            Log.d(TAG, "bind: ${plan.pt!!}")
+            text = if (plan.pt) {
+                "PT"
+            } else {
+                "Normal"
+            }
             binding.apply {
                 cardPlanName.text = plan.name
               //  cardPlanDesc.text = plan.desc
                 cardDuration.text = plan.timeNumber
-                cardType.text = plan.timetype
+                isPersonal.text = text
                 cardFees.text = plan.fees
+
             }
             binding.apply {
                 plansLayout.setOnClickListener {
                     if (adapterPosition != RecyclerView.NO_POSITION) {
                         mListener.onItemClicked(adapterPosition)
-
                     }
                 }
             }
