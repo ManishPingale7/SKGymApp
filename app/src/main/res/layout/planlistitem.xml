@@ -7,35 +7,57 @@
     android:layout_margin="10dp"
     android:padding="10dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    app:cardElevation="12dp">
 
     <LinearLayout
         android:id="@+id/plansLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:background="@drawable/bg1"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/cardPlanName"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:fontFamily="@font/montserratsemibold"
-            android:text="@string/plan_name"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/cardPlanDesc"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="15dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:fontFamily="@font/montserratregular"-->
-<!--            android:text="@string/description"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="18sp" />-->
+            >
+
+            <TextView
+                android:id="@+id/cardPlanName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/montserratsemibold"
+                android:text="@string/plan_name"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/badge_gold"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_premium" />
+
+        </RelativeLayout>
+
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/cardPlanDesc"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="15dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:fontFamily="@font/montserratregular"-->
+        <!--            android:text="@string/description"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="18sp" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,7 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp"
+                android:padding="0dp"
+                android:layout_marginTop="10dp"
                 android:weightSum="3">
 
                 <LinearLayout

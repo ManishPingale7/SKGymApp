@@ -3,6 +3,7 @@ package com.example.skgym.Adapters
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -40,12 +41,16 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
     ) :
         RecyclerView.ViewHolder(binding.root) {
         var text=""
+        var RESULT = View.VISIBLE
         fun bind(plan: Plan) {
             Log.d(TAG, "bind: ${plan.pt!!}")
-            text = if (plan.pt) {
-                "PT"
+            if (plan.pt) {
+                text = "PT"
+                RESULT = View.VISIBLE
+
             } else {
-                "Normal"
+                text = "Normal"
+                RESULT = View.INVISIBLE
             }
             binding.apply {
                 cardPlanName.text = plan.name
@@ -53,7 +58,7 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
                 cardDuration.text = plan.timeNumber
                 isPersonal.text = text
                 cardFees.text = plan.fees
-
+                badgeGold.visibility = RESULT
             }
             binding.apply {
                 plansLayout.setOnClickListener {
