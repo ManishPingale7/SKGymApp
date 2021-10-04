@@ -1,5 +1,7 @@
 package com.example.skgym.activities
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -50,6 +52,7 @@ class ViewPlan : AppCompatActivity(), PaymentResultListener {
         setupRecycler()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupRecycler() {
         viewModel.getAllPlans().observe(this) {
             plansList = it
@@ -59,26 +62,29 @@ class ViewPlan : AppCompatActivity(), PaymentResultListener {
         }
         viewPlansAdapter.setOnItemClickListener(object : ViewPlansAdapter.onItemClickedListener {
             override fun onItemClicked(position: Int) {
-                checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+//                setPayment()
 
-                var jsonObject = JSONObject()
-                jsonObject.put("name", "Test Payment")
-                jsonObject.put("description", "This is the description")
-                jsonObject.put("theme.color", "#0093DD")
-                jsonObject.put("currency", "INR")
-                jsonObject.put("amount", 6900)
-                jsonObject.put("prefill.contact", 9142662000)
-                jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
-
-                checkout.open(this@ViewPlan, jsonObject)
-
-
-//                viewModel.changeMemberStatus()
-//                val intent = Intent(this@ViewPlan, MainActivity::class.java)
-//                startActivity(intent)
+                val intent = Intent(this@ViewPlan, CheckoutActivity::class.java)
+                intent.putExtra("Plan", plansList[position])
+                startActivity(intent)
             }
 
         })
+    }
+
+    private fun setPayment() {
+        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+
+        val jsonObject = JSONObject()
+        jsonObject.put("name", "Test Payment")
+        jsonObject.put("description", "This is the description")
+        jsonObject.put("theme.color", "#0093DD")
+        jsonObject.put("currency", "INR")
+        jsonObject.put("amount", 6900)
+        jsonObject.put("prefill.contact", 9142662000)
+        jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
+
+        checkout.open(this@ViewPlan, jsonObject)
     }
 
     private fun init() {

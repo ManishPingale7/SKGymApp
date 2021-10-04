@@ -40,7 +40,7 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
         val binding: PlanlistitemBinding,
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        var text=""
+        var text = ""
         var RESULT = View.VISIBLE
         fun bind(plan: Plan) {
             Log.d(TAG, "bind: ${plan.pt!!}")
@@ -54,7 +54,7 @@ class ViewPlansAdapter : ListAdapter<Plan, ViewPlansAdapter.PlansViewHolder>(Dif
             }
             binding.apply {
                 cardPlanName.text = plan.name
-              //  cardPlanDesc.text = plan.desc
+                //  cardPlanDesc.text = plan.desc
                 cardDuration.text = plan.timeNumber
                 isPersonal.text = text
                 cardFees.text = plan.fees

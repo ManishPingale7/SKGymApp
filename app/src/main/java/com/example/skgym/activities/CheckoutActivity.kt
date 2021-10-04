@@ -3,10 +3,12 @@ package com.example.skgym.activities
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
+import com.example.skgym.data.Plan
 import com.example.skgym.databinding.ActivityCheckoutBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -27,7 +29,12 @@ class CheckoutActivity : AppCompatActivity() {
 
         init()
 
-
+        Toast.makeText(
+            baseContext,
+            intent.getParcelableExtra<Plan>("Plan").toString(),
+            Toast.LENGTH_SHORT
+        )
+            .show()
     }
 
     private fun init() {
