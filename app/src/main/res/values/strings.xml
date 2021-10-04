@@ -76,4 +76,12 @@
     <string name="duration">Duration</string>
     <string name="_30">30</string>
     <string name="normal">Normal</string>
+    <string name="report_any_issue">Report Any issue</string>
+    <string name="report">Report</string>
+    <string name="app">App</string>
+    <string name="check_if_you_are_member_or_not">Check if you are member or not</string>
+    <string name="refresh_member_status">Refresh Member Status</string>
+    <string name="change_branch">Change Branch</string>
+    <string name="history">History</string>
+    <string name="products">Products</string>
 </resources>

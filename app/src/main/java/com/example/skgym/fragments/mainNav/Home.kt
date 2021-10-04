@@ -1,4 +1,4 @@
-package com.example.skgym.fragments
+package com.example.skgym.fragments.mainNav
 
 
 import android.content.ContentValues.TAG

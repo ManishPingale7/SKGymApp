@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".fragments.Settings">
+        tools:context=".fragments.mainNav.Settings">
 
 
         <TextView
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="Plans"
+                    android:text="@string/plans"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="History"
+                    android:text="@string/history"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -154,7 +154,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserratsemibold"
-            android:text="Branch"
+            android:text="@string/branch"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/my_statusbar_color"
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="Change Branch"
+                    android:text="@string/change_branch"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -262,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="Refresh Member Status"
+                    android:text="@string/refresh_member_status"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -274,7 +274,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserratregular"
-                    android:text="Check if you are member or not"
+                    android:text="@string/check_if_you_are_member_or_not"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -289,7 +289,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserratsemibold"
-            android:text="App"
+            android:text="@string/app"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/my_statusbar_color"
@@ -357,7 +357,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="Report"
+                    android:text="@string/report"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -369,7 +369,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserratregular"
-                    android:text="Report Any issue"
+                    android:text="@string/report_any_issue"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -389,7 +389,7 @@
             android:text="@string/signout"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="16sp" />
 
         <View
