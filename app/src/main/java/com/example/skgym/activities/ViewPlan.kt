@@ -22,7 +22,6 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
-import org.json.JSONObject
 
 
 class ViewPlan : AppCompatActivity(), PaymentResultListener {
@@ -72,20 +71,20 @@ class ViewPlan : AppCompatActivity(), PaymentResultListener {
         })
     }
 
-    private fun setPayment() {
-        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
-
-        val jsonObject = JSONObject()
-        jsonObject.put("name", "Test Payment")
-        jsonObject.put("description", "This is the description")
-        jsonObject.put("theme.color", "#0093DD")
-        jsonObject.put("currency", "INR")
-        jsonObject.put("amount", 6900)
-        jsonObject.put("prefill.contact", 9142662000)
-        jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
-
-        checkout.open(this@ViewPlan, jsonObject)
-    }
+//    private fun setPayment() {
+//        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+//
+//        val jsonObject = JSONObject()
+//        jsonObject.put("name", "Test Payment")
+//        jsonObject.put("description", "This is the description")
+//        jsonObject.put("theme.color", "#0093DD")
+//        jsonObject.put("currency", "INR")
+//        jsonObject.put("amount", 6900)
+//        jsonObject.put("prefill.contact", 9142662000)
+//        jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
+//
+//        checkout.open(this@ViewPlan, jsonObject)
+//    }
 
     private fun init() {
         val window: Window = this.window

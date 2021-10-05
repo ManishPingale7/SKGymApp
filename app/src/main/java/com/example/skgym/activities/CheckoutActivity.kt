@@ -16,6 +16,7 @@ import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 
+
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
@@ -35,6 +36,16 @@ class CheckoutActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         )
             .show()
+
+        binding.checkoutBtn.setOnStateChangeListener { active ->
+            Toast.makeText(
+                this,
+                "State: $active",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+
     }
 
     private fun init() {

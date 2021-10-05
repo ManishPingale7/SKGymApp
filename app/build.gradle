@@ -94,6 +94,8 @@ dependencies {
     //Animations
     implementation 'com.airbnb.android:lottie:4.0.0'
 
+    //Swipe Button
+    implementation 'com.ebanx:swipe-button:0.4.0'
 
     //RazorPay
     implementation 'com.razorpay:checkout:1.6.12'
