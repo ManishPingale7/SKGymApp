@@ -355,7 +355,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             app:button_background="@drawable/shape_button"
             app:button_bottom_padding="20dp"
@@ -370,7 +370,6 @@
             app:inner_text_color="@android:color/white"
             app:inner_text_size="16sp"
             app:inner_text_top_padding="18dp"
-
             >
 
         </com.ebanx.swipebtn.SwipeButton>
