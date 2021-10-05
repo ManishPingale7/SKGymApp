@@ -84,4 +84,13 @@
     <string name="change_branch">Change Branch</string>
     <string name="history">History</string>
     <string name="products">Products</string>
+    <string name="order_details">Order Details</string>
+    <string name="type">Type</string>
+    <string name="none">None</string>
+    <string name="inr">INR</string>
+    <string name="plan_details">Plan Details</string>
+    <string name="order_info">Order Info</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="additional_charges_gst">Additional Charges/GST</string>
 </resources>

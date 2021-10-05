@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/montserratsemibold"
-                android:text="Order Details"
+                android:text="@string/order_details"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
@@ -68,7 +68,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserratsemibold"
-            android:text="Plan Details"
+            android:text="@string/plan_details"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -105,12 +105,15 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"
                         android:fontFamily="@font/montserratsemibold"
+                        android:contentDescription="@string/todo"
                         android:text="@string/plan_name"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        tools:ignore="RelativeOverlap" />
 
                     <ImageView
                         android:id="@+id/badge_gold"
                         android:layout_width="33dp"
+                        android:contentDescription="@string/todo"
                         android:layout_height="33dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
@@ -130,7 +133,8 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal"
                         android:padding="0dp"
-                        android:weightSum="3">
+                        android:weightSum="3"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -172,7 +176,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/montserratsemibold"
-                                android:text="Type"
+                                android:text="@string/type"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -182,7 +186,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/montserratsemibold"
-                                android:text="None"
+                                android:text="@string/none"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
@@ -199,7 +203,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/montserratsemibold"
-                                android:text="Fees"
+                                android:text="@string/inr"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -209,7 +213,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/montserratsemibold"
-                                android:text="Rs.4599"
+                                android:text="@string/_30"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
@@ -250,7 +254,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserratsemibold"
-            android:text="Order Info"
+            android:text="@string/order_info"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -267,7 +271,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserratregular"
-                android:text="Subtotal"
+                android:text="@string/subtotal"
                 android:textColor="@color/grey"
 
                 />
@@ -280,7 +284,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserratsemibold"
-                android:text="2499"
+                android:text="@string/_30"
                 android:textColor="@color/black"
 
                 />
@@ -300,7 +304,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserratregular"
-                android:text="Additional Charges/GST"
+                android:text="@string/additional_charges_gst"
                 android:textColor="@color/grey"
 
                 />
@@ -312,7 +316,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserratsemibold"
-                android:text="0"
+                android:text="@string/_30"
                 android:textColor="@color/black"
 
                 />
@@ -331,7 +335,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserratregular"
-                android:text="Total"
+                android:text="@string/total"
                 android:textColor="@color/grey"
 
                 />
@@ -344,7 +348,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserratsemibold"
-                android:text="2499"
+                android:text="@string/_30"
                 android:textColor="@color/black"
 
                 />
