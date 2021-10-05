@@ -26,7 +26,8 @@ class CheckoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_checkout)
+        binding = ActivityCheckoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         init()
 
@@ -37,6 +38,8 @@ class CheckoutActivity : AppCompatActivity() {
         )
             .show()
 
+        var demo: Plan? =intent.getParcelableExtra<Plan>("Plan")
+        setPlanLayout(demo)
         binding.checkoutBtn.setOnStateChangeListener { active ->
             Toast.makeText(
                 this,
@@ -60,5 +63,11 @@ class CheckoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
+    }
+
+    fun setPlanLayout(demo: Plan?) {
+        binding.cardPlanNameD.text=demo?.name
+        binding.cardPlanDescText.text=demo?.desc
+        binding.isPersonalD.text=if(demo?.pt==true){"PT"}else{"Normal"}
     }
 }
