@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
@@ -20,22 +19,18 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
-import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
 
 
-class ViewPlan : AppCompatActivity(), PaymentResultListener {
+class ViewPlan : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
     lateinit var binding: ActivityViewPlanBinding
     private var viewPlansAdapter = ViewPlansAdapter()
     private lateinit var plansList: ArrayList<Plan>
-    private lateinit var checkout: Checkout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        checkout = Checkout()
         binding = ActivityViewPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -71,20 +66,6 @@ class ViewPlan : AppCompatActivity(), PaymentResultListener {
         })
     }
 
-//    private fun setPayment() {
-//        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
-//
-//        val jsonObject = JSONObject()
-//        jsonObject.put("name", "Test Payment")
-//        jsonObject.put("description", "This is the description")
-//        jsonObject.put("theme.color", "#0093DD")
-//        jsonObject.put("currency", "INR")
-//        jsonObject.put("amount", 6900)
-//        jsonObject.put("prefill.contact", 9142662000)
-//        jsonObject.put("prefill.email", "adityakadlag2004@gmail.com")
-//
-//        checkout.open(this@ViewPlan, jsonObject)
-//    }
 
     private fun init() {
         val window: Window = this.window
@@ -101,12 +82,4 @@ class ViewPlan : AppCompatActivity(), PaymentResultListener {
 
     }
 
-    override fun onPaymentSuccess(p0: String?) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onPaymentError(int: Int, p1: String?) {
-        Toast.makeText(this, "Failed: $p1", Toast.LENGTH_SHORT).show()
-
-    }
 }
