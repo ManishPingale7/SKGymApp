@@ -74,7 +74,7 @@
     <string name="plan_name">Plan Name</string>
     <string name="description">Description</string>
     <string name="duration">Duration</string>
-    <string name="_30">30</string>
+    <string name="_30">0</string>
     <string name="normal">Normal</string>
     <string name="report_any_issue">Report Any issue</string>
     <string name="report">Report</string>

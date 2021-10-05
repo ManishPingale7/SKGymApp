@@ -73,6 +73,7 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
             binding.cardFeesD.text = demo.fees
             binding.subtotal.text = demo.fees
             binding.totalFees.text = demo.fees
+            binding.cardDurationD.text=demo.timeNumber
         }
     }
 

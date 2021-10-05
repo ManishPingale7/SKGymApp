@@ -25,8 +25,10 @@
         <entry key="app/src/main/res/drawable/btn_circular.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/btn_circular_nor.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/camera_logo.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/drawable/ic_done.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_premium.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_get_branch.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_get_user_data.xml" value="0.4036458333333333" />
@@ -44,7 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_view_plans.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/gymdata.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/gymdata.xml" value="0.5" />
         <entry key="app/src/main/res/layout/planlistitem.xml" value="0.25" />
         <entry key="app/src/main/res/layout/progress_btn_layout.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bloodgroups.xml" value="0.4036458333333333" />

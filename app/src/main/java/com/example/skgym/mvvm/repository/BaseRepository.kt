@@ -7,6 +7,8 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.skgym.Interfaces.IsMemberCallBack
+import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
 import com.example.skgym.activities.ViewPlan
@@ -17,18 +19,20 @@ import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.BRANCHES
 import com.example.skgym.utils.Constants.ISMEMBER
 import com.example.skgym.utils.Constants.PLANS
-import com.example.skgym.utils.Constants.USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
     val branchesList = MutableLiveData<ArrayList<String>>()
     private val plansRef = fDatabase.getReference(PLANS)
-
+    var result = ""
     private var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
@@ -89,28 +93,38 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
 
-    fun checkUserIsMember(branch: String): Boolean {
+    fun checkUserIsMember(branch: String,callback:IsMemberCallBack): String {
         val fDatabase = FirebaseDatabase.getInstance()
-        val memberRef = fDatabase.getReference(branch)
+        val memberRef = fDatabase.getReference(BRANCHES)
         val userId = mAuthBase.uid
-        var result = false
-        memberRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild(USERS)) {
-                    if (snapshot.child(USERS).hasChild(userId.toString())) {
-                        if (snapshot.child(USERS).child(userId.toString())
-                                .child(ISMEMBER).value == true
-                        ) {
-                            result = true
+
+        CoroutineScope(IO).launch {
+            Log.d(TAG, "checkUserIsMember: First Check")
+            memberRef.child(branch).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChild(userId.toString())) {
+                        val member = snapshot.child(userId.toString())
+                            .child(ISMEMBER).value.toString()
+                        result = if (member == "true") {
+                            Log.d(TAG, "checkUserIsMember: Checked True")
+                            "true"
+                        } else {
+                            "false"
                         }
                     }
-                }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "onCancelled: ${error.message}")
-            }
-        })
+                    callback.onCallback(result)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d(TAG, "onCancelled: ${error.message}")
+                }
+            })
+        }
+
+        Log.d(TAG, "checkUserIsMember: Then Result")
+        Log.d(TAG, "checkUserIsMember: result $result")
         return result
     }
 
@@ -196,6 +210,12 @@ abstract class BaseRepository(private var contextBase: Context) {
     fun sendUserToHomeAuth() {
         Intent(contextBase, HomeAuth::class.java).also {
             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            contextBase.startActivity(it)
+        }
+    }
+
+    fun sendUsertogetBranchActivity() {
+        Intent(contextBase, GetBranch::class.java).also {
             contextBase.startActivity(it)
         }
     }

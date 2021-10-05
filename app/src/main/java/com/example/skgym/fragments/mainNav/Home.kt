@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.skgym.Interfaces.IsMemberCallBack
 import com.example.skgym.R
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.databinding.FragmentHomeBinding
@@ -32,7 +33,6 @@ class Home : Fragment() {
     var mAuth = FirebaseAuth.getInstance()
     var isDatatakenB = false
     var isMem = false
-    var isMemChecked = false
 
 
     override fun onCreateView(
@@ -48,15 +48,15 @@ class Home : Fragment() {
             requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
         val isDataTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isDataTaken", MODE_PRIVATE)
-        val isUserMemberChecked: SharedPreferences =
-            requireActivity().getSharedPreferences("isUserMemberChecked", MODE_PRIVATE)
-        val isUserMemberCheckedEdit = isUserMemberChecked.edit()
-        val isUserMember: SharedPreferences =
-            requireActivity().getSharedPreferences("isUserMember", MODE_PRIVATE)
-        val isUserMemberEdit = isUserMember.edit()
-
-        isMem = isUserMember.getBoolean("isUserMember", false)
-        isMemChecked = isUserMemberChecked.getBoolean("isUserMemberChecked", false)
+//        val isUserMemberChecked: SharedPreferences =
+//            requireActivity().getSharedPreferences("isUserMemberChecked", MODE_PRIVATE)
+//        val isUserMemberCheckedEdit = isUserMemberChecked.edit()
+//        val isUserMember: SharedPreferences =
+//            requireActivity().getSharedPreferences("isUserMember", MODE_PRIVATE)
+//        val isUserMemberEdit = isUserMember.edit()
+//
+//        isMem = isUserMember.getBoolean("isUserMember", false)
+//        isMemChecked = isUserMemberChecked.getBoolean("isUserMemberChecked", false)
         isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
 
 
@@ -70,29 +70,18 @@ class Home : Fragment() {
                 Log.d(TAG, "onCreateView: Not data taken Checking data and branch Exists")
                 viewModel.isBranchExists(branch)
             } else {
-                Log.d(TAG, "onCreateView: Data Taken")
-                if (isMemChecked) {
-                    Log.d(TAG, "onCreateView: Checked Member")
-                    if (isMem) {
-                        binding.nomemberLayout.visibility = View.GONE
-                        Log.d(TAG, "onCreateView: Member")
-                    } else {
-                        binding.nomemberLayout.visibility = View.VISIBLE
-                        Log.d(TAG, "onCreateView: No Member")
+
+                Log.d(TAG, "onCreateView: Checking Member")
+                viewModel.checkUserIsMember(branch, object : IsMemberCallBack {
+                    override fun onCallback(value: String?) {
+                        if (value == "true") {
+                            binding.nomemberLayout.visibility = View.GONE
+                        } else {
+                            binding.nomemberLayout.visibility = View.VISIBLE
+                        }
                     }
-                } else {
-                    Log.d(TAG, "onCreateView: Checking Member")
-                    val mem = viewModel.checkUserIsMember(branch)
-                    if (mem) {
-                        isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", true)
-                        isUserMemberCheckedEdit.apply()
-                        isUserMemberEdit.putBoolean("isUserMember", true)
-                        isUserMemberEdit.apply()
-                    } else {
-                        isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", true)
-                        isUserMemberCheckedEdit.apply()
-                    }
-                }
+                })
+
             }
         } else {
             binding.becomeMember.text = resources.getString(R.string.selectBranch)
@@ -101,7 +90,10 @@ class Home : Fragment() {
         }
 
         binding.becomeMember.setOnClickListener {
-            viewModel.sendUserToViewPlanActivity()
+            if (binding.becomeMember.text == resources.getString(R.string.selectBranch))
+                viewModel.sendUsertogetBranchActivity()
+            else
+                viewModel.sendUserToViewPlanActivity()
         }
 
         return binding.root

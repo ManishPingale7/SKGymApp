@@ -76,6 +76,10 @@ class Settings : Fragment() {
         binding.viewAllPlans.setOnClickListener {
             viewModel.sendUserToViewPlanActivity()
         }
+
+        binding.currentPlanSettings.setOnClickListener {
+
+        }
         return binding.root
     }
 

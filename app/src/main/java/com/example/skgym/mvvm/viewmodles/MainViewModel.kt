@@ -1,6 +1,7 @@
 package com.example.skgym.mvvm.viewmodles
 
 import androidx.lifecycle.ViewModel
+import com.example.skgym.Interfaces.IsMemberCallBack
 import com.example.skgym.data.Member
 import com.example.skgym.mvvm.repository.MainRepository
 
@@ -11,7 +12,7 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun fetchBranchNames() = repository.fetchBranchNames()
 
 
-    fun checkUserIsMember(branch: String) = repository.checkUserIsMember(branch)
+    fun checkUserIsMember(branch: String,callback:IsMemberCallBack) = repository.checkUserIsMember(branch,callback)
 
 
     fun sendUserToViewPlanActivity() = repository.sendUserToViewPlanActivity()
@@ -35,6 +36,7 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUserToHomeAuth() = repository.sendUserToHomeAuth()
 
     fun getAllPlans() = repository.fetchAllPlans()
+    fun sendUsertogetBranchActivity() = repository.sendUsertogetBranchActivity()
 //    fun changeMemberStatus()=repository.changeMemberToTrue()
 
 
