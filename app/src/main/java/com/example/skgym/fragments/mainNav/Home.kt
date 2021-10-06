@@ -32,7 +32,6 @@ class Home : Fragment() {
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
     var isDatatakenB = false
-    var isMem = false
 
 
     override fun onCreateView(
@@ -48,15 +47,6 @@ class Home : Fragment() {
             requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
         val isDataTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isDataTaken", MODE_PRIVATE)
-//        val isUserMemberChecked: SharedPreferences =
-//            requireActivity().getSharedPreferences("isUserMemberChecked", MODE_PRIVATE)
-//        val isUserMemberCheckedEdit = isUserMemberChecked.edit()
-//        val isUserMember: SharedPreferences =
-//            requireActivity().getSharedPreferences("isUserMember", MODE_PRIVATE)
-//        val isUserMemberEdit = isUserMember.edit()
-//
-//        isMem = isUserMember.getBoolean("isUserMember", false)
-//        isMemChecked = isUserMemberChecked.getBoolean("isUserMemberChecked", false)
         isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
 
 

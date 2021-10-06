@@ -14,6 +14,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.R
 import com.example.skgym.data.Member
 import com.example.skgym.databinding.GymdataBinding
@@ -67,7 +68,12 @@ class GymData : Fragment() {
             picker.show(requireActivity().supportFragmentManager, "DATE-PICKER")
         }
 
-        viewModel.fetchBranchNames().observe(viewLifecycleOwner, {
+        viewModel.fetchBranchNames(object : BranchInterface {
+            override fun getBranch(value: ArrayList<String>) {
+                Log.d(TAG, "getBranch: Branch Loaded")
+            }
+
+        }).observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: Size ${it.size}")
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.dropdownitem,

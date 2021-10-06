@@ -40,13 +40,7 @@ class AuthRepository(var context: Context) : BaseRepository(context) {
 
     }
 
-    fun forgotPassword(email: String) {
-        if (email.isNotEmpty()) {
-            mAuth.sendPasswordResetEmail(email).addOnCompleteListener {
 
-            }
-        }
-    }
 
     fun register(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {

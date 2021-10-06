@@ -4,7 +4,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -14,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.R
 import com.example.skgym.databinding.ActivityGetBranchBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -43,12 +43,14 @@ class GetBranch : AppCompatActivity() {
             getSharedPreferences("userBranch", MODE_PRIVATE)
         val editor3 = userBranch.edit()
 
-        val handler = Handler()
-        handler.postDelayed({ // Do something after 5s = 5000ms
-            binding.progressBarBranch.visibility = View.GONE
-        }, 1500)
 
-        viewModel.fetchBranchNames().observe(this) {
+
+        viewModel.fetchBranchNames(object : BranchInterface {
+            override fun getBranch(value: ArrayList<String>) {
+                binding.progressBarBranch.visibility = View.GONE
+            }
+
+        }).observe(this) {
             Log.d(TAG, "onCreateView: Size ${it.size}")
             val arrayAdapter = ArrayAdapter(
                 this, R.layout.dropdownitem,

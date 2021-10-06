@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.IsMemberCallBack
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
@@ -50,7 +51,7 @@ abstract class BaseRepository(private var contextBase: Context) {
         }
     }
 
-    fun fetchBranchNames(): MutableLiveData<ArrayList<String>> {
+    fun fetchBranchNames(branchInterface: BranchInterface): MutableLiveData<ArrayList<String>> {
         val list = ArrayList<String>()
         val branchesNameRef = fDatabase.getReference(Constants.BRANCHES_SPINNER)
         branchesNameRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -59,6 +60,7 @@ abstract class BaseRepository(private var contextBase: Context) {
                     list.add(dataSnapshot.value.toString())
                 }
                 branchesList.value = list
+                branchInterface.getBranch(list)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -220,4 +222,12 @@ abstract class BaseRepository(private var contextBase: Context) {
         }
     }
 
+    fun forgotPassword(email: String) {
+        if (email.isNotEmpty()) {
+            mAuthBase.sendPasswordResetEmail(email).addOnCompleteListener {
+                Toast.makeText(contextBase, "Reset link has been sent to Email", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
 }
