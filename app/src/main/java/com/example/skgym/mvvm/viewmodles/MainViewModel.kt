@@ -8,6 +8,8 @@ import com.example.skgym.mvvm.repository.MainRepository
 
 class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
+
+    val allCategories = repository.getCategoriesInfo()
     fun signOut() = repository.signOut()
 
     fun fetchBranchNames(branchInterface: BranchInterface) = repository.fetchBranchNames(branchInterface)
