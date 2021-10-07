@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
-    private val TAG = "mActivity"
     private var currentuser: FirebaseUser? = null
 
     lateinit var binding: ActivityMainBinding
