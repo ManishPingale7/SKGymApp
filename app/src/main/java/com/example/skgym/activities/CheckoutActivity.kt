@@ -64,9 +64,9 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
             binding.cardPlanNameD.text = demo.name
             binding.cardPlanDescText.text = demo.desc
             if (demo.pt == true) {
-                binding.isPersonalD.text = "PT"
+                binding.isPersonalD.text = resources.getString(R.string.pt)
             } else {
-                binding.isPersonalD.text = "Normal"
+                binding.isPersonalD.text = resources.getString(R.string.normal)
                 binding.badgeGold.visibility = View.GONE
 
             }

@@ -42,8 +42,14 @@ class ViewPlan : AppCompatActivity() {
             }
         }
 
+
+
         init()
         setupRecycler()
+
+        binding.goBackPlans.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

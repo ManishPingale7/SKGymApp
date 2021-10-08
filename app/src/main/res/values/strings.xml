@@ -96,4 +96,7 @@
     <string name="forgot_password2">Forgot Password</string>
     <string name="product_name">Product Name</string>
     <string name="flavours">Flavours</string>
+    <string name="pt">PT</string>
+    <string name="view_your_current_orders">View Your Current Orders</string>
+    <string name="your_orders">Your Orders</string>
 </resources>

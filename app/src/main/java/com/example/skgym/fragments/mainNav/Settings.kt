@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import com.example.skgym.R
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.FragmentSettingsBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -26,7 +28,7 @@ class Settings : Fragment() {
     private val binding get() = _binding!!
     private var currentUser: FirebaseUser? = null
     var mAuth = FirebaseAuth.getInstance()
-    var branch=""
+    var branch = ""
 
 
     override fun onCreateView(
@@ -54,7 +56,7 @@ class Settings : Fragment() {
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
-            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked",false)
+            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", false)
             isUserMemberCheckedEdit.apply()
             mAuth.signOut()
             val intent = Intent(
@@ -69,7 +71,7 @@ class Settings : Fragment() {
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
-            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked",false)
+            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", false)
             isUserMemberCheckedEdit.apply()
             viewModel.sendUserToMainActivity()
         }
@@ -79,6 +81,14 @@ class Settings : Fragment() {
 
         binding.currentPlanSettings.setOnClickListener {
 
+        }
+
+        binding.viewProductsSettings.setOnClickListener {
+            binding.root.findNavController().navigate(
+                R.id.action_nav_settings_to_products,
+                null, // Bundle of args
+                null
+            )
         }
         return binding.root
     }

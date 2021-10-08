@@ -12,13 +12,18 @@
         android:theme="@style/Theme.SkGym"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".activities.OrdersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.CartActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.CheckoutActivity"
             android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
-
 
         <activity
             android:name=".activities.ViewPlan"

@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/drawable/ic_premium.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/outline_add_24.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/outline_remove_24.xml" value="0.257" />
+        <entry key="app/src/main/res/layout/activity_cart.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_get_branch.xml" value="0.25" />
@@ -42,6 +43,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29878048780487804" />
+        <entry key="app/src/main/res/layout/activity_orders.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_view_plan.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/democardview.xml" value="0.4036458333333333" />
