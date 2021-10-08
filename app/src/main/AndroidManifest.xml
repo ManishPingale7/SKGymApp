@@ -12,6 +12,11 @@
         android:theme="@style/Theme.SkGym"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".activities.ViewProductsInCategory"
+            android:exported="true"
+            android:label="@string/title_activity_view_products_in_category"
+            android:theme="@style/Theme.SkGym.NoActionBar" />
+        <activity
             android:name=".activities.OrdersActivity"
             android:exported="true" />
         <activity

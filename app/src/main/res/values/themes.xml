@@ -23,9 +23,18 @@
     <style name="BottomSheetDialogTheme" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
     </style>
-    
+
     <style name="BottomSheetStyle" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="Theme.SkGym.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SkGym.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SkGym.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
