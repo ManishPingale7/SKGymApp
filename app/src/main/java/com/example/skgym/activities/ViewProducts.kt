@@ -136,7 +136,7 @@ class ViewProducts : AppCompatActivity() {
                     textQuantity.text =
                         number.toString()
                     val price = product.price.toInt() * number
-                    val text = "${resources.getString(R.string.add)} $price+ to Cart"
+                    val text = "${resources.getString(R.string.add)} $price to Cart"
                     cartBtn.text = text
                     Log.d(TAG, "onItemClicked: $number")
                 }

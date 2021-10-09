@@ -53,15 +53,14 @@ class Home : Fragment() {
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
-            Log.d(TAG, "onCreateView: Branch Taken")
+            Log.d(TAG, "onCreateViewMain: Branch Taken")
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
             if (!isDatatakenB) {
-                Log.d(TAG, "onCreateView: Not data taken Checking data and branch Exists")
+                Log.d(TAG, "onCreateViewMain: Not data taken Checking data and branch Exists")
                 viewModel.isBranchExists(branch)
             } else {
-
-                Log.d(TAG, "onCreateView: Checking Member")
+                Log.d(TAG, "onCreateViewMain: Checking Member")
                 viewModel.checkUserIsMember(branch, object : IsMemberCallBack {
                     override fun onCallback(value: String?) {
                         if (value == "true") {
