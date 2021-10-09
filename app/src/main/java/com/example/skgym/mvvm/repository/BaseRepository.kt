@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.skgym.Interfaces.BranchInterface
+import com.example.skgym.Interfaces.DataAdded
 import com.example.skgym.Interfaces.IsMemberCallBack
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
@@ -97,7 +98,7 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
 
-    fun checkUserIsMember(branch: String,callback:IsMemberCallBack): String {
+    fun checkUserIsMember(branch: String, callback: IsMemberCallBack): String {
         val fDatabase = FirebaseDatabase.getInstance()
         val memberRef = fDatabase.getReference(BRANCHES)
         val userId = mAuthBase.uid
@@ -146,67 +147,52 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
 
-    fun doesUserExists(branch: String) {
-        fDatabase = FirebaseDatabase.getInstance()
-        val memberRef = fDatabase.getReference(BRANCHES)
-        val userId = mAuthBase.uid
-        var result = ""
-
-        memberRef.child(branch).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d(TAG, "onDataChange: $userId")
-                val user = snapshot.hasChild(userId.toString())
-                Log.d(TAG, "onDataChange: OnDataChange user is $user")
-                if (user) {
-                    result = "dataPresent"
-                    dataEdit.putBoolean("isDataTaken", true)
-                    dataEdit.apply()
-                    Log.d(TAG, "onDataChange: Result upper is $result")
+    fun uploadUserdata(memberThis: Member, dataAdded: DataAdded) {
+        fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId)
+            .setValue(memberThis).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    dataAdded.dataAdded(true)
+                    Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()
                 } else {
-                    sendUserToDataActivity()
-                    Toast.makeText(contextBase, "No User Data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "uploadUserdata: ${it.exception}")
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "onCancelled: ${error.message}")
             }
-        })
-    }
-
-    fun uploadUserdata(memberThis: Member) {
-        fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId).setValue(memberThis).addOnCompleteListener { 
-            if (it.isSuccessful)
-                Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()    
-            else{
-                Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "uploadUserdata: ${it.exception}")
-            }
-                    
-        }
     }
 
 
-    fun doesBranchExists(branch: String) {
+    fun doesUserAndBranchExists(branch: String) {
         if (mAuthBase.currentUser != null) {
             fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(BRANCHES)) {
-                        Log.d(TAG, "onDataChange: Branch Node")
+                        Log.d(TAG, "onDataChangeCheck: Branches Node Present")
                         if (snapshot.child(BRANCHES).hasChild(branch)) {
-                            Log.d(TAG, "onDataChange: Branch Present")
-                            doesUserExists(branch)
-                        }else{
+                            Log.d(TAG, "onDataChangeCheck: Branch Present")
+
+                            if (snapshot.child(BRANCHES).child(branch)
+                                    .hasChild(mAuthBase.currentUser!!.uid)
+                            ) {
+                                result = "dataPresent"
+                                dataEdit.putBoolean("isDataTaken", true)
+                                dataEdit.apply()
+                                Log.d(TAG, "onDataChangeCheck: Result upper is $result")
+                                Log.d(TAG, "onDataChangeCheck: User Present")
+                            } else {
+                                sendUserToDataActivity()
+                            }
+                        } else {
                             sendUserToDataActivity()
                         }
-                    } else
+                    } else {
                         sendUserToDataActivity()
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.d(TAG, "onCancelled: ${error.message}")
                 }
-
             })
         }
     }
@@ -227,14 +213,19 @@ abstract class BaseRepository(private var contextBase: Context) {
     fun forgotPassword(email: String) {
         if (email.isNotEmpty()) {
             mAuthBase.sendPasswordResetEmail(email).addOnCompleteListener {
-                Toast.makeText(contextBase, "Reset link has been sent to Email", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    contextBase,
+                    "Reset link has been sent to Email",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
     }
 
     fun loadAllProducts(name: String): MutableLiveData<ArrayList<Product>> {
-        val products: MutableLiveData<ArrayList<Product>> = MutableLiveData<ArrayList<Product>>()
+        val products: MutableLiveData<ArrayList<Product>> =
+            MutableLiveData<ArrayList<Product>>()
         val tempList = ArrayList<Product>(50)
 
         val ref = fDatabase.reference.child(PRODUCTS).child(name)
@@ -254,5 +245,4 @@ abstract class BaseRepository(private var contextBase: Context) {
         })
         return products
     }
-
 }

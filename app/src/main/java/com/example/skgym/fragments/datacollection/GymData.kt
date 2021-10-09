@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.skgym.Interfaces.BranchInterface
+import com.example.skgym.Interfaces.DataAdded
 import com.example.skgym.R
 import com.example.skgym.data.Member
 import com.example.skgym.databinding.GymdataBinding
@@ -45,6 +46,7 @@ class GymData : Fragment() {
     private var dateTaken = false
     private val storageRef = FirebaseStorage.getInstance().reference
     private val userId = mAuth.uid
+    private lateinit var progressBtn: ProgressBtn
     private var downloadUrl: Uri? = null
     private val argsData: GymDataArgs by navArgs()
 
@@ -63,6 +65,9 @@ class GymData : Fragment() {
                 .setTitleText("Select date")
 
         val picker = builder.build()
+        val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
+
+        progressBtn = ProgressBtn(requireContext(), view)
 
         binding.pickDateData.setOnClickListener {
             picker.show(requireActivity().supportFragmentManager, "DATE-PICKER")
@@ -73,7 +78,7 @@ class GymData : Fragment() {
                 Log.d(TAG, "getBranch: Branch Loaded")
             }
 
-        }).observe(viewLifecycleOwner, {
+        }).observe(viewLifecycleOwner) {
             Log.d(TAG, "onCreateView: Size ${it.size}")
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.dropdownitem,
@@ -84,7 +89,7 @@ class GymData : Fragment() {
             Log.d(TAG, "onCreateView: Size ${branches.size}")
             arrayAdapter.notifyDataSetChanged()
             binding.branchData.setAdapter(arrayAdapter)
-        })
+        }
 
 
 
@@ -132,11 +137,9 @@ class GymData : Fragment() {
         }
 
 
-        val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
 
 
         view.setOnClickListener {
-            val progressBtn = ProgressBtn(requireContext(), view)
             val bloodGroup = binding.bloodgrpData.text.toString()
             val address = binding.addressData.text.toString()
             val branch = binding.branchData.text.toString()
@@ -152,10 +155,11 @@ class GymData : Fragment() {
                             Log.d(TAG, "onCreateView: $memberThis")
                             uploadProfileImage(memberThis.imgUrl.toString())
                             memberThis.imgUrl = downloadUrl.toString()
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                progressBtn.buttonfinished()
-                                requireActivity().finish()
-                            }, 3000)
+                            Toast.makeText(
+                                requireContext(),
+                                "Please Wait while uploading your data",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -164,7 +168,9 @@ class GymData : Fragment() {
                             )
                                 .show()
                         }
-                    }else{Toast.makeText(requireContext(), "Select Date", Toast.LENGTH_SHORT).show()}
+                    } else {
+                        Toast.makeText(requireContext(), "Select Date", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(requireContext(), "Enter Address", Toast.LENGTH_SHORT).show()
                 }
@@ -203,7 +209,6 @@ class GymData : Fragment() {
     }
 
 
-
     private fun uploadProfileImage(imgUrl: String) {
         val uri = imgUrl.toUri()
         val fileRef = storageRef.child(userId.toString()).child(Constants.PROFILE_IMAGE)
@@ -213,7 +218,15 @@ class GymData : Fragment() {
                 downloadUrl = it
                 memberThis.imgUrl = downloadUrl.toString()
                 Log.d(TAG, "uploadProfileImage: $downloadUrl")
-                viewModel.uploadUserdata(memberThis)
+                viewModel.uploadUserdata(memberThis, object : DataAdded {
+                    override fun dataAdded(added: Boolean) {
+                        if (added) {
+                            progressBtn.buttonfinished()
+                            requireActivity().finish()
+                        }
+                    }
+
+                })
             }.addOnFailureListener {
                 Log.d(TAG, "uploadProfileImage: ${it.message}")
                 Toast.makeText(requireContext(), "Try Again Later", Toast.LENGTH_SHORT).show()
