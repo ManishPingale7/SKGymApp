@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.ProductsAdapter
 import com.example.skgym.R
+import com.example.skgym.data.Product
 import com.example.skgym.data.ProductCategory
 import com.example.skgym.databinding.ActivityViewProductsInCategoryBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -51,6 +53,12 @@ class ViewProducts : AppCompatActivity() {
 
         //Setting the recycler view
         productsAdapter = ProductsAdapter(this)
+        productsAdapter.setOnItemClickListener(object : ProductsAdapter.onItemClickedListener {
+            override fun onItemClicked(product: Product) {
+                Toast.makeText(this@ViewProducts, "Clicked ${product.name}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
 
         binding.apply {
             recyclerViewProducts.apply {

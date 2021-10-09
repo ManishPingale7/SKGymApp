@@ -15,25 +15,37 @@ import com.example.skgym.databinding.ProductlistitemBinding
 class ProductsAdapter(val context: Context) :
     ListAdapter<Product, ProductsAdapter.viewHolder>(DiffCallBack()) {
 
-//    private var context: Context? = null
-//    fun setContext(context: Context) {
-//        this.context = context
-//    }
+    private lateinit var mListener: onItemClickedListener
 
+    interface onItemClickedListener {
+        fun onItemClicked(product: Product)
+    }
+
+    fun setOnItemClickListener(onItemClickedListener: ProductsAdapter.onItemClickedListener) {
+        mListener = onItemClickedListener
+    }
 
     inner class viewHolder(private val binding: ProductlistitemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             Log.d("TAG", "bind: BINDING THIS -$product")
-            binding.productNameCard.text = product.name
-            binding.productPrice.text = product.price
-            Log.d("TAG", "bind:${product.productImages[0]} ")
-            Glide.with(context)
-                .load(product.productImages[0])
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .fitCenter()
-                .into(binding.productImage)
+            binding.apply {
+                productNameCard.text = product.name
+                productPrice.text = product.price
+                Log.d("TAG", "bind:${product.productImages[0]} ")
+                Glide.with(context)
+                    .load(product.productImages[0])
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .fitCenter()
+                    .into(productImage)
+                addButton.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        mListener.onItemClicked(getItem(adapterPosition))
+                    }
+                }
+            }
+
         }
     }
 
