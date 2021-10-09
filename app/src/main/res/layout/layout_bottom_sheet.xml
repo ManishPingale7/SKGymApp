@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_Container"
     android:layout_width="match_parent"
     android:layout_height="300dp"
@@ -31,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/todo"
-            android:inputType="text" />
+            android:inputType="text"
+            tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,13 +55,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
+                android:contentDescription="@string/todo"
                 android:src="@drawable/outline_remove_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="2"
+                android:text="@string/_30"
                 android:textSize="16sp"
                 android:textColor="@color/black" />
 
@@ -76,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/AddToCart"
-            android:text="Add"
+            android:text="@string/add"
             android:background="@drawable/btn_circular"
             android:textColor="@color/white"
             android:layout_marginStart="10dp"
