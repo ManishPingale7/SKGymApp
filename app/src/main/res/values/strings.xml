@@ -104,7 +104,7 @@
     <string name="proceed_to_buy">Proceed to Buy</string>
     <string name="delete">Delete</string>
     <string name="category">Category</string>
-    <string name="product_price">Product Price</string>
+
 
     <string name="eligible_for_free_shipping">Eligible for FREE Shipping</string>
     <string name="title_activity_view_products_in_category">ViewProductsInCategory</string>
@@ -117,4 +117,6 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add">Add</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_description">Product Description</string>
 </resources>

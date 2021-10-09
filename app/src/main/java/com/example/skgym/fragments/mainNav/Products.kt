@@ -66,16 +66,7 @@ class Products : Fragment() {
             startActivity(intent)
 
 
-//            val bottomSheetDialog=BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-//
-//            val bottomSheetView=LayoutInflater.from(requireContext()).inflate(R.layout.layout_bottom_sheet,
-//                requireActivity().findViewById(R.id.bottom_sheet_Container))
-//
-//            bottomSheetDialog.setContentView(bottomSheetView)
-//            bottomSheetDialog.show()
-//            bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
-//                bottomSheetDialog.dismiss()
-//            }
+
         }
 
 

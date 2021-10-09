@@ -21,7 +21,7 @@ class ProductsAdapter(val context: Context) :
         fun onItemClicked(product: Product)
     }
 
-    fun setOnItemClickListener(onItemClickedListener: ProductsAdapter.onItemClickedListener) {
+    fun setOnItemClickListener(onItemClickedListener: onItemClickedListener) {
         mListener = onItemClickedListener
     }
 
@@ -30,9 +30,10 @@ class ProductsAdapter(val context: Context) :
 
         fun bind(product: Product) {
             Log.d("TAG", "bind: BINDING THIS -$product")
+            val text="₹ ${product.price}"
             binding.apply {
                 productNameCard.text = product.name
-                productPrice.text = product.price
+                productPrice.text = text
                 Log.d("TAG", "bind:${product.productImages[0]} ")
                 Glide.with(context)
                     .load(product.productImages[0])
