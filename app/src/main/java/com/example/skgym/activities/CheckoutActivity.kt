@@ -1,5 +1,6 @@
 package com.example.skgym.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -59,6 +60,7 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setPlanLayout(demo: Plan?) {
         demo?.let {
             binding.cardPlanNameD.text = demo.name
@@ -73,7 +75,7 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
             binding.cardFeesD.text = demo.fees
             binding.subtotal.text = demo.fees
             binding.totalFees.text = demo.fees
-            binding.cardDurationD.text=demo.timeNumber
+            binding.cardDurationD.text = demo.timeNumber
         }
     }
 

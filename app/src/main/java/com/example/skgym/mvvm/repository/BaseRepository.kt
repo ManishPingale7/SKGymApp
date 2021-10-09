@@ -16,10 +16,12 @@ import com.example.skgym.activities.ViewPlan
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.data.Member
 import com.example.skgym.data.Plan
+import com.example.skgym.data.Product
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.BRANCHES
 import com.example.skgym.utils.Constants.ISMEMBER
 import com.example.skgym.utils.Constants.PLANS
+import com.example.skgym.utils.Constants.PRODUCTS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -230,4 +232,27 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
         }
     }
+
+    fun loadAllProducts(name: String): MutableLiveData<ArrayList<Product>> {
+        val products: MutableLiveData<ArrayList<Product>> = MutableLiveData<ArrayList<Product>>()
+        val tempList = ArrayList<Product>(50)
+
+        val ref = fDatabase.reference.child(PRODUCTS).child(name)
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                products.value?.clear()
+                Log.d(TAG, "onDataChange: $snapshot")
+                snapshot.children.forEach {
+                    tempList.add(it.getValue(Product::class.java)!!)
+                }
+                products.value = tempList
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+//                TODO("SOLVE EVERY ERROR SITUATION IN THE APP")
+            }
+        })
+        return products
+    }
+
 }

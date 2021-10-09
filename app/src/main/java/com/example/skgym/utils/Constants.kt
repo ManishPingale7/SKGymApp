@@ -7,7 +7,6 @@ object Constants {
     const val PROFILE_IMAGE = "imgUrl"
 
 
-
     const val BRANCH_INFO="branchInfo"
 
 

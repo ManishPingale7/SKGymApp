@@ -103,6 +103,9 @@
     <string name="price">Price</string>
     <string name="proceed_to_buy">Proceed to Buy</string>
     <string name="delete">Delete</string>
+    <string name="category">Category</string>
+    <string name="product_price">Product Price</string>
+
     <string name="eligible_for_free_shipping">Eligible for FREE Shipping</string>
     <string name="title_activity_view_products_in_category">ViewProductsInCategory</string>
     <!-- Strings used for fragments for navigation -->

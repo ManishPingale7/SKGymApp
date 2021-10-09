@@ -42,6 +42,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUsertogetBranchActivity() = repository.sendUsertogetBranchActivity()
 //    fun changeMemberStatus()=repository.changeMemberToTrue()
 
-    fun forgotPass(email:String)= repository.forgotPassword(email)
+    fun forgotPass(email: String) = repository.forgotPassword(email)
+
+    fun loadProducts(name: String) = repository.loadAllProducts(name)
 
 }
