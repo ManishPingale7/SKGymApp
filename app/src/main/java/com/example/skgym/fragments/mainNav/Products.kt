@@ -1,14 +1,10 @@
 package com.example.skgym.fragments.mainNav
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.Adapters.GridAdapter
@@ -28,8 +24,6 @@ class Products : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: MainViewModel
     private var arrayListProductCat = arrayListOf<ProductCategory>()
-    var arrayNames = ArrayList<String>()
-    var arrayImages = ArrayList<Uri>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,21 +38,14 @@ class Products : Fragment() {
 
         viewModel.allCategories.observe(requireActivity()) {
             arrayListProductCat = it
-
-
-            Log.d(TAG, "onCreateView123 45:  HERE IT IS $arrayNames ")
-
-            val gridAdapter = GridAdapter(requireContext(),arrayListProductCat)
+            val gridAdapter = GridAdapter(requireContext(), arrayListProductCat)
             binding.gridView.adapter = gridAdapter
         }
 
         binding.gridView.setOnItemClickListener { _, _, position, _ ->
-            Toast.makeText(context, arrayNames[position], Toast.LENGTH_SHORT).show()
             val intent = Intent(requireContext(), ViewProducts::class.java)
             intent.putExtra("Category", arrayListProductCat[position])
             startActivity(intent)
-
-
         }
 
 
