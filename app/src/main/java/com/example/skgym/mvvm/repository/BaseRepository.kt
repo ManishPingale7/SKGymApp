@@ -170,7 +170,7 @@ abstract class BaseRepository(private var contextBase: Context) {
                         Log.d(TAG, "onDataChangeCheck: Branches Node Present")
                         if (snapshot.child(BRANCHES).hasChild(branch)) {
                             Log.d(TAG, "onDataChangeCheck: Branch Present")
-
+                            Log.d(TAG, "onDataChangeCheck: User ID Check remaning = ${mAuthBase.currentUser!!.uid}")
                             if (snapshot.child(BRANCHES).child(branch)
                                     .hasChild(mAuthBase.currentUser!!.uid)
                             ) {

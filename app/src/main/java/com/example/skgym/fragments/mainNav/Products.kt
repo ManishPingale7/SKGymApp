@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.Adapters.GridAdapter
@@ -46,25 +45,18 @@ class Products : Fragment() {
         viewModel.allCategories.observe(requireActivity()) {
             arrayListProductCat = it
 
-            arrayListProductCat.forEach { it1 ->
-                arrayImages.add(it1.image.toUri())
-                arrayNames.add(it1.name)
-                Log.d(TAG, "onCreateView123: added to array2nd")
-            }
 
             Log.d(TAG, "onCreateView123 45:  HERE IT IS $arrayNames ")
 
-            val gridAdapter = GridAdapter(requireContext(), arrayNames, arrayImages)
+            val gridAdapter = GridAdapter(requireContext(),arrayListProductCat)
             binding.gridView.adapter = gridAdapter
         }
 
         binding.gridView.setOnItemClickListener { _, _, position, _ ->
             Toast.makeText(context, arrayNames[position], Toast.LENGTH_SHORT).show()
-
             val intent = Intent(requireContext(), ViewProducts::class.java)
             intent.putExtra("Category", arrayListProductCat[position])
             startActivity(intent)
-
 
 
         }

@@ -57,7 +57,7 @@ class Home : Fragment() {
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
             if (!isDatatakenB) {
-                Log.d(TAG, "onCreateViewMain: Not data taken Checking data and branch Exists")
+                Log.d(TAG, "onCreateViewMain: data Not taken")
                 viewModel.isBranchExists(branch)
             } else {
                 Log.d(TAG, "onCreateViewMain: Checking Member")

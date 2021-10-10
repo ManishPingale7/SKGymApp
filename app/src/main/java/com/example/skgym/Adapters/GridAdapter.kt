@@ -11,23 +11,24 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.skgym.R
+import com.example.skgym.data.ProductCategory
 
 class GridAdapter(
     var requireContext: Context,
-    var arrayNames: ArrayList<String>,
-    var arrayImages: ArrayList<Uri>
-) : BaseAdapter() {
+    var obj: ArrayList<ProductCategory>,
+
+    ) : BaseAdapter() {
 
     var context: Context? = requireContext
 
     var inflater: LayoutInflater? = null
 
     override fun getCount(): Int {
-        return arrayNames.size
+        return obj.size
     }
 
-    override fun getItem(position: Int): Any? {
-        return arrayImages[position]
+    override fun getItem(position: Int): Any {
+        return obj[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -44,13 +45,13 @@ class GridAdapter(
         val imageView: ImageView = convertView!!.findViewById(R.id.grid_image)
         val textView: TextView = convertView.findViewById(R.id.item_name)
         Glide.with(convertView)
-            .load(arrayImages[position])
-            .skipMemoryCache( false )
+            .load(obj[position].image)
+            .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .fitCenter()
             .into(imageView)
 
-        textView.text = arrayNames[position]
+        textView.text = obj[position].name
         return convertView
     }
 
