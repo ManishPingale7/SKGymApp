@@ -9,49 +9,33 @@
     tools:context=".fragments.datacollection.GymData">
 
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuBlood"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:drawablePadding="12dp"
-        app:hintEnabled="false">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-        <AutoCompleteTextView
-            android:id="@+id/bloodgrp_data"
-            android:layout_width="match_parent"
-            android:hint="@string/blood_group"
-            android:fontFamily="@font/montserratsemibold"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_weight="1" />
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserratsemibold"
+            android:text="Add Your Details"
+            android:textColor="@color/black" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/select_your_branch"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:drawablePadding="12dp"
-        android:hint="@string/address"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratsemibold"
-            android:inputType="textMultiLine">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:fontFamily="@font/montserratsemibold"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/menuBranch"
@@ -132,26 +116,7 @@
 
     </RadioGroup>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:drawablePadding="12dp"
-        android:hint="@string/guardian_optional"
-        >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/gaurdian_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratsemibold"
-            android:inputType="textMultiLine">
-
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
 
 
 

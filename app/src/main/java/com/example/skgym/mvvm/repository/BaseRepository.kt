@@ -153,7 +153,11 @@ abstract class BaseRepository(private var contextBase: Context) {
                 if (it.isSuccessful) {
                     dataAdded.dataAdded(true)
                     Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()
-                } else {
+                } else if (it.isCanceled){
+                    Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "uploadUserdata: ${it.exception}")
+                }
+                else if (!it.isSuccessful){
                     Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "uploadUserdata: ${it.exception}")
                 }
