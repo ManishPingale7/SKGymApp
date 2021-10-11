@@ -5,6 +5,7 @@ import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.DataAdded
 import com.example.skgym.Interfaces.IsMemberCallBack
 import com.example.skgym.data.Member
+import com.example.skgym.data.Plan
 import com.example.skgym.mvvm.repository.MainRepository
 
 class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
@@ -36,11 +37,16 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUserToHomeAuth() = repository.sendUserToHomeAuth()
 
     fun getAllPlans() = repository.fetchAllPlans()
-    fun sendUsertogetBranchActivity() = repository.sendUsertogetBranchActivity()
+    fun sendUsertogetBranchActivity() = repository.sendUserToGetBranchActivity()
 //    fun changeMemberStatus()=repository.changeMemberToTrue()
 
     fun forgotPass(email: String) = repository.forgotPassword(email)
 
     fun loadProducts(name: String) = repository.loadAllProducts(name)
+
+
+    fun addPlanToData(demo: Plan?, branch: String) = repository.addPlanToUser(demo, branch)
+
+    fun addEndDate(tDays: Int, branch: String) = repository.pushEndDate(tDays, branch)
 
 }

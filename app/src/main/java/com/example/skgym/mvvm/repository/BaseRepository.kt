@@ -1,5 +1,6 @@
 package com.example.skgym.mvvm.repository
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -31,6 +32,9 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
@@ -153,11 +157,10 @@ abstract class BaseRepository(private var contextBase: Context) {
                 if (it.isSuccessful) {
                     dataAdded.dataAdded(true)
                     Toast.makeText(contextBase, "Done", Toast.LENGTH_SHORT).show()
-                } else if (it.isCanceled){
+                } else if (it.isCanceled) {
                     Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "uploadUserdata: ${it.exception}")
-                }
-                else if (!it.isSuccessful){
+                } else if (!it.isSuccessful) {
                     Toast.makeText(contextBase, "Error occurred", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "uploadUserdata: ${it.exception}")
                 }
@@ -174,7 +177,10 @@ abstract class BaseRepository(private var contextBase: Context) {
                         Log.d(TAG, "onDataChangeCheck: Branches Node Present")
                         if (snapshot.child(BRANCHES).hasChild(branch)) {
                             Log.d(TAG, "onDataChangeCheck: Branch Present")
-                            Log.d(TAG, "onDataChangeCheck: User ID Check remaning = ${mAuthBase.currentUser!!.uid}")
+                            Log.d(
+                                TAG,
+                                "onDataChangeCheck: User ID Check remaning = ${mAuthBase.currentUser!!.uid}"
+                            )
                             if (snapshot.child(BRANCHES).child(branch)
                                     .hasChild(mAuthBase.currentUser!!.uid)
                             ) {
@@ -208,7 +214,7 @@ abstract class BaseRepository(private var contextBase: Context) {
         }
     }
 
-    fun sendUsertogetBranchActivity() {
+    fun sendUserToGetBranchActivity() {
         Intent(contextBase, GetBranch::class.java).also {
             contextBase.startActivity(it)
         }
@@ -248,5 +254,31 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
         })
         return products
+    }
+
+    fun addPlanToUser(plan: Plan?, branch: String) {
+        fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid)
+            .child("plan")
+            .setValue(plan!!.name)
+    }
+
+    fun pushEndDate(totalDays: Int, branch: String) {
+        val endDate = findEndDate(totalDays)
+        fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid)
+            .child("EndDate")
+            .setValue(endDate)
+        fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid).child(
+            ISMEMBER
+        )
+            .setValue(true)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun findEndDate(totalDays: Int): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val c = Calendar.getInstance()
+        c.time = Date()
+        c.add(Calendar.DATE, totalDays)
+        return sdf.format(c.time)
     }
 }
