@@ -34,9 +34,8 @@ class ProductsAdapter(val context: Context) :
             binding.apply {
                 productNameCard.text = product.name
                 productPrice.text = text
-                Log.d("TAG", "bind:${product.productImages[0]} ")
                 Glide.with(context)
-                    .load(product.productImages[0])
+                    .load(product.productImage)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .fitCenter()
                     .into(productImage)
@@ -51,7 +50,6 @@ class ProductsAdapter(val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        Log.d("TAG", "onCreateViewHolder: INNNNNNNNNNNNNNNNNNNNNNNNN")
         return viewHolder(
             ProductlistitemBinding.inflate(
                 LayoutInflater.from(parent.context),

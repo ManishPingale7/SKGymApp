@@ -30,15 +30,14 @@ class MainRepository(private var contextMain: Context) : BaseRepository(contextM
     fun getCategoriesInfo(): MutableLiveData<ArrayList<ProductCategory>> {
         val tempList = ArrayList<ProductCategory>(40)
 
-        categoryInfo.addValueEventListener(object : ValueEventListener {
+        categoryInfo.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 categories.value?.clear()
                 dataSnapshot.children.forEach {
-                    Log.d(TAG, "onCreateView123 onDataChange: $it")
+                    Log.d(TAG, "onDataChange: New Fetched$it")
                     tempList.add(it.getValue(ProductCategory::class.java)!!)
                 }
                 categories.value = tempList
-                Log.d(TAG, "onCreateView123 onDataChange:${categories.value} ")
             }
 
             override fun onCancelled(error: DatabaseError) {

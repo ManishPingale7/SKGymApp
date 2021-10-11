@@ -239,7 +239,7 @@ abstract class BaseRepository(private var contextBase: Context) {
         val tempList = ArrayList<Product>(50)
 
         val ref = fDatabase.reference.child(PRODUCTS).child(name)
-        ref.addValueEventListener(object : ValueEventListener {
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 products.value?.clear()
                 Log.d(TAG, "onDataChange: $snapshot")
@@ -250,7 +250,7 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-//                TODO("SOLVE EVERY ERROR SITUATION IN THE APP")
+                Log.d(TAG, "onCancelled: ${error.message}")
             }
         })
         return products

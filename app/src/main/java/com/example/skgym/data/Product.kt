@@ -5,9 +5,9 @@ data class Product(
     var desc: String,
     var price: String,
     var category: String,
-    var productImages: ArrayList<String>,
-    var flavours: ArrayList<String>?=null,
-    var key:String?=null
+    var productImage: String,
+    var flavours: java.util.ArrayList<String>? = null,
+    var key: String? = null
 ) {
-    constructor() : this("", "", "", "", ArrayList<String>(), ArrayList<String>(),"")
+    constructor() : this("", "", "", "", "", ArrayList<String>(), "")
 }
