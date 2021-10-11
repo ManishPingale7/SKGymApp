@@ -9,28 +9,12 @@
     tools:context=".fragments.datacollection.GymData">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/montserratsemibold"
-            android:text="Add Your Details"
-            android:textColor="@color/black" />
-
-    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_your_branch"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="120dp"
         android:layout_marginStart="40dp"
         android:fontFamily="@font/montserratsemibold"
         android:textColor="@color/black"
@@ -73,10 +57,13 @@
 
 
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:id="@+id/textViewBirthday"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:layout_marginStart="40dp"
@@ -88,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gender"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="40dp"
         android:fontFamily="@font/montserratsemibold"
         android:textColor="@color/black"
@@ -97,7 +84,7 @@
 
     <RadioGroup
         android:id="@+id/radioGroupGender"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:checkedButton="@id/radio_button_male"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
@@ -125,7 +112,7 @@
         android:id="@+id/btn_continue_datastage2"
         layout="@layout/progress_btn_layout"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="40dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

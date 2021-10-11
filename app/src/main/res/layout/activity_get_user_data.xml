@@ -10,27 +10,23 @@
     tools:context=".activities.GetUserData">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appBarMain"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_main"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:title="Form"
-            android:background="@color/white"
-            app:titleTextColor="@color/black">
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserratsemibold"
+            android:text="@string/fill_the_details"
+            android:textColor="@color/black" />
 
-        </com.google.android.material.appbar.MaterialToolbar>
+    </RelativeLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/ContainerViewMain"

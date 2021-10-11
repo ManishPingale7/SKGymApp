@@ -50,9 +50,12 @@ class GymData : Fragment() {
         init()
         val builder =
             MaterialDatePicker.Builder.datePicker()
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .setTitleText("Select date")
 
+
         val picker = builder.build()
+
         val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
 
         progressBtn = ProgressBtn(requireContext(), view)
@@ -132,6 +135,8 @@ class GymData : Fragment() {
             val branch = binding.branchData.text.toString()
 
             if (dateTaken) {
+                val text = "Birthdate is ${memberThis.dob}"
+                binding.textViewBirthday.text = text
                 if (branch.isNotEmpty() && branches.contains(branch)) {
                     progressBtn.buttonActivated()
                     memberThis.branch = branch
@@ -139,7 +144,12 @@ class GymData : Fragment() {
                     Log.d(TAG, "onCreateView: $memberThis")
                     viewModel.uploadUserdata(memberThis, object : DataAdded {
                         override fun dataAdded(added: Boolean) {
-
+                            if (added) {
+//                                Intent(requireContext(), MainActivity::class.java).also {
+//                                    startActivity(it)
+                                requireActivity().finish()
+                                //    }
+                            }
                         }
                     })
                     Toast.makeText(
