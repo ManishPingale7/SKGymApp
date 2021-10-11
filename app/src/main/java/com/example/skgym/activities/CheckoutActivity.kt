@@ -1,6 +1,7 @@
 package com.example.skgym.activities
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -95,12 +96,24 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
         checkout.open(this, jsonObject)
     }
 
-    override fun onPaymentSuccess(p0: String?) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+    override fun onPaymentSuccess(str: String?) {
+        Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show()
+
+        val userBranch: SharedPreferences =
+            this.getSharedPreferences("userBranch", MODE_PRIVATE)
+
+        demo?.let {
+            viewModel.addPlanToData(demo, userBranch.getString("userBranch", "").toString())
+            viewModel.addEndDate(
+                demo!!.totalDays,
+                userBranch.getString("userBranch", "").toString()
+            )
+        }
+        demo?.let { demo!!.totalDays }
     }
 
-    override fun onPaymentError(int: Int, p1: String?) {
-        Toast.makeText(this, "Failed: $p1", Toast.LENGTH_SHORT).show()
+    override fun onPaymentError(code: Int, str: String?) {
+        Toast.makeText(this, "Payment Failed $str", Toast.LENGTH_SHORT).show()
 
     }
 }

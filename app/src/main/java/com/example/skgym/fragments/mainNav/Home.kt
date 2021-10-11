@@ -1,12 +1,10 @@
 package com.example.skgym.fragments.mainNav
 
 
-import android.content.ContentValues.TAG
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,14 +51,11 @@ class Home : Fragment() {
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
-            Log.d(TAG, "onCreateViewMain: Branch Taken")
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
             if (!isDatatakenB) {
-                Log.d(TAG, "onCreateViewMain: data Not taken")
                 viewModel.isBranchExists(branch)
             } else {
-                Log.d(TAG, "onCreateViewMain: Checking Member")
                 viewModel.checkUserIsMember(branch, object : IsMemberCallBack {
                     override fun onCallback(value: String?) {
                         if (value == "true") {
