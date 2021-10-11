@@ -1,6 +1,8 @@
 package com.example.skgym.fragments.datacollection
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -53,6 +55,12 @@ class GymData : Fragment() {
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .setTitleText("Select date")
 
+        val userBranch: SharedPreferences =
+            requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
+        val branch = userBranch.getString("userBranch", "").toString()
+
+        if (branch.isNotEmpty())
+        binding.branchData.setText(branch)
 
         val picker = builder.build()
 

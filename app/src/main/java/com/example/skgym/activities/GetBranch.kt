@@ -23,6 +23,7 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 
+
 class GetBranch : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
@@ -57,7 +58,7 @@ class GetBranch : AppCompatActivity() {
                 it.toArray()
             )
             branchList = it
-
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             arrayAdapter.notifyDataSetChanged()
             binding.branchDataGet.setAdapter(arrayAdapter)
         }
@@ -65,7 +66,7 @@ class GetBranch : AppCompatActivity() {
 
         binding.continueBranch.setOnClickListener {
             Log.d(TAG, "onCreate: ${branchList.size}")
-            val branch = binding.branchDataGet.text.toString()
+            val branch = binding.branchDataGet.selectedItem.toString()
             if (branch.isNotEmpty()) {
                 if (branchList.contains(branch)) {
                     Log.d(TAG, "onCreate: $branch")

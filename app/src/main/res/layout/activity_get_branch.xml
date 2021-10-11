@@ -33,28 +33,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar_branch"
-        android:layout_gravity="center"
-        />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuBranchGet"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_gravity="center" />
+
+
+    <Spinner
+        android:id="@+id/branch_dataGet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:drawablePadding="12dp"
-        app:hintEnabled="false">
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/montserratsemibold" />
 
-        <AutoCompleteTextView
-            android:id="@+id/branch_dataGet"
-            android:layout_width="match_parent"
-            android:hint="@string/branch"
-            android:fontFamily="@font/montserratsemibold"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_weight="1" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:layout_width="match_parent"
