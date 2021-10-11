@@ -90,6 +90,9 @@ class GymData : Fragment() {
             val date = picker.headerText
             dateTaken = true
             memberThis.dob = date
+            val text = "Birthdate is ${memberThis.dob}"
+            binding.textViewBirthday.text=text
+            binding.textViewBirthday.visibility = View.VISIBLE
         }
 
         picker.addOnNegativeButtonClickListener {
@@ -135,8 +138,8 @@ class GymData : Fragment() {
             val branch = binding.branchData.text.toString()
 
             if (dateTaken) {
-                val text = "Birthdate is ${memberThis.dob}"
-                binding.textViewBirthday.text = text
+
+
                 if (branch.isNotEmpty() && branches.contains(branch)) {
                     progressBtn.buttonActivated()
                     memberThis.branch = branch
@@ -145,10 +148,7 @@ class GymData : Fragment() {
                     viewModel.uploadUserdata(memberThis, object : DataAdded {
                         override fun dataAdded(added: Boolean) {
                             if (added) {
-//                                Intent(requireContext(), MainActivity::class.java).also {
-//                                    startActivity(it)
                                 requireActivity().finish()
-                                //    }
                             }
                         }
                     })
