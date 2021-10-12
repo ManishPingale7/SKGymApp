@@ -24,7 +24,6 @@ import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.progress_btn_layout.*
 
 class ViewProducts : AppCompatActivity() {
     private lateinit var binding: ActivityViewProductsInCategoryBinding
