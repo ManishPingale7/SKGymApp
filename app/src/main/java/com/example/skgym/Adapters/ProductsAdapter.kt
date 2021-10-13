@@ -18,10 +18,13 @@ import com.bumptech.glide.request.target.Target
 import com.example.skgym.data.Product
 import com.example.skgym.databinding.ProductlistitemBinding
 
-class ProductsAdapter(val context: Context) :
+class ProductsAdapter() :
     ListAdapter<Product, ProductsAdapter.viewHolder>(DiffCallBack()) {
 
     private lateinit var mListener: onItemClickedListener
+
+    private lateinit var context: Context
+
 
     interface onItemClickedListener {
         fun onItemClicked(product: Product)
@@ -31,12 +34,16 @@ class ProductsAdapter(val context: Context) :
         mListener = onItemClickedListener
     }
 
+    fun setContext(context2: Context) {
+        context = context2
+    }
+
     inner class viewHolder(private val binding: ProductlistitemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             Log.d("TAG", "bind: BINDING THIS -$product")
-            val text="₹ ${product.price}"
+            val text = "₹ ${product.price}"
             binding.apply {
                 productNameCard.text = product.name
                 productPrice.text = text
@@ -79,30 +86,6 @@ class ProductsAdapter(val context: Context) :
         }
     }
 
-
-//    .listener(object : RequestListener<Drawable> {
-//        override fun onLoadFailed(
-//            e: GlideException?,
-//            model: Any?,
-//            target: Target<Drawable>?,
-//            isFirstResource: Boolean
-//        ): Boolean {
-//
-//            return false
-//        }
-//
-//        override fun onResourceReady(
-//            resource: Drawable?,
-//            model: Any?,
-//            target: Target<Drawable>?,
-//            dataSource: DataSource?,
-//            isFirstResource: Boolean
-//        ): Boolean {
-//
-//            return false
-//        }
-//
-//    })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
         return viewHolder(

@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.skgym.R
 import com.example.skgym.data.ProductCategory
 
-class GridAdapter(
+class CategoriesAdapter(
     requireContext: Context,
     var obj: ArrayList<ProductCategory>,
 ) : BaseAdapter() {

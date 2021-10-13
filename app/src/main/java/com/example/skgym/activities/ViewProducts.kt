@@ -57,7 +57,8 @@ class ViewProducts : AppCompatActivity() {
 
 
         //Setting the recycler view
-        productsAdapter = ProductsAdapter(this)
+        productsAdapter = ProductsAdapter()
+        productsAdapter.setContext(this)
         productsAdapter.setOnItemClickListener(object : ProductsAdapter.onItemClickedListener {
             override fun onItemClicked(product: Product) {
                 Toast.makeText(this@ViewProducts, "Clicked ${product.name}", Toast.LENGTH_SHORT)

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.example.skgym.Adapters.GridAdapter
+import com.example.skgym.Adapters.CategoriesAdapter
 import com.example.skgym.activities.ViewProducts
 import com.example.skgym.data.ProductCategory
 import com.example.skgym.databinding.FragmentProductsBinding
@@ -31,6 +31,9 @@ class Products : Fragment() {
     ): View {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         init()
+        val gridAdapter = CategoriesAdapter(requireContext(), arrayListProductCat)
+
+
 
         binding.fabMain.setOnClickListener {
 
@@ -38,7 +41,6 @@ class Products : Fragment() {
 
         viewModel.allCategories.observe(requireActivity()) {
             arrayListProductCat = it
-            val gridAdapter = GridAdapter(requireContext(), arrayListProductCat)
             binding.gridView.adapter = gridAdapter
         }
 
