@@ -29,15 +29,18 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+import kotlin.random.Random
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
+    val mFirestore = Firebase.firestore
     val branchesList = MutableLiveData<ArrayList<String>>()
     private val plansRef = fDatabase.getReference(PLANS)
     var result = ""
@@ -264,13 +267,22 @@ abstract class BaseRepository(private var contextBase: Context) {
 
     fun pushEndDate(totalDays: Int, branch: String) {
         val endDate = findEndDate(totalDays)
-        fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid)
-            .child("EndDate")
-            .setValue(endDate)
+        val userData = hashMapOf(
+            "endDate" to endDate,
+            "mToken" to Random.nextInt(),
+        )
+        mFirestore.collection("Users")
+            .document(mAuthBase.currentUser!!.uid).set(userData)
+            .addOnSuccessListener {
+                Log.d(TAG, "pushEndDate: Data Pushed")
+            }.addOnFailureListener {
+                Log.d(TAG, "pushEndDate: Failed to push data : ${it.cause}" + " and " + it.message)
+            }
+
+
         fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid).child(
             ISMEMBER
-        )
-            .setValue(true)
+        ).setValue(true)
     }
 
     @SuppressLint("SimpleDateFormat")

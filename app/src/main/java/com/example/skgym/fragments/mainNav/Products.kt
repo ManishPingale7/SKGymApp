@@ -41,7 +41,8 @@ class Products : Fragment() {
 
         viewModel.allCategories.observe(requireActivity()) {
             arrayListProductCat = it
-            binding.gridView.adapter = gridAdapter
+            val categoriesAdapter = CategoriesAdapter(requireContext(), arrayListProductCat)
+            binding.gridView.adapter = categoriesAdapter
         }
 
         binding.gridView.setOnItemClickListener { _, _, position, _ ->
