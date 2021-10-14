@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -46,10 +46,12 @@
         <activity
             android:name=".activities.GetBranch"
             android:exported="true" />
+
         <activity
             android:name=".activities.GetUserData"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".auth.HomeAuth"
             android:exported="true"

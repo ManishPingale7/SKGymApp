@@ -84,6 +84,8 @@ class Settings : Fragment() {
 
         binding.currentPlanSettings.setOnClickListener {
 
+
+
         }
 
         binding.viewProductsSettings.setOnClickListener {
