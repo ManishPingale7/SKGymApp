@@ -69,6 +69,7 @@ class ProductsAdapter() :
                         ): Boolean {
                             binding.progressBarProduct.visibility = View.GONE
                             binding.productInfoLay.visibility = View.VISIBLE
+                            binding.productImage.visibility = View.VISIBLE
                             return false
                         }
 

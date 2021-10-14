@@ -31,7 +31,6 @@ class Products : Fragment() {
     ): View {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         init()
-        val gridAdapter = CategoriesAdapter(requireContext(), arrayListProductCat)
 
 
 
@@ -43,6 +42,7 @@ class Products : Fragment() {
             arrayListProductCat = it
             val categoriesAdapter = CategoriesAdapter(requireContext(), arrayListProductCat)
             binding.gridView.adapter = categoriesAdapter
+            binding.progressBarProductsCatLoad.visibility = View.GONE
         }
 
         binding.gridView.setOnItemClickListener { _, _, position, _ ->

@@ -1,14 +1,20 @@
 package com.example.skgym.Adapters
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.skgym.R
 import com.example.skgym.data.ProductCategory
 
@@ -43,11 +49,35 @@ class CategoriesAdapter(
         }
         val imageView: ImageView = convertView!!.findViewById(R.id.grid_image)
         val textView: TextView = convertView.findViewById(R.id.item_name)
+        val progBar: ProgressBar = convertView.findViewById(R.id.loadProgressBar)
 
 
         Glide.with(convertView)
             .load(obj[position].image)
             .skipMemoryCache(false)
+            .listener(object: RequestListener<Drawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    progBar.visibility = View.GONE
+                    imageView.visibility = View.VISIBLE
+                    return false
+                }
+
+            })
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .fitCenter()
             .into(imageView)

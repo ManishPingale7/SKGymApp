@@ -120,4 +120,5 @@
     <string name="product_price">Product Price</string>
     <string name="product_description">Product Description</string>
     <string name="fill_the_details">Fill The Details</string>
+    <string name="specify_your_order">Specify Your Order</string>
 </resources>

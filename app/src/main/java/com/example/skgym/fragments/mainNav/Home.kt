@@ -60,8 +60,10 @@ class Home : Fragment() {
                     override fun onCallback(value: String?) {
                         if (value == "true") {
                             binding.nomemberLayout.visibility = View.GONE
+                            binding.progressbarHome.visibility = View.GONE
                         } else {
                             binding.nomemberLayout.visibility = View.VISIBLE
+                            binding.progressbarHome.visibility = View.GONE
                         }
                     }
                 })

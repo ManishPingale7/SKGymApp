@@ -6,20 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".fragments.mainNav.Products">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progressBarProductsCatLoad"
+        >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/fab_Main"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="@string/todo"
         android:focusable="true"
+        android:text="View Cart"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/white"
-        app:srcCompat="@drawable/ic_cart"
+        app:srcCompat="@drawable/ic_cart_icon"
         app:tint="@color/white" />
 
 

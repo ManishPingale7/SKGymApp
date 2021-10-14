@@ -30,6 +30,11 @@
         android:name="com.example.skgym.fragments.mainNav.Products"
         android:label="Products"
         tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/nav_Cart"
+        android:name="com.example.skgym.fragments.mainNav.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" />
 
 
 </navigation>
