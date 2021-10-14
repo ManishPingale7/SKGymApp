@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.DataAdded
 import com.example.skgym.Interfaces.IsMemberCallBack
+import com.example.skgym.Notification.MessageService
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
@@ -31,12 +32,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
@@ -46,6 +47,7 @@ abstract class BaseRepository(private var contextBase: Context) {
     var result = ""
     private var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
+
 
     private val isDataTaken: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
@@ -265,32 +267,51 @@ abstract class BaseRepository(private var contextBase: Context) {
             .setValue(plan!!.name)
     }
 
-    fun pushEndDate(totalDays: Int, branch: String) {
-        val endDate = findEndDate(totalDays)
-        val userData = hashMapOf(
-            "endDate" to endDate,
-            "mToken" to Random.nextInt(),
-        )
-        mFirestore.collection("Users")
-            .document(mAuthBase.currentUser!!.uid).set(userData)
-            .addOnSuccessListener {
-                Log.d(TAG, "pushEndDate: Data Pushed")
-            }.addOnFailureListener {
-                Log.d(TAG, "pushEndDate: Failed to push data : ${it.cause}" + " and " + it.message)
+    fun pushEndDate(context: Context, totalDays: Int, branch: String) {
+        var token: String? = " "
+        MessageService.sharedPrefs = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Log.d(TAG, "pushEndDate: FAILED", it.exception)
+                return@addOnCompleteListener
             }
+            token = it.result
+
+            val endDate: Array<String> = findEndDate(totalDays)
+            val calendar = Calendar.getInstance()
+            calendar.set(endDate[2].toInt(), endDate[1].toInt() - 1, endDate[0].toInt())
+            val endingDate = calendar.time
+
+            val userData = hashMapOf(
+                "endDate" to endingDate,
+                "mToken" to token.toString(),
+            )
+            mFirestore.collection("Users")
+                .document(mAuthBase.currentUser!!.uid).set(userData)
+                .addOnSuccessListener {
+                    Log.d(TAG, "pushEndDate: Data Pushed")
+                }.addOnFailureListener {
+                    Log.d(
+                        TAG,
+                        "pushEndDate: Failed to push data : ${it.cause}" + " and " + it.message
+                    )
+                }
+
+            fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid)
+                .child(
+                    ISMEMBER
+                ).setValue(true)
+        }
 
 
-        fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid).child(
-            ISMEMBER
-        ).setValue(true)
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun findEndDate(totalDays: Int): String {
+    private fun findEndDate(totalDays: Int): Array<String> {
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val c = Calendar.getInstance()
         c.time = Date()
         c.add(Calendar.DATE, totalDays)
-        return sdf.format(c.time)
+        return sdf.format(c.time).toString().split("/").toTypedArray()
     }
 }

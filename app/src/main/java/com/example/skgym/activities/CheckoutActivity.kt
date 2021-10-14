@@ -39,7 +39,6 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
         demo = intent.getParcelableExtra("Plan")
         init()
 
-
         setPlanLayout(demo)
         binding.checkoutBtn.setOnStateChangeListener {
             setPayment()
@@ -102,14 +101,15 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
         val userBranch: SharedPreferences =
             this.getSharedPreferences("userBranch", MODE_PRIVATE)
 
+
         demo?.let {
             viewModel.addPlanToData(demo, userBranch.getString("userBranch", "").toString())
             viewModel.addEndDate(
+                this,
                 demo!!.totalDays,
                 userBranch.getString("userBranch", "").toString()
             )
         }
-        demo?.let { demo!!.totalDays }
     }
 
     override fun onPaymentError(code: Int, str: String?) {

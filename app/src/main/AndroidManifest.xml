@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.skgym">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkGym"
         tools:replace="android:allowBackup">
+        <service
+            android:name=".Notification.MessageService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".activities.ViewProducts"
             android:exported="true"
@@ -19,9 +31,6 @@
             android:theme="@style/Theme.SkGym.NoActionBar" />
         <activity
             android:name=".activities.OrdersActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activities.CartActivity"
             android:exported="true" />
         <activity
             android:name=".activities.CheckoutActivity"

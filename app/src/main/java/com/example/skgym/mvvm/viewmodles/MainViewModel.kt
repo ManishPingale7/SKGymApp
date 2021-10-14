@@ -1,5 +1,6 @@
 package com.example.skgym.mvvm.viewmodles
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.DataAdded
@@ -25,7 +26,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun sendUserToViewPlanActivity() = repository.sendUserToViewPlanActivity()
 
 
-    fun uploadUserdata(memberThis: Member,dataAdded: DataAdded) = repository.uploadUserdata(memberThis,dataAdded)
+    fun uploadUserdata(memberThis: Member, dataAdded: DataAdded) =
+        repository.uploadUserdata(memberThis, dataAdded)
 
 
     fun sendUserToMainActivity() = repository.sendUserToMainActivity()
@@ -46,7 +48,8 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
 
     fun addPlanToData(demo: Plan?, branch: String) = repository.addPlanToUser(demo, branch)
+    fun addEndDate(context: Context, totalDays: Int, branch: String) =
+        repository.pushEndDate(context, totalDays, branch)
 
-    fun addEndDate(tDays: Int, branch: String) = repository.pushEndDate(tDays, branch)
 
 }

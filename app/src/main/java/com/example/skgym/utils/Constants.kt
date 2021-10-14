@@ -6,9 +6,7 @@ object Constants {
     const val ISMEMBER = "member"
     const val PROFILE_IMAGE = "imgUrl"
 
-
     const val BRANCH_INFO="branchInfo"
-
 
     const val BRANCH_NAME="branchName"
     const val BRANCH_ID="branchID"
@@ -23,4 +21,5 @@ object Constants {
     const val CATEGORYINFO="categoryInfo"
     const val CATEGORYNAMES="categoryNames"
     const val STORAGECATEGORIES="storageCategories"
+
 }
