@@ -51,7 +51,7 @@
 
     <RelativeLayout
         android:id="@+id/progressbarHome"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -61,172 +61,175 @@
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
-    <LinearLayout
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/memberLayout"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="12dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardViewPlans"
+        <LinearLayout
+            android:id="@+id/plansLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="12dp">
-
-            <LinearLayout
-                android:id="@+id/plansLayout"
-                android:visibility="gone"
+            android:layout_height="200dp"
+            android:background="@drawable/bg1"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/bg1"
-                android:orientation="vertical">
-                <RelativeLayout
+                android:layout_height="wrap_content"
+
+                >
+
+                <TextView
+                    android:id="@+id/cardPlanName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/plan_name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/badge_gold"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_premium" />
+
+            </RelativeLayout>
+
+
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/cardPlanDesc"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginStart="15dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:fontFamily="@font/montserratregular"-->
+            <!--            android:text="@string/description"-->
+            <!--            android:textColor="@color/white"-->
+            <!--            android:textSize="18sp" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
-
-                    <TextView
-                        android:id="@+id/cardPlanName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/montserratsemibold"
-                        android:text="@string/plan_name"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:id="@+id/badge_gold"
-                        android:layout_width="33dp"
-                        android:layout_height="33dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="20dp"
-                        android:src="@drawable/ic_premium" />
-
-                </RelativeLayout>
-
-
-
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal"
+                    android:padding="0dp"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="3">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="0dp"
-                        android:layout_marginTop="10dp"
-                        android:weightSum="3">
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:padding="10dp">
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="@string/duration"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="@string/duration"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/cardDuration"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="@string/_30"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/cardDuration"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="Type"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/isPersonal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="None"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="Fees"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/cardFees"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="@font/montserratsemibold"
-                                android:text="@string/_30"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="@string/_30"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
-                </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="Type"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/isPersonal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="None"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="Fees"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/cardFees"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/montserratsemibold"
+                            android:text="Rs.4599"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
 
-            </LinearLayout>
+        </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </LinearLayout>

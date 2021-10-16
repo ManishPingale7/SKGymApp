@@ -61,9 +61,11 @@ class Home : Fragment() {
                         if (value == "true") {
                             binding.nomemberLayout.visibility = View.GONE
                             binding.progressbarHome.visibility = View.GONE
+                            binding.memberLayout.visibility = View.VISIBLE
                         } else {
                             binding.nomemberLayout.visibility = View.VISIBLE
                             binding.progressbarHome.visibility = View.GONE
+                            binding.memberLayout.visibility = View.GONE
                         }
                     }
                 })
