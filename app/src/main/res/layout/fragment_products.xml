@@ -28,7 +28,7 @@
         android:clickable="true"
         android:contentDescription="@string/todo"
         android:focusable="true"
-        android:text="View Cart"
+        android:text="@string/checkout"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:fabSize="normal"

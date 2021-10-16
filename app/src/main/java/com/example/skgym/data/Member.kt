@@ -7,8 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Member(
     var branch:String="",
     var name: String="empty",
-    var dob: String="",
     var gender: String="empty",
-    var plan:String="",
+    var planKey:String="",
     var member: Boolean = false
 ): Parcelable

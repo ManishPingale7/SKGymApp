@@ -23,6 +23,7 @@ import com.example.skgym.data.Product
 import com.example.skgym.utils.Constants
 import com.example.skgym.utils.Constants.BRANCHES
 import com.example.skgym.utils.Constants.ISMEMBER
+import com.example.skgym.utils.Constants.PLANKEY
 import com.example.skgym.utils.Constants.PLANS
 import com.example.skgym.utils.Constants.PRODUCTS
 import com.google.firebase.auth.FirebaseAuth
@@ -263,8 +264,8 @@ abstract class BaseRepository(private var contextBase: Context) {
 
     fun addPlanToUser(plan: Plan?, branch: String) {
         fDatabase.reference.child(BRANCHES).child(branch).child(mAuthBase.currentUser!!.uid)
-            .child("plan")
-            .setValue(plan!!.name)
+            .child(PLANKEY)
+            .setValue(plan!!.key)
     }
 
     fun pushEndDate(context: Context, totalDays: Int, branch: String) {

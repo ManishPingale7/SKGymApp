@@ -140,10 +140,7 @@ class ViewProducts : AppCompatActivity() {
                     cartBtn.text = text
                     Log.d(TAG, "onItemClicked: $number")
                 }
-
-
-
-
+                
                 bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
                     val itemQuantity = textQuantity.text.toString().toInt()
                     Toast.makeText(this@ViewProducts, "$product", Toast.LENGTH_SHORT).show()

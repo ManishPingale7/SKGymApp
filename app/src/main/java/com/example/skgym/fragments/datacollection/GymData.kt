@@ -39,7 +39,6 @@ class GymData : Fragment() {
     private var gender = "male"
     private var branches = ArrayList<String>()
     private var memberThis = Member()
-    private var dateTaken = false
     private lateinit var progressBtn: ProgressBtn
     private val argsData: GymDataArgs by navArgs()
 
@@ -68,9 +67,7 @@ class GymData : Fragment() {
 
         progressBtn = ProgressBtn(requireContext(), view)
 
-        binding.pickDateData.setOnClickListener {
-            picker.show(requireActivity().supportFragmentManager, "DATE-PICKER")
-        }
+
 
         viewModel.fetchBranchNames(object : BranchInterface {
             override fun getBranch(value: ArrayList<String>) {
@@ -92,25 +89,8 @@ class GymData : Fragment() {
 
 
 
-        picker.addOnPositiveButtonClickListener {
-            Log.d(TAG, "onCreateView: Header Date =${picker.headerText}")
-            Log.d(TAG, "onCreateView: Selection =${picker.selection}")
-            val date = picker.headerText
-            dateTaken = true
-            memberThis.dob = date
-            val text = "Birthdate is ${memberThis.dob}"
-            binding.textViewBirthday.text=text
-            binding.textViewBirthday.visibility = View.VISIBLE
-        }
 
-        picker.addOnNegativeButtonClickListener {
-            Log.d(TAG, "onCreateView: NEGATIVE")
-            dateTaken = false
-        }
-        picker.addOnCancelListener {
-            Log.d(TAG, "onCreateView: Cancel")
-            dateTaken = false
-        }
+
 
         when (binding.radioGroupGender.checkedRadioButtonId) {
             R.id.radio_button_male -> {
@@ -144,21 +124,17 @@ class GymData : Fragment() {
         view.setOnClickListener {
 
             val branch = binding.branchData.text.toString()
-
-            if (dateTaken) {
-
-
-                if (branch.isNotEmpty() && branches.contains(branch)) {
-                    progressBtn.buttonActivated()
-                    memberThis.branch = branch
-                    memberThis.member = false
-                    Log.d(TAG, "onCreateView: $memberThis")
-                    viewModel.uploadUserdata(memberThis, object : DataAdded {
-                        override fun dataAdded(added: Boolean) {
-                            if (added) {
-                                requireActivity().finish()
-                            }
+            if (branch.isNotEmpty() && branches.contains(branch)) {
+                progressBtn.buttonActivated()
+                memberThis.branch = branch
+                memberThis.member = false
+                Log.d(TAG, "onCreateView: $memberThis")
+                viewModel.uploadUserdata(memberThis, object : DataAdded {
+                    override fun dataAdded(added: Boolean) {
+                        if (added) {
+                            requireActivity().finish()
                         }
+                    }
                     })
                     Toast.makeText(
                         requireContext(),
@@ -173,9 +149,6 @@ class GymData : Fragment() {
                             )
                                 .show()
                         }
-                    } else {
-                        Toast.makeText(requireContext(), "Select Date", Toast.LENGTH_SHORT).show()
-                    }
 
 
         }

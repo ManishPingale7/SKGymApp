@@ -121,4 +121,5 @@
     <string name="product_description">Product Description</string>
     <string name="fill_the_details">Fill The Details</string>
     <string name="specify_your_order">Specify Your Order</string>
+    <string name="checkout">Checkout</string>
 </resources>

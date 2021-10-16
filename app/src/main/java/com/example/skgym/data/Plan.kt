@@ -10,7 +10,8 @@ data class Plan(
     val timeNumber: String,
     val fees: String,
     val pt:Boolean?,
+    val key: String,
     val totalDays:Int
 ) : Parcelable{
-    constructor() : this("", "", "", "",null,-1)
+    constructor() : this("", "", "", "",null,"",-1)
 }
