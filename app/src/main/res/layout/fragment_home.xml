@@ -51,7 +51,7 @@
 
     <RelativeLayout
         android:id="@+id/progressbarHome"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -78,6 +78,7 @@
 
             <LinearLayout
                 android:id="@+id/plansLayout"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/bg1"
