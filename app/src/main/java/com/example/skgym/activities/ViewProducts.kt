@@ -145,6 +145,8 @@ class ViewProducts : AppCompatActivity() {
 
 
                 bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
+                    val itemQuantity = textQuantity.text.toString().toInt()
+                    Toast.makeText(this@ViewProducts, "$product", Toast.LENGTH_SHORT).show()
                     bottomSheetDialog.dismiss()
                 }
 
