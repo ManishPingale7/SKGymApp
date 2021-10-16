@@ -284,7 +284,7 @@ abstract class BaseRepository(private var contextBase: Context) {
             val endingDate = calendar.time
 
             val userData = hashMapOf(
-                "endDate" to endingDate,
+                "endDate" to Date(),
                 "mToken" to token.toString(),
             )
             mFirestore.collection("Users")
