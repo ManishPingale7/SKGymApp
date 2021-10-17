@@ -1,4 +1,4 @@
-package com.example.skgym.Databases.Dao
+package com.example.skgym.Room.Dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -25,5 +25,5 @@ interface CartDao {
 
     //Get unpaid Products only
     @Query("SELECT * FROM Cart WHERE paymentDone IS 0")
-    fun getUnpaidCart()
+    fun getUnpaidCart(): LiveData<List<Cart>>
 }

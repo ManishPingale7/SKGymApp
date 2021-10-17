@@ -1,17 +1,17 @@
-package com.example.skgym.Databases.viewmodels
+package com.example.skgym.Room.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.skgym.Databases.Database.CartDatabase
-import com.example.skgym.Databases.repository.CartDatabaseRepository
+import com.example.skgym.Room.Database.CartDatabase
+import com.example.skgym.Room.repository.CartDatabaseRepository
 import com.example.skgym.data.Cart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CartViewModel(application: Application) : AndroidViewModel(application) {
-    private val readAllData: LiveData<List<Cart>>
+    val readAllData: LiveData<List<Cart>>
     private val repository: CartDatabaseRepository
 
     init {
@@ -20,9 +20,8 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         readAllData = repository.readAllData
     }
 
-    fun addProductToCartDB(product: Cart) {
+    fun addProductToCartDB(product: Cart) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.addProductToCart(product)
         }
-    }
 }

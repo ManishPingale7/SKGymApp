@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.ProductsAdapter
 import com.example.skgym.R
+import com.example.skgym.Room.viewmodels.CartViewModel
+import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
 import com.example.skgym.data.ProductCategory
 import com.example.skgym.databinding.ActivityViewProductsInCategoryBinding
@@ -24,12 +26,16 @@ import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.Gson
 
 class ViewProducts : AppCompatActivity() {
     private lateinit var binding: ActivityViewProductsInCategoryBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
     private lateinit var productsAdapter: ProductsAdapter
+    private lateinit var mDbViewModel: CartViewModel
+    val gson = Gson()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +44,6 @@ class ViewProducts : AppCompatActivity() {
 
         init()
         loadData()
-
 
     }
 
@@ -55,16 +60,15 @@ class ViewProducts : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
+        //Database stuff
+        mDbViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
+
 
         //Setting the recycler view
         productsAdapter = ProductsAdapter()
         productsAdapter.setContext(this)
         productsAdapter.setOnItemClickListener(object : ProductsAdapter.onItemClickedListener {
             override fun onItemClicked(product: Product) {
-                Toast.makeText(this@ViewProducts, "Clicked ${product.name}", Toast.LENGTH_SHORT)
-                    .show()
-
-
                 val bottomSheetDialog =
                     BottomSheetDialog(this@ViewProducts, R.style.BottomSheetDialogTheme)
 
@@ -77,15 +81,10 @@ class ViewProducts : AppCompatActivity() {
                 bottomSheetDialog.setContentView(bottomSheetView)
                 bottomSheetDialog.show()
 
-
                 val cartBtn = bottomSheetView.findViewById<Button>(R.id.AddToCart)
-
-
 
                 bottomSheetView.findViewById<TextView>(R.id.bottomSheetName).text = product.name
                 bottomSheetView.findViewById<TextView>(R.id.bottomSheetDesc).text = product.desc
-
-
 
                 if (product.flavours != null) {
                     val arrayAdapter = ArrayAdapter(
@@ -140,14 +139,14 @@ class ViewProducts : AppCompatActivity() {
                     cartBtn.text = text
                     Log.d(TAG, "onItemClicked: $number")
                 }
-                
+
                 bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
                     val itemQuantity = textQuantity.text.toString().toInt()
-                    Toast.makeText(this@ViewProducts, "$product", Toast.LENGTH_SHORT).show()
+                    val productCart = Cart(gson.toJson(product), itemQuantity)
+                    insertProductIntoCart(productCart)
+
                     bottomSheetDialog.dismiss()
                 }
-
-
             }
         })
 
@@ -160,6 +159,9 @@ class ViewProducts : AppCompatActivity() {
         }
 
     }
+
+    private fun insertProductIntoCart(productCart: Cart) =
+        mDbViewModel.addProductToCartDB(productCart)
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadData() {
