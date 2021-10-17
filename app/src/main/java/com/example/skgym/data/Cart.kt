@@ -13,5 +13,5 @@ data class Cart(
     val quantity: Int,
     val paymentDone: Boolean = false,
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    val id: Int
 ) : Parcelable

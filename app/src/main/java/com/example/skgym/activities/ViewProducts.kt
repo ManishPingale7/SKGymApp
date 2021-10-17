@@ -19,7 +19,7 @@ import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
 import com.example.skgym.data.ProductCategory
-import com.example.skgym.databinding.ActivityViewProductsInCategoryBinding
+import com.example.skgym.databinding.ActivityViewProductsCategoryBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
@@ -30,7 +30,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 
 class ViewProducts : AppCompatActivity() {
-    private lateinit var binding: ActivityViewProductsInCategoryBinding
+    private lateinit var binding: ActivityViewProductsCategoryBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
     private lateinit var productsAdapter: ProductsAdapter
@@ -40,7 +40,7 @@ class ViewProducts : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityViewProductsInCategoryBinding.inflate(layoutInflater)
+        binding = ActivityViewProductsCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         init()
@@ -158,7 +158,7 @@ class ViewProducts : AppCompatActivity() {
 
                 bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
                     val list = ArrayList<String>()
-                    val mainList=product.flavours
+                    val mainList = product.flavours
                     list.add(flavourEdit.text.toString())
                     product.flavours = list
                     Toast.makeText(this@ViewProducts, "$product", Toast.LENGTH_SHORT).show()
@@ -166,10 +166,10 @@ class ViewProducts : AppCompatActivity() {
                     insertProductIntoCart(
                         Cart(
                             gson.toJson(product),
-                            textQuantity.text.toString().toInt()
+                            textQuantity.text.toString().toInt(), id = 0
                         )
                     )
-                    product.flavours=mainList
+                    product.flavours = mainList
                     bottomSheetDialog.dismiss()
                 }
             }
@@ -186,9 +186,11 @@ class ViewProducts : AppCompatActivity() {
     }
 
     private fun insertProductIntoCart(productCart: Cart) {
-        Log.d(TAG, "insertProductIntoCart: Inserting Data")
+        Log.d(TAG, "insertProductIntoCart: Inserting Data $productCart")
         mDbViewModel.addProductToCartDB(productCart)
     }
+
+    //TODO: ONCE PLAN IS PURCHASED USER SHOULD MOVE TO HOME ACTIVITY
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadData() {

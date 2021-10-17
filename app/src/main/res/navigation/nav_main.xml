@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_products" />
     <fragment
         android:id="@+id/nav_Cart"
-        android:name="com.example.skgym.fragments.mainNav.CartFragment"
+        android:name="com.example.skgym.fragments.mainNav.CartFrag"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" />
 

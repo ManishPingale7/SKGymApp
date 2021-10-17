@@ -10,14 +10,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
-import com.example.skgym.databinding.CartitemBinding
+import com.example.skgym.databinding.CartItemBinding
 import com.google.gson.Gson
 
 class CartAdapter(val context: Context) :
     ListAdapter<Cart, CartAdapter.CartViewHolder>(DiffCallBack()) {
     private val gson = Gson()
 
-    inner class CartViewHolder(val binding: CartitemBinding) :
+    inner class CartViewHolder(val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(cart: Cart) {
@@ -39,7 +39,7 @@ class CartAdapter(val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(
-            CartitemBinding.inflate(
+            CartItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

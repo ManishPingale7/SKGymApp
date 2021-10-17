@@ -17,7 +17,7 @@ interface CartDao {
 
     //Update
     @Update
-    fun updateProduct(cart: Cart)
+    suspend fun updateProduct(cart: Cart)
 
     //QueryAll
     @Query("SELECT * FROM Cart")
