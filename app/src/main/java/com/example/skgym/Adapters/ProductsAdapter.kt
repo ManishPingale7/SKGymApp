@@ -18,7 +18,7 @@ import com.bumptech.glide.request.target.Target
 import com.example.skgym.data.Product
 import com.example.skgym.databinding.ProductlistitemBinding
 
-class ProductsAdapter() :
+class ProductsAdapter :
     ListAdapter<Product, ProductsAdapter.viewHolder>(DiffCallBack()) {
 
     private lateinit var mListener: onItemClickedListener

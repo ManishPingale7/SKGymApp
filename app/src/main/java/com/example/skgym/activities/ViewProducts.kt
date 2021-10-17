@@ -185,8 +185,10 @@ class ViewProducts : AppCompatActivity() {
 
     }
 
-    private fun insertProductIntoCart(productCart: Cart) =
+    private fun insertProductIntoCart(productCart: Cart) {
+        Log.d(TAG, "insertProductIntoCart: Inserting Data")
         mDbViewModel.addProductToCartDB(productCart)
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadData() {
