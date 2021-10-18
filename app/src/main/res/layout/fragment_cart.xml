@@ -39,6 +39,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="200dp"
+            android:id="@+id/proceed_toBuy"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="20dp"
