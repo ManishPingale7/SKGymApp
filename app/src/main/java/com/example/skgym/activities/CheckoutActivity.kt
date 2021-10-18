@@ -101,7 +101,6 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
         val userBranch: SharedPreferences =
             this.getSharedPreferences("userBranch", MODE_PRIVATE)
 
-
         demo?.let {
             viewModel.addPlanToData(demo, userBranch.getString("userBranch", "").toString())
             viewModel.addEndDate(
@@ -114,6 +113,6 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentError(code: Int, str: String?) {
         Toast.makeText(this, "Payment Failed $str", Toast.LENGTH_SHORT).show()
-
+        Log.d("TAG", "onPaymentError: $code and $str")
     }
 }

@@ -20,10 +20,12 @@ interface CartDao {
     fun updateProduct(cart: Cart)
 
     //QueryAll
-    @Query("SELECT * FROM Cart")
+    //Get orders in descending order
+    @Query("SELECT * FROM Cart ORDER BY id DESC ")
     fun getCart(): LiveData<List<Cart>>
 
     //Get unpaid Products only
     @Query("SELECT * FROM Cart WHERE paymentDone IS 0")
     fun getUnpaidCart(): LiveData<List<Cart>>
+
 }

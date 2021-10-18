@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragments.mainNav.CartFragment">
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/subtotaltext"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/subtotaltext"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="20dp"
@@ -38,6 +41,7 @@
                 tools:ignore="RelativeOverlap" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/proceedToBuy"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -48,55 +52,14 @@
                 android:text="@string/proceed_to_buy"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCartItems"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:visibility="visible" />
-
-    <LinearLayout
-        android:id="@+id/emptyCartLay"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/emptycart" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/montserratsemibold"
-            android:text="@string/your_cart_is_empty"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/montserratsemibold"
-            android:text="@string/looks_like_you_haven_t_added_anything_to_your_cart_yet"
-            android:textAlignment="center"
-            android:textColor="@color/grey" />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCartItems"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" />
     </LinearLayout>
-</LinearLayout>
+
+</FrameLayout>
 

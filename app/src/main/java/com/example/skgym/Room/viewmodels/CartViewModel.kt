@@ -11,17 +11,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CartViewModel(application: Application) : AndroidViewModel(application) {
+    //For History
     val readAllData: LiveData<List<Cart>>
+
+    //For Cart
+    val readUnpaidData: LiveData<List<Cart>>
     private val repository: CartDatabaseRepository
 
     init {
         val cartDao = CartDatabase.getDatabase(application).cartDao()
         repository = CartDatabaseRepository(cartDao, application)
         readAllData = repository.readAllData
+        readUnpaidData = repository.readUnpaidCartData
+
+
     }
 
     fun addProductToCartDB(product: Cart) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.addProductToCart(product)
+        }
+
+    fun changePaymentStatus(cart: Cart) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setPaymentToTrue(cart)
         }
 }
