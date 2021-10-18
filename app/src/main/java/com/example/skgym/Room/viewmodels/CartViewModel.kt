@@ -24,6 +24,7 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         readAllData = repository.readAllData
         readUnpaidData = repository.readUnpaidCartData
 
+
     }
 
     fun addProductToCartDB(product: Cart) =
