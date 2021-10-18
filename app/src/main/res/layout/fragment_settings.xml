@@ -165,7 +165,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/viewCartSettings"
+            android:id="@+id/viewCartOrders"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:padding="10dp"

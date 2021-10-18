@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.CartAdapter
+import com.example.skgym.R
 import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
 import com.example.skgym.databinding.FragmentCartBinding
 import com.google.gson.Gson
+
 
 private const val TAG = "CartFragment"
 
@@ -32,6 +34,12 @@ class CartFragment : Fragment() {
     ): View {
         binding = FragmentCartBinding.inflate(LayoutInflater.from(context), container, false)
         init()
+
+
+
+
+
+
         loadData()
         return binding.root
     }

@@ -19,10 +19,11 @@
 
     <color name="tab_indicator_gray">#c0c0c0</color>
     <color name="intro_title_color">#000000</color>
-    <color name="intro_description_color">#656565</color>
-    <color name="grey">#392A2A</color>
+    <color name="intro_description_color">#404040</color>
+    <color name="grey">#3F4143</color>
     <color name="blue">#2455ab</color>
     <color name="faintGray">#d3d3d3</color>
     <color name="green">#1DE025</color>
     <color name="gold">#FFD700</color>
+    <color name="red">#9AF31336</color>
 </resources>
