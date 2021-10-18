@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,9 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="100">
-
-
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -48,15 +43,14 @@
                 android:id="@+id/productInfoLay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/productName_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserratsemibold"
                     android:gravity="start"
                     android:text="@string/product_name"
@@ -80,12 +74,10 @@
                     android:layout_height="match_parent">
 
                     <RelativeLayout
-                        android:id="@+id/cartQuantitySwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="120dp"
                         android:background="@drawable/background_cart"
                         android:orientation="horizontal">
 
@@ -94,10 +86,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentStart="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_margin="10dp"
                             android:contentDescription="@string/todo"
                             android:src="@drawable/outline_remove_24" />
 
@@ -121,20 +110,6 @@
                             android:src="@drawable/outline_add_24" />
 
                     </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/deleteBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/cartQuantitySwitch"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="40dp"
-                        android:background="@drawable/cart_delete_btn"
-                        android:text="@string/delete"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        tools:targetApi="m" />
 
 
                 </RelativeLayout>
