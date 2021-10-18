@@ -2,8 +2,10 @@ package com.example.skgym.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.skgym.R
+import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.ActivityMainBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -22,8 +25,9 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.razorpay.PaymentResultListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var viewModel: MainViewModel
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var currentuser: FirebaseUser? = null
 
     lateinit var binding: ActivityMainBinding
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +66,9 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
+        cartViewModel =
+            ViewModelProviders.of(this).get(CartViewModel::class.java)
+
         currentuser = mAuth.currentUser
 
         checkUser()
@@ -81,5 +89,24 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
+    }
+
+    override fun onPaymentSuccess(p0: String?) {
+        Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show()
+        cartViewModel.readUnpaidData.observe(this) {
+            for (i in it) {
+                Log.d("TAG", "onPaymentSuccess: CHANGING TO TRUE: $i ")
+                val cart = i.copy(paymentDone = true)
+                cartViewModel.changePaymentStatus(cart)
+            }
+        }
+        startActivity(Intent(this, MainActivity::class.java))
+
+
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?) {
+        Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
+        Log.d("TAG", "onPaymentError: $p0 and $p1")
     }
 }
