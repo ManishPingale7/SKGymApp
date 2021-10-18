@@ -122,4 +122,6 @@
     <string name="fill_the_details">Fill The Details</string>
     <string name="specify_your_order">Specify Your Order</string>
     <string name="checkout">Checkout</string>
+    <string name="looks_like_you_haven_t_added_anything_to_your_cart_yet">Looks like you haven\'t added anything to Your Cart Yet</string>
+    <string name="your_cart_is_empty">Your Cart is Empty</string>
 </resources>

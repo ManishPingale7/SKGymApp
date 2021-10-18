@@ -23,9 +23,9 @@ class CartAdapter(val context: Context) :
         fun bind(cart: Cart) {
             binding.apply {
                 val product = gson.fromJson(cart.product, Product::class.java)
-
+                val text = "₹ ${product.price}"
                 productNameCard.text = product.name
-                productPrice.text = product.price
+                productPrice.text = text
                 bottomQuantityTextView.text = cart.quantity.toString()
                 Glide.with(context)
                     .load(product.productImage)
