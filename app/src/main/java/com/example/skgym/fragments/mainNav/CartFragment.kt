@@ -40,14 +40,12 @@ class CartFragment : Fragment() {
         loadData()
 
         binding.proceedToBuy.setOnClickListener {
-
             if (totalPrice != 0)
                 initiatePayment()
             else
                 Toast.makeText(requireActivity(), "Your Cart is Empty", Toast.LENGTH_SHORT).show()
         }
         return binding.root
-
     }
 
     private fun initiatePayment() {
