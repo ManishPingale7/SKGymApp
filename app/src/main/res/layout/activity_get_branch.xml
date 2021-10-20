@@ -36,13 +36,29 @@
         android:layout_gravity="center" />
 
 
-    <Spinner
-        android:id="@+id/branch_dataGet"
+<!---->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuBranches"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/montserratsemibold" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/branch">
+
+        <AutoCompleteTextView
+            android:id="@+id/bottomAutoCompleteBranches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/todo"
+            android:inputType="none"
+            tools:ignore="LabelFor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <Button

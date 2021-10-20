@@ -60,13 +60,13 @@ class GetBranch : AppCompatActivity() {
             branchList = it
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             arrayAdapter.notifyDataSetChanged()
-            binding.branchDataGet.setAdapter(arrayAdapter)
+            binding.bottomAutoCompleteBranches.setAdapter(arrayAdapter)
         }
 
 
         binding.continueBranch.setOnClickListener {
             Log.d(TAG, "onCreate: ${branchList.size}")
-            val branch = binding.branchDataGet.selectedItem.toString()
+            val branch = binding.bottomAutoCompleteBranches.text.toString()
             if (branch.isNotEmpty()) {
                 if (branchList.contains(branch)) {
                     Log.d(TAG, "onCreate: $branch")
