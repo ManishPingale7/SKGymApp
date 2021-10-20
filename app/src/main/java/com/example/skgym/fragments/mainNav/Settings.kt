@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.skgym.R
+import com.example.skgym.activities.OrdersActivity
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.FragmentSettingsBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -55,7 +56,7 @@ class Settings : Fragment() {
 
 
         binding.ordersHistory.setOnClickListener {
-
+            startActivity(Intent(requireContext(), OrdersActivity::class.java))
         }
 
 

@@ -1,9 +1,9 @@
 package com.example.skgym.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.R
@@ -26,6 +26,9 @@ class OrdersActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
 
+        binding.goBackHistory.setOnClickListener {
+            finish()
+        }
 
 
     }
