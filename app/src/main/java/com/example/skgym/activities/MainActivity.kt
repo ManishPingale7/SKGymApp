@@ -30,9 +30,9 @@ import com.razorpay.PaymentResultListener
 class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var mAuth: FirebaseAuth
+    private var currentuser: FirebaseUser? = null
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
-    private var currentuser: FirebaseUser? = null
 
     lateinit var binding: ActivityMainBinding
     private lateinit var cartViewModel: CartViewModel

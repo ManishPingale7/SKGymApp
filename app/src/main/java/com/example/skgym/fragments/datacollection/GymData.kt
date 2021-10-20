@@ -2,6 +2,7 @@ package com.example.skgym.fragments.datacollection
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.DataAdded
 import com.example.skgym.R
+import com.example.skgym.activities.MainActivity
 import com.example.skgym.data.Member
 import com.example.skgym.databinding.GymdataBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -132,6 +134,7 @@ class GymData : Fragment() {
                 viewModel.uploadUserdata(memberThis, object : DataAdded {
                     override fun dataAdded(added: Boolean) {
                         if (added) {
+                            startActivity(Intent(requireContext(), MainActivity::class.java))
                             requireActivity().finish()
                         }
                     }

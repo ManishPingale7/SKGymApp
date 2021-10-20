@@ -5,6 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class Home : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: FragmentHomeBinding? = null
     var branch = ""
+    private val TAG = "Home"
     private val binding get() = _binding!!
     lateinit var currentUser: FirebaseUser
     var mAuth = FirebaseAuth.getInstance()
@@ -53,16 +55,23 @@ class Home : Fragment() {
         if (isBTaken) {
             binding.becomeMember.text = resources.getString(R.string.become_a_member)
             branch = userBranch.getString("userBranch", "").toString()
+            Log.d(TAG, "onCreateView: Branch Taken")
             if (!isDatatakenB) {
+                Log.d(TAG, "onCreateView: Data Not Taken")
                 viewModel.isBranchExists(branch)
+
             } else {
+                Log.d(TAG, "onCreateView: Checking Member")
+
                 viewModel.checkUserIsMember(branch, object : IsMemberCallBack {
                     override fun onCallback(value: String?) {
                         if (value == "true") {
+                            Log.d(TAG, "onCreateView: Member")
                             binding.nomemberLayout.visibility = View.GONE
                             binding.progressbarHome.visibility = View.GONE
                             binding.memberLayout.visibility = View.VISIBLE
                         } else {
+                            Log.d(TAG, "onCreateView: Not Member")
                             binding.nomemberLayout.visibility = View.VISIBLE
                             binding.progressbarHome.visibility = View.GONE
                             binding.memberLayout.visibility = View.GONE
@@ -72,6 +81,7 @@ class Home : Fragment() {
 
             }
         } else {
+            Log.d(TAG, "onCreateView: Branch Not Taken")
             binding.becomeMember.text = resources.getString(R.string.selectBranch)
             val intent = Intent(requireContext(), GetBranch::class.java)
             startActivity(intent)

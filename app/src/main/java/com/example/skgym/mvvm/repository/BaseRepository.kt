@@ -195,6 +195,9 @@ abstract class BaseRepository(private var contextBase: Context) {
                                 dataEdit.apply()
                                 Log.d(TAG, "onDataChangeCheck: Result upper is $result")
                                 Log.d(TAG, "onDataChangeCheck: User Present")
+                                Intent(contextBase, MainActivity::class.java).also {
+                                    contextBase.startActivity(it)
+                                }
                             } else {
                                 sendUserToDataActivity()
                             }
