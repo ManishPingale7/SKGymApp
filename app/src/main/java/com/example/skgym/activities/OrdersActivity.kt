@@ -1,12 +1,17 @@
 package com.example.skgym.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.skgym.Adapters.ProductHistoryAdapter
 import com.example.skgym.R
+import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.databinding.ActivityOrdersBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -18,6 +23,8 @@ import com.example.skgym.mvvm.viewmodles.MainViewModel
 class OrdersActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
+    private lateinit var historyAdapter: ProductHistoryAdapter
+    private lateinit var cartViewModel: CartViewModel
 
     lateinit var binding: ActivityOrdersBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +33,22 @@ class OrdersActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
 
+        loadData()
+
         binding.goBackHistory.setOnClickListener {
             finish()
         }
 
 
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun loadData() {
+        cartViewModel.readAllData.observe(this@OrdersActivity) {
+            Log.d("TAG", "loadData123: $it")
+            historyAdapter.submitList(it)
+            historyAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun init() {
@@ -44,6 +62,18 @@ class OrdersActivity : AppCompatActivity() {
             .build() as DaggerFactoryComponent
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
+
+        cartViewModel = ViewModelProviders.of(this@OrdersActivity).get(CartViewModel::class.java)
+        historyAdapter = ProductHistoryAdapter(this@OrdersActivity)
+
+
+        binding.apply {
+            recyclerViewOrdersHis.apply {
+                adapter = historyAdapter
+                layoutManager = LinearLayoutManager(this@OrdersActivity)
+                setHasFixedSize(true)
+            }
+        }
 
     }
 }

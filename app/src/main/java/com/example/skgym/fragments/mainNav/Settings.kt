@@ -50,7 +50,7 @@ class Settings : Fragment() {
         val isUserMemberCheckedEdit = isUserMemberChecked.edit()
         val isDataTaken: SharedPreferences =
             requireActivity().getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
-        val isDatatakenEdit = isDataTaken.edit()
+        val isDataTakenEdit = isDataTaken.edit()
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
 
@@ -65,8 +65,8 @@ class Settings : Fragment() {
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
-            isDatatakenEdit.putBoolean("isDataTaken", false)
-            isDatatakenEdit.apply()
+            isDataTakenEdit.putBoolean("isDataTaken", false)
+            isDataTakenEdit.apply()
             isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", false)
             isUserMemberCheckedEdit.apply()
             mAuth.signOut()
