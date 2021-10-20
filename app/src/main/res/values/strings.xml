@@ -125,4 +125,5 @@
     <string name="looks_like_you_haven_t_added_anything_to_your_cart_yet">Looks like you haven\'t added anything to Your Cart Yet</string>
     <string name="your_cart_is_empty">Your Cart is Empty</string>
     <string name="_0">0</string>
+    <string name="products_quantity">Products Quantity</string>
 </resources>
