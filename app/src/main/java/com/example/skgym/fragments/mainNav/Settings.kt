@@ -52,12 +52,19 @@ class Settings : Fragment() {
         val isDatatakenEdit = isDataTaken.edit()
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
+
+
+        binding.ordersHistory.setOnClickListener {
+
+        }
+
+
         binding.SignOutSettings.setOnClickListener {
             branchTakenEdit.putBoolean("isBranchTaken", false)
             branchTakenEdit.apply()
             branchEdit.putString("userBranch", "")
             branchEdit.apply()
-            isDatatakenEdit.putBoolean("isDataTaken",false)
+            isDatatakenEdit.putBoolean("isDataTaken", false)
             isDatatakenEdit.apply()
             isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", false)
             isUserMemberCheckedEdit.apply()

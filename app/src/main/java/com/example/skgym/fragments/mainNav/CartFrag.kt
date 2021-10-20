@@ -22,7 +22,7 @@ import org.json.JSONObject
 
 private const val TAG = "CartFragment"
 
-class CartFragment : Fragment() {
+class CartFrag : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var cartAdapter: CartAdapter
@@ -65,15 +65,16 @@ class CartFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadData() {
-        viewModel.readAllData.observe(requireActivity()) {
-            Log.d(TAG, "loadData: Room Dataaaaaa $it")
-        }
-
         viewModel.readUnpaidData.observe(requireActivity()) {
-            Log.d(TAG, "loadData:Room Data $it")
-            binding.cartPrice.text = calculateTotalPrice(it)
-            cartAdapter.submitList(it)
-            cartAdapter.notifyDataSetChanged()
+            if (it.isEmpty()) {
+                binding.emptyCartLay.visibility = View.VISIBLE
+                binding.recyclerViewCartItems.visibility = View.GONE
+            } else {
+                Log.d(TAG, "loadData:Room Data $it")
+                binding.cartPrice.text = calculateTotalPrice(it)
+                cartAdapter.submitList(it)
+                cartAdapter.notifyDataSetChanged()
+            }
         }
 
     }
