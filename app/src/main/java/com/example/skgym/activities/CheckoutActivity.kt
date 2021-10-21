@@ -1,6 +1,7 @@
 package com.example.skgym.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -109,6 +110,8 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
                 userBranch.getString("userBranch", "").toString()
             )
         }
+
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onPaymentError(code: Int, str: String?) {
