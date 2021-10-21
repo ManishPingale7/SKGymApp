@@ -19,12 +19,10 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CartDatabaseRepository
 
     init {
-        val cartDao = CartDatabase.getDatabase(application).cartDao()
+        val cartDao = CartDatabase.getCartDatabase(application).cartDao()
         repository = CartDatabaseRepository(cartDao, application)
         readAllData = repository.readAllData
         readUnpaidData = repository.readUnpaidCartData
-
-
     }
 
     fun addProductToCartDB(product: Cart) =
