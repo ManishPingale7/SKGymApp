@@ -109,6 +109,18 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserratsemibold"
+            android:text="@string/history"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/my_statusbar_color"
+            android:textSize="16sp" />
         <LinearLayout
             android:id="@+id/viewPlansHis"
             android:layout_width="match_parent"
@@ -130,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserratsemibold"
-                    android:text="Plans Purchased History"
+                    android:text="@string/plans_purchased_history"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
@@ -150,7 +162,49 @@
 
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/viewCartOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="100">
 
+            <LinearLayout
+                android:id="@+id/ordersHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="90"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:text="@string/your_orders"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserratregular"
+                    android:text="@string/view_your_current_orders"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -206,49 +260,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/viewCartOrders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="100">
 
-            <LinearLayout
-                android:id="@+id/ordersHistory"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="90"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/montserratsemibold"
-                    android:text="@string/your_orders"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/montserratregular"
-                    android:text="@string/view_your_current_orders"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
 
         <TextView

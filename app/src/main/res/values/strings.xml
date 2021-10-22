@@ -127,4 +127,5 @@
     <string name="_0">0</string>
     <string name="products_quantity">Products Quantity</string>
     <string name="fees">Fees</string>
+    <string name="plans_purchased_history">Plans Purchased History</string>
 </resources>
