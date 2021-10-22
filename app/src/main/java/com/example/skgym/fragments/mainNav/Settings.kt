@@ -76,16 +76,7 @@ class Settings : Fragment() {
             startActivity(intent)
             requireActivity().finish()
         }
-        binding.refreshMemberStatus.setOnClickListener {
-            Toast.makeText(requireContext(), "Checking", Toast.LENGTH_SHORT).show()
-            branchTakenEdit.putBoolean("isBranchTaken", false)
-            branchTakenEdit.apply()
-            branchEdit.putString("userBranch", "")
-            branchEdit.apply()
-            isUserMemberCheckedEdit.putBoolean("isUserMemberChecked", false)
-            isUserMemberCheckedEdit.apply()
-            viewModel.sendUserToMainActivity()
-        }
+
         binding.viewAllPlans.setOnClickListener {
             viewModel.sendUserToViewPlanActivity()
         }

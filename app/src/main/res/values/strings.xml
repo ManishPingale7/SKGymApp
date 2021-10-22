@@ -126,4 +126,5 @@
     <string name="your_cart_is_empty">Your Cart is Empty</string>
     <string name="_0">0</string>
     <string name="products_quantity">Products Quantity</string>
+    <string name="fees">Fees</string>
 </resources>
