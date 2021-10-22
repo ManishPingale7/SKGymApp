@@ -8,5 +8,5 @@ data class PlansDB(
     val plan: String,
     val date: String,
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
 )
