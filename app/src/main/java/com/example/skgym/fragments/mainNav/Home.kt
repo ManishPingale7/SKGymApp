@@ -114,18 +114,18 @@ class Home : Fragment() {
                         binding.cardPlanNameHome.text = plan.name
                         binding.cardDurationHome.text = plan.timeNumber
                         binding.cardFeesHome.text = plan.fees
-                        val RESULT: Int
-                        var text = ""
+                        val result: Int
+                        val text: String
                         if (plan.pt == true) {
                             text = "PT"
-                            RESULT = View.VISIBLE
+                            result = View.VISIBLE
 
                         } else {
                             text = "Normal"
-                            RESULT = View.INVISIBLE
+                            result = View.INVISIBLE
                         }
                         binding.isPersonalHome.text = text
-                        binding.badgeGold.visibility = RESULT
+                        binding.badgeGold.visibility = result
                     }
                 })
             }
