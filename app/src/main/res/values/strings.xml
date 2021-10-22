@@ -128,4 +128,7 @@
     <string name="products_quantity">Products Quantity</string>
     <string name="fees">Fees</string>
     <string name="plans_purchased_history">Plans Purchased History</string>
+    <string name="view_plans_purchased_before">View Plans Purchased Before</string>
+    <string name="products_available_at_bk_gym">Products available at Bk Gym</string>
+    <string name="view_products">View Products</string>
 </resources>
