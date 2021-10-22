@@ -1,8 +1,11 @@
 package com.example.skgym.activities
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
@@ -27,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.razorpay.PaymentResultListener
 
+
 class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var mAuth: FirebaseAuth
@@ -42,14 +46,42 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+
         setSupportActionBar(binding.toolbarMain)
         val actionBar: ActionBar? = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar.setHomeButtonEnabled(true)
         val navController = findNavController(R.id.ContainerViewMain)
-        val appBarConfigration = AppBarConfiguration(setOf(R.id.homeFrag,R.id.products ,R.id.nav_Cart,R.id.nav_settings))
+        val appBarConfigration = AppBarConfiguration(
+            setOf(
+                R.id.homeFrag,
+                R.id.products,
+                R.id.nav_Cart,
+                R.id.nav_settings
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfigration)
         binding.bottomNavigation.setupWithNavController(navController)
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.homeHistory -> {
+                Log.d(TAG, "onOptionsItemSelected: Menu Clicked")
+                startActivity(Intent(this, OrdersActivity::class.java))
+            }
+            else -> {
+                Log.d(TAG, "onOptionsItemSelected: Default View")
+            }
+        }
+        return super.onOptionsItemSelected(item)
 
     }
 

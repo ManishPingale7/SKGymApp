@@ -23,6 +23,7 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:menu="@menu/main_toolbar_menu"
             app:title="Your Reader"
             app:titleTextColor="@color/white">
 
