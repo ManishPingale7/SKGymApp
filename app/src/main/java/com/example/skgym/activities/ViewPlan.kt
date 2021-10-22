@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.ViewPlansAdapter
 import com.example.skgym.R
+import com.example.skgym.Room.viewmodels.PlansDbViewModel
 import com.example.skgym.data.Plan
 import com.example.skgym.databinding.ActivityViewPlanBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -19,10 +20,12 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
+import com.google.gson.Gson
 
 
 class ViewPlan : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
+    private lateinit var plansViewModel: PlansDbViewModel
     private lateinit var component: DaggerFactoryComponent
     lateinit var binding: ActivityViewPlanBinding
     private var viewPlansAdapter = ViewPlansAdapter()
@@ -85,6 +88,24 @@ class ViewPlan : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
+        plansViewModel = ViewModelProviders.of(this).get(PlansDbViewModel::class.java)
+
+        plansViewModel.readPlansHistory.observe(this) {
+            val gson = Gson()
+            Log.d(
+                "TAG",
+                "init: All the plans ${
+                    gson.fromJson(
+                        it[0].plan,
+                        Plan::class.java
+                    ).name
+                } \n ${gson.fromJson(it[0].plan, Plan::class.java)}"
+            )
+            Log.d(
+                "TAG",
+                "init: All the plans ${gson.fromJson(it[1].plan, Plan::class.java).name} \n $it"
+            )
+        }
 
     }
 
