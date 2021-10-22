@@ -8,9 +8,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.example.skgym.Interfaces.BranchInterface
-import com.example.skgym.Interfaces.DataAdded
-import com.example.skgym.Interfaces.IsMemberCallBack
+import com.example.skgym.Interfaces.*
 import com.example.skgym.Notification.MessageService
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
@@ -284,7 +282,6 @@ abstract class BaseRepository(private var contextBase: Context) {
             val endDate: Array<String> = findEndDate(totalDays)
             val calendar = Calendar.getInstance()
             calendar.set(endDate[2].toInt(), endDate[1].toInt() - 1, endDate[0].toInt())
-            val endingDate = calendar.time
 
             val userData = hashMapOf(
                 "endDate" to Date(),
@@ -317,5 +314,43 @@ abstract class BaseRepository(private var contextBase: Context) {
         c.time = Date()
         c.add(Calendar.DATE, totalDays)
         return sdf.format(c.time).toString().split("/").toTypedArray()
+    }
+
+    fun getUserCurrentPlan(branch: String, isMemberCallBack: PlanKeyCallback) {
+        var planKey = ""
+        Log.d(TAG, "getUserCurrentPlan: User Branch = $branch \n")
+        Log.d(TAG, "getUserCurrentPlan: User ID = $userId \n")
+
+        val usersRef = fDatabase.getReference(BRANCHES).child(branch).child(userId).child(
+            PLANKEY
+        )
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                isMemberCallBack.getCurrentPlanKey(snapshot.value.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
+            }
+
+        })
+
+
+    }
+
+    fun fetchPlan(planKey: String, param: PlanFinalCallback) {
+        val planRef = fDatabase.getReference(PLANS).child(planKey)
+
+        planRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val plan = snapshot.getValue(Plan::class.java)
+                param.getCurrentPlan(plan ?: Plan())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: ${error.message}")
+            }
+
+        })
     }
 }
