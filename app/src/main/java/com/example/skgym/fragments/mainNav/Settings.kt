@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.skgym.R
 import com.example.skgym.activities.OrdersActivity
+import com.example.skgym.activities.PlansHistory
 import com.example.skgym.auth.HomeAuth
 import com.example.skgym.databinding.FragmentSettingsBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
@@ -53,6 +53,10 @@ class Settings : Fragment() {
         val isDataTakenEdit = isDataTaken.edit()
         branch = userBranch.getString("userBranch", "").toString()
         binding.currentBranchSettings.text = branch
+
+        binding.viewPlansHis.setOnClickListener {
+            startActivity(Intent(requireContext(), PlansHistory::class.java))
+        }
 
 
         binding.ordersHistory.setOnClickListener {

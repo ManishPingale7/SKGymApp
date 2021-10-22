@@ -10,6 +10,8 @@
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_checkout.xml" value="0.3671875" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_order_history.xml" value="0.2546875" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_orders.xml" value="0.3671875" />
+        <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_plans_history.xml" value="0.2546875" />
+        <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_view_plan.xml" value="0.1" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/activity_view_products_in_category.xml" value="0.264" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/cartitem.xml" value="0.25076923076923074" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/cartitem_history.xml" value="0.2546875" />
@@ -17,6 +19,7 @@
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/fragment_products.xml" value="0.264" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/fragment_settings.xml" value="0.2546875" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/grid_item.xml" value="0.2546875" />
+        <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/planlistitemhis.xml" value="0.25076923076923074" />
         <entry key="..\:/Android Apps/SKGymApp/app/src/main/res/layout/productlistitem.xml" value="0.3671875" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/drawable/checkout_with_googlepay_button_content.xml" value="0.26666666666666666" />
         <entry key="..\:/Android Apps/SkGym/app/src/main/res/drawable/googlepay_button_background.xml" value="0.26666666666666666" />
@@ -46,7 +49,6 @@
         <entry key="app/src/main/res/drawable/ic_cart_icon.xml" value="0.2685" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_premium.xml" value="0.4197916666666667" />
-        <entry key="app/src/main/res/drawable/outline_history_24.xml" value="0.2685" />
         <entry key="app/src/main/res/drawable/outlineshoppingproductsicon_24.xml" value="0.2685" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.4036458333333333" />
@@ -56,7 +58,6 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29878048780487804" />
-        <entry key="app/src/main/res/layout/activity_plans_history.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_view_plan.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_view_products_in_category.xml" value="0.4036458333333333" />
@@ -76,12 +77,10 @@
         <entry key="app/src/main/res/layout/gymdata.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_bottom_sheet.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/planlistitem.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/planlistitemhis.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/productlistitem.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/progress_btn_layout.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bloodgroups.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/menu/main_toolbar_menu.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>
