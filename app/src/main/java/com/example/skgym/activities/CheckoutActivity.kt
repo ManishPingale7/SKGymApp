@@ -26,6 +26,7 @@ import com.google.gson.Gson
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -102,6 +103,7 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
         checkout.open(this, jsonObject)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onPaymentSuccess(str: String?) {
         Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show()
 
@@ -116,8 +118,8 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
                 userBranch.getString("userBranch", "").toString()
             )
             val gson = Gson()
-            val date = Date()
-            val plansDB = PlansDB(gson.toJson(demo), date.toString())
+            val plansDB =
+                PlansDB(gson.toJson(demo), SimpleDateFormat.getDateInstance().format(Date()))
             plansVM.insertPlanToHistory(plansDB)
         }
         plansVM.readPlansHistory.observe(this) {

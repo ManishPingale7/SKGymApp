@@ -20,7 +20,6 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
-import com.google.gson.Gson
 
 
 class ViewPlan : AppCompatActivity() {
@@ -89,23 +88,6 @@ class ViewPlan : AppCompatActivity() {
             .get(MainViewModel::class.java)
 
         plansViewModel = ViewModelProviders.of(this).get(PlansDbViewModel::class.java)
-
-        plansViewModel.readPlansHistory.observe(this) {
-            val gson = Gson()
-            Log.d(
-                "TAG",
-                "init: All the plans ${
-                    gson.fromJson(
-                        it[0].plan,
-                        Plan::class.java
-                    ).name
-                } \n ${gson.fromJson(it[0].plan, Plan::class.java)}"
-            )
-            Log.d(
-                "TAG",
-                "init: All the plans ${gson.fromJson(it[1].plan, Plan::class.java).name} \n $it"
-            )
-        }
 
     }
 
