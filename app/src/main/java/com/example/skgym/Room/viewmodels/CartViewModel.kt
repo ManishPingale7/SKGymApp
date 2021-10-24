@@ -30,8 +30,11 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
             repository.addProductToCart(product)
         }
 
-    fun changePaymentStatus(cart: Cart) =
+
+    fun pushOrdersToDb(cart: Cart) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setPaymentToTrue(cart)
+            repository.pushOrdersDb(cart)
         }
+    }
 }

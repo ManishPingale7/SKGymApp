@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 class AuthRepository(var context: Context) : BaseRepository(context) {
     private var mAuth = FirebaseAuth.getInstance()
 
-
     fun login(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             mAuth.signInWithEmailAndPassword(email, password)

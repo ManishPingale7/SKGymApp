@@ -32,8 +32,6 @@ class Products : Fragment() {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         init()
 
-
-
         binding.fabMain.setOnClickListener {
 
         }
@@ -51,7 +49,6 @@ class Products : Fragment() {
             startActivity(intent)
         }
 
-
         return binding.root
     }
 
@@ -62,8 +59,6 @@ class Products : Fragment() {
             .build() as DaggerFactoryComponent
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
-
     }
-
 
 }

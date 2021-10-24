@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
             R.id.homeHistory -> {
                 Log.d(TAG, "onOptionsItemSelected: Menu Clicked")
-                startActivity(Intent(this, OrdersActivity::class.java))
+                val intent = Intent(this, OrdersActivity::class.java)
+                startActivity(intent)
             }
             else -> {
                 Log.d(TAG, "onOptionsItemSelected: Default View")
@@ -123,22 +124,22 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
-    override fun onPaymentSuccess(p0: String?) {
+    override fun onPaymentSuccess(msg: String?) {
         Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show()
-        cartViewModel.readUnpaidData.observe(this) {
-            for (i in it) {
-                Log.d("TAG", "onPaymentSuccess: CHANGING TO TRUE: $i ")
-                val cart = i.copy(paymentDone = true)
-                cartViewModel.changePaymentStatus(cart)
-            }
-        }
+        pushDataToDb()
         startActivity(Intent(this, MainActivity::class.java))
-
-
     }
 
-    override fun onPaymentError(p0: Int, p1: String?) {
+    private fun pushDataToDb() {
+        cartViewModel.readUnpaidData.observe(this) {
+            for (i in it) {
+                cartViewModel.pushOrdersToDb(i.copy(paymentDone = true))
+            }
+        }
+    }
+
+    override fun onPaymentError(code: Int, msg: String?) {
         Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
-        Log.d("TAG", "onPaymentError: $p0 and $p1")
+        Log.d("TAG", "onPaymentError: $code and $msg")
     }
 }
