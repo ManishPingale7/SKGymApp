@@ -15,6 +15,7 @@ import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
 import com.example.skgym.databinding.FragmentCartBinding
+import com.example.skgym.utils.Constants
 import com.google.gson.Gson
 import com.razorpay.Checkout
 import org.json.JSONObject
@@ -50,7 +51,7 @@ class CartFrag : Fragment() {
 
     private fun initiatePayment() {
         checkout = Checkout()
-        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+        checkout.setKeyID(Constants.KEY_ID)
 
         val jsonObject = JSONObject()
         jsonObject.put("name", "Supplements")

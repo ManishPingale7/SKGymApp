@@ -22,6 +22,7 @@ import com.example.skgym.di.modules.FactoryModule
 import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
+import com.example.skgym.utils.Constants
 import com.google.gson.Gson
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
@@ -90,7 +91,7 @@ class CheckoutActivity : AppCompatActivity(), PaymentResultListener {
     private fun setPayment() {
         Log.d("TAG111", "setPayment: here")
         checkout = Checkout()
-        checkout.setKeyID("rzp_test_MbMaA0scjOVfmP")
+        checkout.setKeyID(Constants.KEY_ID)
 
         val jsonObject = JSONObject()
         jsonObject.put("name", "BK Gym Membership")
