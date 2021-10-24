@@ -13,14 +13,9 @@ import com.google.firebase.database.ValueEventListener
 
 class MainRepository(private var contextMain: Context) : BaseRepository(contextMain) {
 
-
-    var categories = MutableLiveData<ArrayList<ProductCategory>>()
-
-    val fDatabaseMain = FirebaseDatabase.getInstance()
-
-
-    private val categoryInfo = fDatabaseMain.getReference(Constants.CATEGORYINFO)
-
+    private var categories = MutableLiveData<ArrayList<ProductCategory>>()
+    private val mDatabase = FirebaseDatabase.getInstance()
+    private val categoryInfo = mDatabase.getReference(Constants.CATEGORYINFO)
 
 
     fun getCategoriesInfo(): MutableLiveData<ArrayList<ProductCategory>> {
@@ -42,5 +37,6 @@ class MainRepository(private var contextMain: Context) : BaseRepository(contextM
         })
         return categories
     }
+
 
 }

@@ -23,7 +23,7 @@ import com.example.skgym.mvvm.viewmodles.MainViewModel
 class OrdersActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var component: DaggerFactoryComponent
-    private lateinit var historyAdapter: ProductHistoryAdapter
+    private val historyAdapter = ProductHistoryAdapter(this@OrdersActivity)
     private lateinit var cartViewModel: CartViewModel
 
     lateinit var binding: ActivityOrdersBinding
@@ -33,13 +33,19 @@ class OrdersActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
 
+        binding.apply {
+            recyclerViewOrdersHis.apply {
+                adapter = historyAdapter
+                layoutManager = LinearLayoutManager(this@OrdersActivity)
+                setHasFixedSize(true)
+            }
+        }
+
         loadData()
 
         binding.goBackHistory.setOnClickListener {
             finish()
         }
-
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -47,6 +53,7 @@ class OrdersActivity : AppCompatActivity() {
         cartViewModel.readAllData.observe(this@OrdersActivity) {
             Log.d("TAG", "loadData123: $it")
             historyAdapter.submitList(it)
+            Log.d("TAG", "loadData: submitted the list")
             historyAdapter.notifyDataSetChanged()
         }
     }
@@ -63,17 +70,6 @@ class OrdersActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, component.getFactory())
             .get(MainViewModel::class.java)
 
-        cartViewModel = ViewModelProviders.of(this@OrdersActivity).get(CartViewModel::class.java)
-        historyAdapter = ProductHistoryAdapter(this@OrdersActivity)
-
-
-        binding.apply {
-            recyclerViewOrdersHis.apply {
-                adapter = historyAdapter
-                layoutManager = LinearLayoutManager(this@OrdersActivity)
-                setHasFixedSize(true)
-            }
-        }
-
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
     }
 }
