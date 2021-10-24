@@ -1,6 +1,7 @@
 package com.example.skgym.Adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -19,8 +20,8 @@ class ProductHistoryAdapter(val context: Context) :
 
     inner class CartViewHolder(val binding: CartitemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(cart: Cart) {
+            Log.d("TAG", "bind: Binding the dataa")
             binding.apply {
                 val product = gson.fromJson(cart.product, Product::class.java)
                 val text = "₹ ${product.price}"
@@ -38,6 +39,7 @@ class ProductHistoryAdapter(val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        Log.d("TAG", "onCreateViewHolder: OncreateViweHolder")
         return CartViewHolder(
             CartitemHistoryBinding.inflate(
                 LayoutInflater.from(parent.context),
