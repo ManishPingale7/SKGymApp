@@ -48,9 +48,9 @@ abstract class BaseRepository(private var contextBase: Context) {
     private val userId = mAuthBase.uid.toString()
 
 
-    private val isDataTaken: SharedPreferences =
+    val userPref: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
-    val dataEdit = isDataTaken.edit()
+    val dataEdit = userPref.edit()
     fun signOut() {
         mAuthBase.signOut()
     }

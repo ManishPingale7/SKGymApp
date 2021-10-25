@@ -30,6 +30,10 @@ class PlansHistory : AppCompatActivity() {
                 setHasFixedSize(true)
             }
         }
+
+        binding.goBackPlansHis.setOnClickListener {
+            finish()
+        }
         setupRecycler()
     }
 

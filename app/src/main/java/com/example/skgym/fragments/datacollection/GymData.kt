@@ -25,7 +25,6 @@ import com.example.skgym.di.modules.RepositoryModule
 import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.example.skgym.utils.ProgressBtn
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -51,19 +50,17 @@ class GymData : Fragment() {
     ): View {
         _binding = GymdataBinding.inflate(inflater, container, false)
         init()
-        val builder =
-            MaterialDatePicker.Builder.datePicker()
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setTitleText("Select date")
+
 
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
         val branch = userBranch.getString("userBranch", "").toString()
 
-        if (branch.isNotEmpty())
-        binding.branchData.setText(branch)
 
-        val picker = builder.build()
+
+        if (branch.isNotEmpty())
+            binding.branchData.setText(branch)
+
 
         val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
 

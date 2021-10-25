@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/plansLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:background="@drawable/bg1"
         android:orientation="vertical">
         <RelativeLayout
@@ -167,6 +167,7 @@
             android:id="@+id/boughtOn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:fontFamily="@font/montserratsemibold"
             android:text="Bought On"

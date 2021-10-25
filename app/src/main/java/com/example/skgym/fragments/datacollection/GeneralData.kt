@@ -1,5 +1,8 @@
 package com.example.skgym.fragments.datacollection
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -29,12 +32,18 @@ class GeneralData : Fragment() {
     var member = Member()
 
 
+    @SuppressLint("CommitPrefEdits")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneralDataBinding.inflate(inflater, container, false)
         init()
+        val userName: SharedPreferences =
+            requireActivity().getSharedPreferences("username", Context.MODE_PRIVATE)
+
+        val editor = userName.edit()
+
 
         binding.btnContinueGeneral1.setOnClickListener {
             val firstname = binding.firstNameGeneral.text.toString()
@@ -43,8 +52,10 @@ class GeneralData : Fragment() {
 
             if (firstname.isNotEmpty() && middleName.isNotEmpty() && lastname.isNotEmpty()) {
                 member.name = "$firstname $middleName $lastname"
-                    val action = GeneralDataDirections.actionGeneralDataToGymData(member)
-                    it.findNavController().navigate(action)
+                editor.putString("username", member.name)
+                editor.apply()
+                val action = GeneralDataDirections.actionGeneralDataToGymData(member)
+                it.findNavController().navigate(action)
             } else {
                 Toast.makeText(requireContext(), "Fill the Fields", Toast.LENGTH_SHORT).show()
             }

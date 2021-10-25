@@ -58,10 +58,12 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29878048780487804" />
+        <entry key="app/src/main/res/layout/activity_plans_history.xml" value="0.3974358974358974" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_view_plan.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_view_products_in_category.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/cartitem.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/cartitem_history.xml" value="0.3974358974358974" />
         <entry key="app/src/main/res/layout/democardview.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/democartitem.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/dialogspinner.xml" value="0.4036458333333333" />
@@ -77,6 +79,7 @@
         <entry key="app/src/main/res/layout/gymdata.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_bottom_sheet.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/planlistitem.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/planlistitemhis.xml" value="0.3974358974358974" />
         <entry key="app/src/main/res/layout/productlistitem.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/progress_btn_layout.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/bloodgroups.xml" value="0.4036458333333333" />

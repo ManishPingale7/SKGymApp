@@ -1,11 +1,11 @@
 package com.example.skgym.activities
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
@@ -65,26 +65,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-
-            R.id.homeHistory -> {
-                Log.d(TAG, "onOptionsItemSelected: Menu Clicked")
-                val intent = Intent(this, OrdersActivity::class.java)
-                startActivity(intent)
-            }
-            else -> {
-                Log.d(TAG, "onOptionsItemSelected: Default View")
-            }
-        }
-        return super.onOptionsItemSelected(item)
-
-    }
 
     private fun init() {
         val window: Window = this.window
@@ -131,6 +112,10 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     }
 
     private fun pushDataToDb() {
+        val userName: SharedPreferences =
+            getSharedPreferences("username", Context.MODE_PRIVATE)
+        val name = userName.getString("username", "").toString()
+        Log.d(TAG, "pushDataToDb: $name")
         cartViewModel.readUnpaidData.observe(this) {
             for (i in it) {
                 cartViewModel.pushOrdersToDb(i.copy(paymentDone = true))

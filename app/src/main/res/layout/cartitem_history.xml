@@ -91,6 +91,18 @@
                     android:textColor="@color/black"
                      />
 
+                <TextView
+                    android:id="@+id/productBoughtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:gravity="start"
+                    android:text="@string/bought_date"
+                    android:textColor="@color/black"
+                    />
+
 
             </LinearLayout>
 

@@ -32,6 +32,8 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun pushOrdersToDb(cart: Cart) {
+
+
         viewModelScope.launch(Dispatchers.IO) {
             repository.setPaymentToTrue(cart)
             repository.pushOrdersDb(cart)

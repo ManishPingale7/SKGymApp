@@ -46,6 +46,7 @@ class GetBranch : AppCompatActivity() {
 
 
 
+
         viewModel.fetchBranchNames(object : BranchInterface {
             override fun getBranch(value: ArrayList<String>) {
                 binding.progressBarBranch.visibility = View.GONE
