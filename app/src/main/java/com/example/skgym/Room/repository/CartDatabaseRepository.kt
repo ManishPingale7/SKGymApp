@@ -27,4 +27,10 @@ class CartDatabaseRepository(private val cartDao: CartDao, var context: Context)
                 "Customer" to prefs.getString("Name", "Null")
             )
         )
+
+    fun decreaseQuantityOfProduct(cart: Cart) =
+        cartDao.updateProduct(cart.copy(quantity = cart.quantity - 1))
+
+    fun increaseQuantityOfProduct(cart: Cart) =
+        cartDao.updateProduct(cart.copy(quantity = cart.quantity + 1))
 }

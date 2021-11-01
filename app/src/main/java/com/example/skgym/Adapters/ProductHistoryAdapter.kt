@@ -28,6 +28,7 @@ class ProductHistoryAdapter(val context: Context) :
                 productNameCard.text = product.name
                 productPrice.text = text
                 productQuantity.text = cart.quantity.toString()
+                productBoughtDate.text = cart.purchasedAt
                 Glide.with(context)
                     .load(product.productImage)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

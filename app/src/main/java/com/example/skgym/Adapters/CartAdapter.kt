@@ -16,6 +16,17 @@ import com.google.gson.Gson
 class CartAdapter(val context: Context) :
     ListAdapter<Cart, CartAdapter.CartViewHolder>(DiffCallBack()) {
     private val gson = Gson()
+    private lateinit var mListener: onItemClickedListener
+
+    interface onItemClickedListener {
+        fun onMinusItemClicked(cart: Cart)
+
+        fun onPlusItemClicked(cart: Cart)
+    }
+
+    fun setOnClickListener(onItemClickedListener: onItemClickedListener) {
+        mListener = onItemClickedListener
+    }
 
     inner class CartViewHolder(val binding: CartitemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,6 +43,18 @@ class CartAdapter(val context: Context) :
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .fitCenter()
                     .into(productImage)
+
+                bottomMinusButton.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        mListener.onMinusItemClicked(getItem(adapterPosition))
+                    }
+                }
+
+                bottomPlusBtn.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        mListener.onPlusItemClicked(getItem(adapterPosition))
+                    }
+                }
             }
         }
 
