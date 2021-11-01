@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.skgym.Interfaces.*
 import com.example.skgym.Notification.MessageService
+import com.example.skgym.Notification.MessageService.Companion.token
 import com.example.skgym.activities.GetBranch
 import com.example.skgym.activities.GetUserData
 import com.example.skgym.activities.MainActivity
@@ -270,13 +271,13 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun pushEndDate(context: Context, totalDays: Int, branch: String) {
-        var token: String? = " "
         MessageService.sharedPrefs = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (!it.isSuccessful) {
                 Log.d(TAG, "pushEndDate: FAILED", it.exception)
                 return@addOnCompleteListener
             }
+            //MessageService Token
             token = it.result
 
             val endDate: Array<String> = findEndDate(totalDays)
@@ -285,7 +286,7 @@ abstract class BaseRepository(private var contextBase: Context) {
 
             val userData = hashMapOf(
                 "endDate" to calendar.time,
-                "mToken" to token.toString(),
+                "mToken" to token,
             )
             mFirestore.collection("Users")
                 .document(mAuthBase.currentUser!!.uid).set(userData)
