@@ -3,6 +3,7 @@ package com.example.skgym.Adapters
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -23,6 +24,8 @@ class ProductHistoryAdapter(val context: Context) :
         fun bind(cart: Cart) {
             Log.d("TAG", "bind: Binding the dataa")
             binding.apply {
+                if (adapterPosition == 0)
+                    topStrip.visibility = View.VISIBLE
                 val product = gson.fromJson(cart.product, Product::class.java)
                 val text = "₹ ${product.price}"
                 productNameCard.text = product.name

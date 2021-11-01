@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
     <View
+        android:id="@+id/topStrip"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey" />
+        android:background="@color/grey"
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/progressBarProduct"
@@ -47,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="invisible">
+                android:visibility="invisible"
+                tools:ignore="UselessParent">
 
                 <TextView
                     android:id="@+id/productName_card"

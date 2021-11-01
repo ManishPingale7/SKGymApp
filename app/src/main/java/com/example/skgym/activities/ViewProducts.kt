@@ -158,10 +158,11 @@ class ViewProducts : AppCompatActivity() {
 
                 bottomSheetView.findViewById<Button>(R.id.AddToCart).setOnClickListener {
                     val list = ArrayList<String>()
-                    val mainList=product.flavours
+                    val mainList = product.flavours
                     list.add(flavourEdit.text.toString())
                     product.flavours = list
-                    Toast.makeText(this@ViewProducts, "$product", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ViewProducts, "Product Added to Cart", Toast.LENGTH_SHORT)
+                        .show()
                     Log.d(TAG, "onItemClicked: $product")
                     insertProductIntoCart(
                         Cart(
@@ -169,7 +170,7 @@ class ViewProducts : AppCompatActivity() {
                             textQuantity.text.toString().toInt()
                         )
                     )
-                    product.flavours=mainList
+                    product.flavours = mainList
                     bottomSheetDialog.dismiss()
                 }
             }

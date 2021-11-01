@@ -44,6 +44,8 @@ class ProductsAdapter :
             Log.d("TAG", "bind: BINDING THIS -$product")
             val text = "₹ ${product.price}"
             binding.apply {
+                if (adapterPosition == 0)
+                    topStrip.visibility = View.VISIBLE
                 productNameCard.text = product.name
                 productPrice.text = text
                 Glide.with(context)

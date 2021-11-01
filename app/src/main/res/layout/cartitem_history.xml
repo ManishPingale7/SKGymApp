@@ -1,13 +1,14 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
+        android:id="@+id/topStrip"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey" />
+        android:background="@color/grey"
+        android:visibility="invisible" />
 
 
     <LinearLayout
@@ -19,8 +20,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="250dp"
-            android:layout_weight="40"
-            >
+            android:layout_weight="40">
+
             <ImageView
                 android:id="@+id/productImage"
                 android:layout_width="match_parent"
@@ -30,8 +31,6 @@
 
 
         </LinearLayout>
-
-
 
 
         <RelativeLayout
@@ -88,8 +87,7 @@
                     android:fontFamily="@font/montserratsemibold"
                     android:gravity="start"
                     android:text="@string/products_quantity"
-                    android:textColor="@color/black"
-                     />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/productBoughtDate"
@@ -100,8 +98,7 @@
                     android:fontFamily="@font/montserratsemibold"
                     android:gravity="start"
                     android:text="@string/bought_date"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
 
             </LinearLayout>
