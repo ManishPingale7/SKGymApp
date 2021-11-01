@@ -58,11 +58,9 @@ class Settings : Fragment() {
             startActivity(Intent(requireContext(), PlansHistory::class.java))
         }
 
-
         binding.ordersHistory.setOnClickListener {
             startActivity(Intent(requireContext(), OrdersActivity::class.java))
         }
-
 
         binding.SignOutSettings.setOnClickListener {
             branchTakenEdit.putBoolean("isBranchTaken", false)
@@ -86,7 +84,6 @@ class Settings : Fragment() {
         }
 
         binding.currentPlanSettings.setOnClickListener {
-
 
 
         }
