@@ -29,6 +29,7 @@ import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.razorpay.PaymentResultListener
+import java.text.DateFormat
 
 
 class MainActivity : AppCompatActivity(), PaymentResultListener {
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         binding.bottomNavigation.setupWithNavController(navController)
 
     }
-
 
 
     private fun init() {
@@ -118,7 +118,13 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         Log.d(TAG, "pushDataToDb: $name")
         cartViewModel.readUnpaidData.observe(this) {
             for (i in it) {
-                cartViewModel.pushOrdersToDb(i.copy(paymentDone = true))
+                cartViewModel.pushOrdersToDb(
+                    i.copy(
+                        paymentDone = true,
+                        purchasedAt = DateFormat.getDateInstance()
+                            .format(System.currentTimeMillis()),
+                    )
+                )
             }
         }
     }
