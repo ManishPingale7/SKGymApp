@@ -25,7 +25,6 @@ class ProductsAdapter :
 
     private lateinit var context: Context
 
-
     interface onItemClickedListener {
         fun onItemClicked(product: Product)
     }

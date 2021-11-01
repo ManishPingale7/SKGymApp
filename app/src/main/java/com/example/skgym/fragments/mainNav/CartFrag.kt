@@ -103,5 +103,16 @@ class CartFrag : Fragment() {
                 setHasFixedSize(true)
             }
         }
+
+        cartAdapter.setOnClickListener(object : CartAdapter.onItemClickedListener {
+            override fun onMinusItemClicked(cart: Cart) {
+                if (cart.quantity != 1)
+                    viewModel.decreaseQuantity(cart)
+            }
+
+            override fun onPlusItemClicked(cart: Cart) {
+                viewModel.increaseQuantity(cart)
+            }
+        })
     }
 }

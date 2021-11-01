@@ -37,4 +37,14 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
             repository.pushOrdersDb(cart)
         }
     }
+
+    fun decreaseQuantity(cart: Cart) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.decreaseQuantityOfProduct(cart)
+        }
+
+    fun increaseQuantity(cart: Cart) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.increaseQuantityOfProduct(cart)
+        }
 }
