@@ -33,4 +33,6 @@ class CartDatabaseRepository(private val cartDao: CartDao, var context: Context)
 
     fun increaseQuantityOfProduct(cart: Cart) =
         cartDao.updateProduct(cart.copy(quantity = cart.quantity + 1))
+
+    fun deleteProduct(cart: Cart) = cartDao.deleteProduct(cart)
 }

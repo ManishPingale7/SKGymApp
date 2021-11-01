@@ -52,7 +52,7 @@ class GeneralData : Fragment() {
 
             if (firstname.isNotEmpty() && middleName.isNotEmpty() && lastname.isNotEmpty()) {
                 member.name = "$firstname $middleName $lastname"
-                editor.putString("Name", "$firstname  $lastname")
+                editor.putString("Name", "$firstname $lastname")
                 editor.apply()
                 val action = GeneralDataDirections.actionGeneralDataToGymData(member)
                 it.findNavController().navigate(action)

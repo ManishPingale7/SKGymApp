@@ -64,15 +64,18 @@ class CartFrag : Fragment() {
 //        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun loadData() {
         viewModel.readUnpaidData.observe(requireActivity()) {
             if (it.isEmpty()) {
-                binding.emptyCartLay.visibility = View.VISIBLE
-                binding.recyclerViewCartItems.visibility = View.GONE
+                binding.apply {
+                    cartPrice.text = "Rs 0"
+                    emptyCartLay.visibility = View.VISIBLE
+                    recyclerViewCartItems.visibility = View.GONE
+                }
             } else {
                 Log.d(TAG, "loadData:Room Data $it")
-                binding.cartPrice.text = calculateTotalPrice(it)
+                binding.cartPrice.text = "Rs ${calculateTotalPrice(it)}"
                 cartAdapter.submitList(it)
                 cartAdapter.notifyDataSetChanged()
             }
@@ -108,6 +111,8 @@ class CartFrag : Fragment() {
             override fun onMinusItemClicked(cart: Cart) {
                 if (cart.quantity != 1)
                     viewModel.decreaseQuantity(cart)
+                else
+                    viewModel.deleteProduct(cart)
             }
 
             override fun onPlusItemClicked(cart: Cart) {

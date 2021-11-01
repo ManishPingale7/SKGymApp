@@ -47,4 +47,9 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.increaseQuantityOfProduct(cart)
         }
+
+    fun deleteProduct(cart: Cart) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteProduct(cart)
+        }
 }
