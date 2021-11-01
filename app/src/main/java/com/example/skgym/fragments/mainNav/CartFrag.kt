@@ -1,6 +1,8 @@
 package com.example.skgym.fragments.mainNav
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.skgym.Adapters.CartAdapter
+import com.example.skgym.Interfaces.GetNameCallback
 import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.data.Cart
 import com.example.skgym.data.Product
@@ -92,9 +95,21 @@ class CartFrag : Fragment() {
     }
 
     private fun init() {
+        val prefs = requireContext().getSharedPreferences("Prefs", MODE_PRIVATE)
+        val userBranch: SharedPreferences =
+            requireActivity().getSharedPreferences("userBranch", MODE_PRIVATE)
+
         //ViewModel stuff
         viewModel =
             ViewModelProviders.of(requireActivity()).get(CartViewModel::class.java)
+
+        //getting userName
+        viewModel.getUserName(userBranch.getString("userBranch", "Null").toString(),
+            object : GetNameCallback {
+                override fun getName(name: String) {
+                    prefs.edit().putString("Name", name).apply()
+                }
+            })
 
         //RecyclerView stuff
         cartAdapter = CartAdapter(requireActivity())

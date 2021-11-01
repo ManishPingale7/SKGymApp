@@ -50,13 +50,12 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun addEndDate(context: Context, totalDays: Int, branch: String) =
         repository.pushEndDate(context, totalDays, branch)
 
-    fun getUserCurrentPlan(branch: String,isMemberCallBack: PlanKeyCallback) {
-        repository.getUserCurrentPlan(branch,isMemberCallBack)
+    fun getUserCurrentPlan(branch: String, isMemberCallBack: PlanKeyCallback) {
+        repository.getUserCurrentPlan(branch, isMemberCallBack)
     }
 
     fun fetchPlan(planKey: String, param: PlanFinalCallback) {
-        repository.fetchPlan(planKey,param)
+        repository.fetchPlan(planKey, param)
     }
-
 
 }

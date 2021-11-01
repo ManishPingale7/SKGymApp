@@ -14,7 +14,6 @@ class CartDatabaseRepository(private val cartDao: CartDao, var context: Context)
     private val ref = fDatabase.reference.child("Orders")
     private val prefs = context.getSharedPreferences("Prefs", MODE_PRIVATE)
 
-
     suspend fun addProductToCart(product: Cart) = cartDao.insertProduct(product)
 
     fun setPaymentToTrue(cart: Cart) = cartDao.updateProduct(cart)

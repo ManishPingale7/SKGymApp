@@ -117,6 +117,8 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         val name = userName.getString("username", "").toString()
         Log.d(TAG, "pushDataToDb: $name")
         cartViewModel.readUnpaidData.observe(this) {
+            val userBranch: SharedPreferences =
+                getSharedPreferences("userBranch", Context.MODE_PRIVATE)
             for (i in it) {
                 cartViewModel.pushOrdersToDb(
                     i.copy(

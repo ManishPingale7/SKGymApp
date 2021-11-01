@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.skgym.Interfaces.GetNameCallback
 import com.example.skgym.Room.Database.CartDatabase
 import com.example.skgym.Room.repository.CartDatabaseRepository
 import com.example.skgym.data.Cart
@@ -52,4 +53,7 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteProduct(cart)
         }
+
+    fun getUserName(branch: String, callback: GetNameCallback) =
+        repository.getUserName(branch, callback)
 }

@@ -45,7 +45,7 @@ abstract class BaseRepository(private var contextBase: Context) {
     val branchesList = MutableLiveData<ArrayList<String>>()
     private val plansRef = fDatabase.getReference(PLANS)
     var result = ""
-    private var mAuthBase = FirebaseAuth.getInstance()
+    var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
 
@@ -350,5 +350,20 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
 
         })
+    }
+
+    fun getUserName(branch: String, callback: GetNameCallback) {
+        fDatabase.reference.child("$BRANCHES/$branch/${mAuthBase.currentUser!!.uid}/name")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value.toString().isNotEmpty())
+                        callback.getName(snapshot.value.toString())
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d(TAG, "onCancelled: Error! ${error.message}")
+                    //TODO:WHAT TO DO IF ERROR OCCURRED
+                }
+            })
     }
 }

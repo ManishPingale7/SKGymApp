@@ -51,22 +51,16 @@ class GymData : Fragment() {
         _binding = GymdataBinding.inflate(inflater, container, false)
         init()
 
-
         val userBranch: SharedPreferences =
             requireActivity().getSharedPreferences("userBranch", Context.MODE_PRIVATE)
         val branch = userBranch.getString("userBranch", "").toString()
 
-
-
         if (branch.isNotEmpty())
             binding.branchData.setText(branch)
-
 
         val view = binding.root.findViewById<View>(R.id.btn_continue_datastage2)
 
         progressBtn = ProgressBtn(requireContext(), view)
-
-
 
         viewModel.fetchBranchNames(object : BranchInterface {
             override fun getBranch(value: ArrayList<String>) {
@@ -78,18 +72,12 @@ class GymData : Fragment() {
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.dropdownitem,
                 it.toArray()
-
             )
             branches = it
             Log.d(TAG, "onCreateView: Size ${branches.size}")
             arrayAdapter.notifyDataSetChanged()
             binding.branchData.setAdapter(arrayAdapter)
         }
-
-
-
-
-
 
         when (binding.radioGroupGender.checkedRadioButtonId) {
             R.id.radio_button_male -> {
@@ -116,10 +104,6 @@ class GymData : Fragment() {
             }
             Log.d(TAG, "onCreateView: Gender $gender")
         }
-
-
-
-
         view.setOnClickListener {
 
             val branch = binding.branchData.text.toString()
@@ -135,20 +119,20 @@ class GymData : Fragment() {
                             requireActivity().finish()
                         }
                     }
-                    })
-                    Toast.makeText(
-                        requireContext(),
-                        "Please Wait while uploading your data",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Enter a Valid Branch $branch",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
+                })
+                Toast.makeText(
+                    requireContext(),
+                    "Please Wait while uploading your data",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Enter a Valid Branch $branch",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
 
 
         }
