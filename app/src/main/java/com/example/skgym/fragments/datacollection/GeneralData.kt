@@ -1,7 +1,7 @@
 package com.example.skgym.fragments.datacollection
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
@@ -40,7 +40,7 @@ class GeneralData : Fragment() {
         _binding = FragmentGeneralDataBinding.inflate(inflater, container, false)
         init()
         val userName: SharedPreferences =
-            requireActivity().getSharedPreferences("username", Context.MODE_PRIVATE)
+            requireActivity().getSharedPreferences("Prefs", MODE_PRIVATE)
 
         val editor = userName.edit()
 
@@ -52,7 +52,7 @@ class GeneralData : Fragment() {
 
             if (firstname.isNotEmpty() && middleName.isNotEmpty() && lastname.isNotEmpty()) {
                 member.name = "$firstname $middleName $lastname"
-                editor.putString("username", member.name)
+                editor.putString("Name", "$firstname  $lastname")
                 editor.apply()
                 val action = GeneralDataDirections.actionGeneralDataToGymData(member)
                 it.findNavController().navigate(action)

@@ -52,6 +52,7 @@ abstract class BaseRepository(private var contextBase: Context) {
     val userPref: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
     val dataEdit = userPref.edit()
+
     fun signOut() {
         mAuthBase.signOut()
     }
@@ -106,7 +107,6 @@ abstract class BaseRepository(private var contextBase: Context) {
         return plans
     }
 
-
     fun checkUserIsMember(branch: String, callback: IsMemberCallBack): String {
         val fDatabase = FirebaseDatabase.getInstance()
         val memberRef = fDatabase.getReference(BRANCHES)
@@ -142,7 +142,6 @@ abstract class BaseRepository(private var contextBase: Context) {
         return result
     }
 
-
     fun sendUserToViewPlanActivity() {
         Intent(contextBase, ViewPlan::class.java).also {
             contextBase.startActivity(it)
@@ -154,7 +153,6 @@ abstract class BaseRepository(private var contextBase: Context) {
             contextBase.startActivity(it)
         }
     }
-
 
     fun uploadUserdata(memberThis: Member, dataAdded: DataAdded) {
         fDatabase.reference.child(BRANCHES).child(memberThis.branch).child(userId)
@@ -172,7 +170,6 @@ abstract class BaseRepository(private var contextBase: Context) {
 
             }
     }
-
 
     fun doesUserAndBranchExists(branch: String) {
         if (mAuthBase.currentUser != null) {

@@ -46,6 +46,7 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
 
     fun addPlanToData(demo: Plan?, branch: String) = repository.addPlanToUser(demo, branch)
+
     fun addEndDate(context: Context, totalDays: Int, branch: String) =
         repository.pushEndDate(context, totalDays, branch)
 
