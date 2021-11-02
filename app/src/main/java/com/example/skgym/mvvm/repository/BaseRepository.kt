@@ -336,10 +336,9 @@ abstract class BaseRepository(private var contextBase: Context) {
     }
 
     fun fetchPlan(planKey: String): MutableLiveData<Plan> {
-        val currentPlanPref: SharedPreferences =
-            contextBase.getSharedPreferences("currentPlan", Context.MODE_PRIVATE)
+
         val plan = MutableLiveData<Plan>()
-        val planEdit = currentPlanPref.edit()
+
         val planRef = fDatabase.getReference(PLANS).child(planKey)
 
         planRef.addListenerForSingleValueEvent(object : ValueEventListener {

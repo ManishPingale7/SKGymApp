@@ -1,6 +1,7 @@
 package com.example.skgym.fragments.mainNav
 
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
@@ -51,6 +52,7 @@ class Home : Fragment() {
         isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
 
 
+
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
@@ -99,6 +101,9 @@ class Home : Fragment() {
     }
 
     private fun setUpPlanCard() {
+        val currentPlanPref: SharedPreferences =
+            requireActivity().getSharedPreferences("currentPlan", Context.MODE_PRIVATE)
+        val planEdit = currentPlanPref.edit()
         viewModel.getUserCurrentPlan(branch, object : PlanKeyCallback {
             override fun getCurrentPlanKey(planKey: String) {
                 binding.nomemberLayout.visibility = View.GONE
@@ -107,6 +112,14 @@ class Home : Fragment() {
                 Log.d(TAG, "getCurrentPlanKey: Plan Key = $planKey")
                 viewModel.fetchPlan(planKey).observe(this@Home) {
                     val plan = it
+                    planEdit.putString("PlanName", plan.name)
+                    planEdit.putString("PlanDesc", plan.desc)
+                    planEdit.putString("PlanFees", plan.fees)
+                    planEdit.putString("PlanKey", plan.key)
+                    planEdit.putString("PlanTimeNumber", plan.timeNumber)
+                    planEdit.putBoolean("PlanPT", plan.pt?:false)
+                    planEdit.putInt("PlanTotalDays", plan.totalDays)
+                    planEdit.apply()
                     Log.d(TAG, "getCurrentPlan: $plan")
                     binding.cardPlanNameHome.text = plan.name
                     binding.cardDurationHome.text = plan.timeNumber
@@ -116,7 +129,6 @@ class Home : Fragment() {
                     if (plan.pt == true) {
                         text = "PT"
                         result = View.VISIBLE
-
                     } else {
                         text = "Normal"
                         result = View.INVISIBLE

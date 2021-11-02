@@ -132,4 +132,6 @@
     <string name="products_available_at_bk_gym">Products available at Bk Gym</string>
     <string name="view_products">View Products</string>
     <string name="bought_date">Bought Date</string>
+    <string name="okay">Okay</string>
+    <string name="cancel">Cancel</string>
 </resources>
