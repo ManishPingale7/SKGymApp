@@ -7,6 +7,7 @@
     tools:context=".fragments.mainNav.CartFrag">
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/montserratsemibold"
             android:layout_marginTop="20dp"
             android:text="@string/subtotal"
             android:textColor="@color/black"
@@ -29,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserratsemibold"
             android:layout_toEndOf="@id/subtotaltext"
             android:contentDescription="@string/todo"
             android:text="@string/_0"
@@ -45,7 +48,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/btn_circular"
+            android:background="@drawable/background_btn_green"
             android:text="@string/proceed_to_buy"
             android:textAllCaps="false"
             android:textColor="@color/white" />
@@ -58,6 +61,7 @@
         android:layout_margin="10dp"
         android:visibility="visible" />
 
+    <!--  Empty Cart Lay-->
     <LinearLayout
         android:id="@+id/emptyCartLay"
         android:layout_width="match_parent"
@@ -99,5 +103,7 @@
             android:textColor="@color/grey" />
 
     </LinearLayout>
+
+
 </LinearLayout>
 
