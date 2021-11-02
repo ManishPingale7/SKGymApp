@@ -2,7 +2,6 @@ package com.example.skgym.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -34,9 +33,8 @@ class CartAdapter(val context: Context) :
 
         fun bind(cart: Cart) {
             binding.apply {
-                if (adapterPosition == 0)
-                    topStrip.visibility = View.VISIBLE
-                val product = gson.fromJson(cart.product, Product::class.java)
+
+            val product = gson.fromJson(cart.product, Product::class.java)
                 val text = "₹ ${product.price}"
                 productNameCard.text = product.name
                 productPrice.text = text
