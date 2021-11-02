@@ -12,11 +12,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.skgym.Interfaces.IsMemberCallBack
-import com.example.skgym.Interfaces.PlanFinalCallback
 import com.example.skgym.Interfaces.PlanKeyCallback
 import com.example.skgym.R
 import com.example.skgym.activities.GetBranch
-import com.example.skgym.data.Plan
 import com.example.skgym.databinding.FragmentHomeBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -101,33 +99,31 @@ class Home : Fragment() {
     }
 
     private fun setUpPlanCard() {
-
         viewModel.getUserCurrentPlan(branch, object : PlanKeyCallback {
             override fun getCurrentPlanKey(planKey: String) {
                 binding.nomemberLayout.visibility = View.GONE
                 binding.progressbarHome.visibility = View.GONE
                 binding.memberLayout.visibility = View.VISIBLE
                 Log.d(TAG, "getCurrentPlanKey: Plan Key = $planKey")
-                viewModel.fetchPlan(planKey, object : PlanFinalCallback {
-                    override fun getCurrentPlan(plan: Plan) {
-                        Log.d(TAG, "getCurrentPlan: $plan")
-                        binding.cardPlanNameHome.text = plan.name
-                        binding.cardDurationHome.text = plan.timeNumber
-                        binding.cardFeesHome.text = plan.fees
-                        val result: Int
-                        val text: String
-                        if (plan.pt == true) {
-                            text = "PT"
-                            result = View.VISIBLE
+                viewModel.fetchPlan(planKey).observe(this@Home) {
+                    val plan = it
+                    Log.d(TAG, "getCurrentPlan: $plan")
+                    binding.cardPlanNameHome.text = plan.name
+                    binding.cardDurationHome.text = plan.timeNumber
+                    binding.cardFeesHome.text = plan.fees
+                    val result: Int
+                    val text: String
+                    if (plan.pt == true) {
+                        text = "PT"
+                        result = View.VISIBLE
 
-                        } else {
-                            text = "Normal"
-                            result = View.INVISIBLE
-                        }
-                        binding.isPersonalHome.text = text
-                        binding.badgeGold.visibility = result
+                    } else {
+                        text = "Normal"
+                        result = View.INVISIBLE
                     }
-                })
+                    binding.isPersonalHome.text = text
+                    binding.badgeGold.visibility = result
+                }
             }
         })
     }

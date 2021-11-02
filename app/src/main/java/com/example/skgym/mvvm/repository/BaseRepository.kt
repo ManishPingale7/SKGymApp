@@ -314,8 +314,7 @@ abstract class BaseRepository(private var contextBase: Context) {
         return sdf.format(c.time).toString().split("/").toTypedArray()
     }
 
-    fun getUserCurrentPlan(branch: String, isMemberCallBack: PlanKeyCallback) {
-        var planKey = ""
+    fun getUserCurrentPlanKey(branch: String, isMemberCallBack: PlanKeyCallback) {
         Log.d(TAG, "getUserCurrentPlan: User Branch = $branch \n")
         Log.d(TAG, "getUserCurrentPlan: User ID = $userId \n")
 
@@ -336,13 +335,16 @@ abstract class BaseRepository(private var contextBase: Context) {
 
     }
 
-    fun fetchPlan(planKey: String, param: PlanFinalCallback) {
+    fun fetchPlan(planKey: String): MutableLiveData<Plan> {
+        val currentPlanPref: SharedPreferences =
+            contextBase.getSharedPreferences("currentPlan", Context.MODE_PRIVATE)
+        val plan = MutableLiveData<Plan>()
+        val planEdit = currentPlanPref.edit()
         val planRef = fDatabase.getReference(PLANS).child(planKey)
 
         planRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val plan = snapshot.getValue(Plan::class.java)
-                param.getCurrentPlan(plan ?: Plan())
+                plan.value = snapshot.getValue(Plan::class.java)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -350,6 +352,7 @@ abstract class BaseRepository(private var contextBase: Context) {
             }
 
         })
+        return plan
     }
 
     fun getUserName(branch: String, callback: GetNameCallback) {

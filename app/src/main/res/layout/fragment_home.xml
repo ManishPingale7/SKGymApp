@@ -53,7 +53,7 @@
     <!--Progress Bar Lay-->
     <RelativeLayout
         android:id="@+id/progressbarHome"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <!--Plan Card-->
         <com.google.android.material.card.MaterialCardView
