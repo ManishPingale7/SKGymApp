@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.skgym.Room.Dao.CartDao
 import com.example.skgym.data.Cart
 import com.example.skgym.mvvm.repository.BaseRepository
+import com.example.skgym.utils.OrderStatus
 
 class CartDatabaseRepository(private val cartDao: CartDao, var context: Context) :
     BaseRepository(context) {
@@ -19,13 +20,15 @@ class CartDatabaseRepository(private val cartDao: CartDao, var context: Context)
     fun setPaymentToTrue(cart: Cart) = cartDao.updateProduct(cart)
 
     fun pushOrdersDb(cart: Cart) =
-        ref.push().setValue(
-            hashMapOf(
-                "Product" to cart.product,
-                "Quantity" to cart.quantity,
-                "Customer" to prefs.getString("Name", "Null")
+        mFirestore.collection("Orders")
+            .add(
+                hashMapOf(
+                    "Product" to cart.product,
+                    "Quantity" to cart.quantity,
+                    "Customer" to prefs.getString("Name", "Null"),
+                    "Status" to OrderStatus.PENDING
+                )
             )
-        )
 
     fun decreaseQuantityOfProduct(cart: Cart) =
         cartDao.updateProduct(cart.copy(quantity = cart.quantity - 1))
