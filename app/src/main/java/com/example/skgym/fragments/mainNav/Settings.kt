@@ -69,10 +69,11 @@ class Settings : Fragment() {
             )
         )
         dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        dialog.setCancelable(false); //Optional
+        )
+
+        dialog.setCancelable(true)
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         val okay: Button = dialog.findViewById(R.id.btn_okay)
         val cancel: Button = dialog.findViewById(R.id.btn_cancel)
