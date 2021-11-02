@@ -242,22 +242,17 @@ abstract class BaseRepository(private var contextBase: Context) {
         val products: MutableLiveData<ArrayList<Product>> =
             MutableLiveData<ArrayList<Product>>()
         val tempList = ArrayList<Product>(50)
-
         val ref = fDatabase.reference.child(PRODUCTS).child(name)
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                products.value?.clear()
-                Log.d(TAG, "onDataChange: $snapshot")
-                snapshot.children.forEach {
-                    tempList.add(it.getValue(Product::class.java)!!)
-                }
-                products.value = tempList
+        ref.get().addOnSuccessListener {
+            products.value?.clear()
+            Log.d(TAG, "onDataChange: $it")
+            it.children.forEach {
+                tempList.add(it.getValue(Product::class.java)!!)
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "onCancelled: ${error.message}")
-            }
-        })
+            products.value = tempList
+        }.addOnFailureListener {
+            Log.d(TAG, "onCancelled: ${it.message}")
+        }
         return products
     }
 
@@ -321,28 +316,22 @@ abstract class BaseRepository(private var contextBase: Context) {
         val usersRef = fDatabase.getReference(BRANCHES).child(branch).child(userId).child(
             PLANKEY
         )
-        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                isMemberCallBack.getCurrentPlanKey(snapshot.value.toString())
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "onCancelled: ${error.message}")
-            }
-
-        })
+        usersRef.get().addOnSuccessListener {
+            isMemberCallBack.getCurrentPlanKey(it.value.toString())
+            Log.d(TAG, "getUserCurrentPlanKey: ${it.value}")
+        }.addOnFailureListener {
+            Log.d(TAG, "onCancelled: ${it.message}")
+        }
 
 
     }
 
     fun fetchPlan(planKey: String): MutableLiveData<Plan> {
-
         val plan = MutableLiveData<Plan>()
-
         val planRef = fDatabase.getReference(PLANS).child(planKey)
-
-        planRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        planRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d(TAG, "onDataChangePlan: Data Read")
                 plan.value = snapshot.getValue(Plan::class.java)
             }
 
