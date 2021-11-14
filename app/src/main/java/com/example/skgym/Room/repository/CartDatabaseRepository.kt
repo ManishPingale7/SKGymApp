@@ -2,6 +2,8 @@ package com.example.skgym.Room.repository
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.skgym.Room.Dao.CartDao
 import com.example.skgym.data.Cart
@@ -28,7 +30,16 @@ class CartDatabaseRepository(private val cartDao: CartDao, var context: Context)
                     "Customer" to prefs.getString("Name", "Null"),
                     "Status" to OrderStatus.PENDING
                 )
-            )
+            ).addOnSuccessListener {
+                Log.d("TAG", "pushOrdersDb: Data pushed successfully!")
+                Toast.makeText(context, "Data Pushed", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                Log.d(
+                    "TAG",
+                    "pushOrdersDb: Data cannot be pushed!: " + it.cause + " \n " + it.message
+                )
+                TODO("HANDLE THIS FAILED SITUATION")
+            }
 
     fun decreaseQuantityOfProduct(cart: Cart) =
         cartDao.updateProduct(cart.copy(quantity = cart.quantity - 1))

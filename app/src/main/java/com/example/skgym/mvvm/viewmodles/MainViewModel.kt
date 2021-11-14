@@ -31,23 +31,20 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
     fun uploadUserdata(memberThis: Member, dataAdded: DataAdded) =
         repository.uploadUserdata(memberThis, dataAdded)
 
-
     fun sendUserToMainActivity() = repository.sendUserToMainActivity()
 
-
     fun isBranchExists(branch: String) = repository.doesUserAndBranchExists(branch)
-
 
     fun sendUserToHomeAuth() = repository.sendUserToHomeAuth()
 
     fun getAllPlans() = repository.fetchAllPlans()
+
     fun sendUsertogetBranchActivity() = repository.sendUserToGetBranchActivity()
 //    fun changeMemberStatus()=repository.changeMemberToTrue()
 
     fun forgotPass(email: String) = repository.forgotPassword(email)
 
     fun loadProducts(name: String) = repository.loadAllProducts(name)
-
 
     fun addPlanToData(demo: Plan?, branch: String) = repository.addPlanToUser(demo, branch)
 

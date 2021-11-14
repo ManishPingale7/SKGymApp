@@ -1,6 +1,7 @@
 package com.example.skgym.Room.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -34,6 +35,7 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
 
     fun pushOrdersToDb(cart: Cart) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("TAG", "pushOrdersToDb: pushing ViewMidel")
             repository.setPaymentToTrue(cart)
             repository.pushOrdersDb(cart)
         }

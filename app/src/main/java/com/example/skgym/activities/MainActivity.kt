@@ -1,9 +1,7 @@
 package com.example.skgym.activities
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -106,19 +104,15 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     }
 
     override fun onPaymentSuccess(msg: String?) {
-        Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show()
         pushDataToDb()
+        Toast.makeText(this, "Order Successful", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this, MainActivity::class.java))
     }
 
     private fun pushDataToDb() {
-        val userName: SharedPreferences =
-            getSharedPreferences("username", Context.MODE_PRIVATE)
-        val name = userName.getString("username", "").toString()
-        Log.d(TAG, "pushDataToDb: $name")
+        Log.d(TAG, "pushDataToDb: PUSHING DATA!")
         cartViewModel.readUnpaidData.observe(this) {
-            val userBranch: SharedPreferences =
-                getSharedPreferences("userBranch", Context.MODE_PRIVATE)
+            Log.d(TAG, "pushDataToDb: DATA WHICH IS BEING PUSHED: $it")
             for (i in it) {
                 cartViewModel.pushOrdersToDb(
                     i.copy(
