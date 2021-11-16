@@ -1,18 +1,19 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
+    android:orientation="vertical"
     app:cardCornerRadius="10dp"
-    app:cardElevation="12dp"
-    android:orientation="vertical">
+    app:cardElevation="12dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="100">
+        android:weightSum="100"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -30,12 +31,12 @@
 
 
         <LinearLayout
-            android:layout_width="0dp"
             android:id="@+id/productInfoLay"
+            android:layout_width="0dp"
 
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="60">
+            android:layout_weight="60"
+            android:orientation="vertical">
 
 
             <TextView
@@ -58,15 +59,14 @@
                 android:fontFamily="@font/montserratsemibold"
                 android:gravity="start"
                 android:text="@string/product_price"
-                android:textColor="@color/productPrColor"
-                />
+                android:textColor="@color/productPrColor" />
 
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/bottomMinusButton"

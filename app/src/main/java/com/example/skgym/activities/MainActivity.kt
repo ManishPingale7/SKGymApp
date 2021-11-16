@@ -1,7 +1,12 @@
 package com.example.skgym.activities
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.ConnectivityManager.TYPE_MOBILE
+import android.net.ConnectivityManager.TYPE_WIFI
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -45,7 +50,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-
+        checkInternet()
         setSupportActionBar(binding.toolbarMain)
         val actionBar: ActionBar? = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -128,5 +133,18 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     override fun onPaymentError(code: Int, msg: String?) {
         Toast.makeText(this, "Payment Failed", Toast.LENGTH_SHORT).show()
         Log.d("TAG", "onPaymentError: $code and $msg")
+    }
+
+    private fun checkInternet() {
+        val connected: Boolean
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connected =
+            connectivityManager.getNetworkInfo(TYPE_MOBILE)!!.state == NetworkInfo.State.CONNECTED ||
+                    connectivityManager.getNetworkInfo(TYPE_WIFI)!!.state == NetworkInfo.State.CONNECTED
+
+        if (!connected)
+            startActivity(Intent(this, NoInternetActivity::class.java))
+
     }
 }

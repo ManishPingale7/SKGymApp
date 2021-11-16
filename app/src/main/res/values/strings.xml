@@ -134,4 +134,6 @@
     <string name="bought_date">Bought Date</string>
     <string name="okay">Okay</string>
     <string name="cancel">Cancel</string>
+    <string name="your_orders_history">Your Orders History</string>
+    <string name="delivery_status">Delivery Status</string>
 </resources>

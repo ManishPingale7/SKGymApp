@@ -100,6 +100,29 @@
                     android:text="@string/bought_date"
                     android:textColor="@color/black" />
 
+                <TextView
+                    android:id="@+id/productStatusHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:gravity="start"
+                    android:text="@string/delivery_status"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/productStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserratsemibold"
+                    android:gravity="start"
+                    android:text="@string/delivery_status"
+                    android:textColor="@color/black" />
+
 
             </LinearLayout>
 
