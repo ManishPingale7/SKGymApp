@@ -52,7 +52,6 @@ class Home : Fragment() {
         isDatatakenB = isDataTaken.getBoolean("isDataTaken", false)
 
 
-
         val isBTaken = isBranchTaken.getBoolean("isBranchTaken", false)
 
         if (isBTaken) {
@@ -117,7 +116,7 @@ class Home : Fragment() {
                     planEdit.putString("PlanFees", plan.fees)
                     planEdit.putString("PlanKey", plan.key)
                     planEdit.putString("PlanTimeNumber", plan.timeNumber)
-                    planEdit.putBoolean("PlanPT", plan.pt?:false)
+                    planEdit.putBoolean("PlanPT", plan.pt ?: false)
                     planEdit.putInt("PlanTotalDays", plan.totalDays)
                     planEdit.apply()
                     Log.d(TAG, "getCurrentPlan: $plan")
@@ -149,9 +148,9 @@ class Home : Fragment() {
         viewModel =
             ViewModelProviders.of(this, component.getFactory()).get(MainViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
-        if (mAuth.currentUser == null) {
+        if (mAuth.currentUser == null)
             viewModel.sendUserToHomeAuth()
-        }
+
     }
 
 

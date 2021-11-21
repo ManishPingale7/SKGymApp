@@ -27,6 +27,7 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
 
     fun sendUserToViewPlanActivity() = repository.sendUserToViewPlanActivity()
 
+    fun checkStatsCondition() = repository.checkIfStatsExists()
 
     fun uploadUserdata(memberThis: Member, dataAdded: DataAdded) =
         repository.uploadUserdata(memberThis, dataAdded)
@@ -59,4 +60,5 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
         return repository.fetchPlan(planKey)
     }
 
+    fun pushStats(totalPrice: Int) = repository.updateStats(totalPrice)
 }

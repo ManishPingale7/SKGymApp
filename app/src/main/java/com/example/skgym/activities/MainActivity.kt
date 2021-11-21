@@ -23,6 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.skgym.R
 import com.example.skgym.Room.viewmodels.CartViewModel
 import com.example.skgym.auth.HomeAuth
+import com.example.skgym.data.Product
 import com.example.skgym.databinding.ActivityMainBinding
 import com.example.skgym.di.component.DaggerFactoryComponent
 import com.example.skgym.di.modules.FactoryModule
@@ -31,12 +32,14 @@ import com.example.skgym.mvvm.repository.MainRepository
 import com.example.skgym.mvvm.viewmodles.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.gson.Gson
 import com.razorpay.PaymentResultListener
 import java.text.DateFormat
 
 
 class MainActivity : AppCompatActivity(), PaymentResultListener {
-
+    private val gson = Gson()
+    var totalPrice = 0
     private lateinit var mAuth: FirebaseAuth
     private var currentuser: FirebaseUser? = null
     private lateinit var viewModel: MainViewModel
@@ -114,11 +117,21 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         startActivity(Intent(this, MainActivity::class.java))
     }
 
+
     private fun pushDataToDb() {
         Log.d(TAG, "pushDataToDb: PUSHING DATA!")
+        totalPrice = 0
         cartViewModel.readUnpaidData.observe(this) {
-            Log.d(TAG, "pushDataToDb: DATA WHICH IS BEING PUSHED: $it")
             for (i in it) {
+                //Getting total price
+                totalPrice += (i.quantity * gson.fromJson(
+                    i.product,
+                    Product::class.java
+                ).price.toInt())
+                viewModel.pushStats(totalPrice)
+
+                Log.d(TAG, "pushDataToDb: TotalPrice $totalPrice")
+
                 cartViewModel.pushOrdersToDb(
                     i.copy(
                         paymentDone = true,
