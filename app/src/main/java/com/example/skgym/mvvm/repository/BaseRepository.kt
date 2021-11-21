@@ -43,6 +43,7 @@ import java.util.*
 import java.util.Calendar.*
 import kotlin.math.ceil
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
     val mFirestore = Firebase.firestore
