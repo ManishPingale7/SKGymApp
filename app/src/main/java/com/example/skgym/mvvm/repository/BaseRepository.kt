@@ -43,6 +43,7 @@ import java.util.*
 import java.util.Calendar.*
 import kotlin.math.ceil
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
     val mFirestore = Firebase.firestore
@@ -381,43 +382,29 @@ abstract class BaseRepository(private var contextBase: Context) {
 
             }
 
-//        fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.hasChild(STATS))
-//                    contextBase.getSharedPreferences("Stats", Context.MODE_PRIVATE).edit()
-//                        .putBoolean("StatsExists", true).apply()
-//                else
-//                    contextBase.getSharedPreferences("Stats", Context.MODE_PRIVATE).edit()
-//                        .putBoolean("StatsExists", false).apply()
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+        fun updateStats(totalPrice: Int) {
+            val calendar = Calendar.getInstance()
+            val ref =
+                fDatabase.reference.child(STATS).child(PRODUCT_STATS)
+                    .child(calendar.get(YEAR).toString())
+                    .child((calendar.get(MONTH) + 1).toString())
+                    .child(ceil(calendar.get(DAY_OF_MONTH) / 7.0).toInt().toString())
+
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChild("Profit")) {
+                        val profit = snapshot.value as HashMap<String, Int>
+                        snapshot.ref.child("Profit")
+                            .setValue(profit["Profit"]!!.toInt() + totalPrice)
+                    } else
+                        ref.child("Profit").setValue(totalPrice)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("NOPE!")
+                }
+            })
+        }
+
     }
-
-    fun updateStats(totalPrice: Int) {
-        val calendar = Calendar.getInstance()
-        val ref =
-            fDatabase.reference.child(STATS).child(PRODUCT_STATS)
-                .child(calendar.get(YEAR).toString())
-                .child((calendar.get(MONTH) + 1).toString())
-                .child(ceil(calendar.get(DAY_OF_MONTH) / 7.0).toInt().toString())
-
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.hasChild("Profit")) {
-                    val profit = snapshot.value as HashMap<String, Int>
-                    snapshot.ref.child("Profit").setValue(profit["Profit"]!!.toInt() + totalPrice)
-                } else
-                    ref.child("Profit").setValue(totalPrice)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("NOPE!")
-            }
-        })
-    }
-
 }
