@@ -25,6 +25,8 @@ import com.example.skgym.utils.Constants.ISMEMBER
 import com.example.skgym.utils.Constants.PLANKEY
 import com.example.skgym.utils.Constants.PLANS
 import com.example.skgym.utils.Constants.PRODUCTS
+import com.example.skgym.utils.Constants.PRODUCT_STATS
+import com.example.skgym.utils.Constants.STATS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -38,6 +40,8 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Calendar.*
+import kotlin.math.ceil
 
 abstract class BaseRepository(private var contextBase: Context) {
     var fDatabase = FirebaseDatabase.getInstance()
@@ -48,10 +52,9 @@ abstract class BaseRepository(private var contextBase: Context) {
     var mAuthBase = FirebaseAuth.getInstance()
     private val userId = mAuthBase.uid.toString()
 
-
-    val userPref: SharedPreferences =
+    private val userPref: SharedPreferences =
         contextBase.getSharedPreferences("isDataTaken", Context.MODE_PRIVATE)
-    val dataEdit = userPref.edit()
+    val dataEdit = userPref.edit()!!
 
     fun signOut() {
         mAuthBase.signOut()
@@ -207,6 +210,7 @@ abstract class BaseRepository(private var contextBase: Context) {
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.d(TAG, "onCancelled: ${error.message}")
+                    TODO("Not implemented yet")
                 }
             })
         }
@@ -357,4 +361,63 @@ abstract class BaseRepository(private var contextBase: Context) {
                 }
             })
     }
+
+/*Task-> Dashboard
+* 1)Check whether dashboard node exists or not
+* 2)if not then create if yes then get the data and do changes
+*   and append that data
+* */
+
+    fun checkIfStatsExists() {
+
+        fDatabase.reference.child("Stats").child("Data").get()
+            .addOnSuccessListener {
+                Log.d("IMPORTANT", "checkIfStatsExists: $it")
+            }.addOnFailureListener {
+                Log.d(
+                    "IMPORTANT",
+                    "checkIfStatsExists: ${it.stackTrace} \n ${it.message} \n ${it.message}"
+                )
+
+            }
+
+//        fDatabase.reference.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.hasChild(STATS))
+//                    contextBase.getSharedPreferences("Stats", Context.MODE_PRIVATE).edit()
+//                        .putBoolean("StatsExists", true).apply()
+//                else
+//                    contextBase.getSharedPreferences("Stats", Context.MODE_PRIVATE).edit()
+//                        .putBoolean("StatsExists", false).apply()
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+    }
+
+    fun updateStats(totalPrice: Int) {
+        val calendar = Calendar.getInstance()
+        val ref =
+            fDatabase.reference.child(STATS).child(PRODUCT_STATS)
+                .child(calendar.get(YEAR).toString())
+                .child((calendar.get(MONTH) + 1).toString())
+                .child(ceil(calendar.get(DAY_OF_MONTH) / 7.0).toInt().toString())
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChild("Profit")) {
+                    val profit = snapshot.value as HashMap<String, Int>
+                    snapshot.ref.child("Profit").setValue(profit["Profit"]!!.toInt() + totalPrice)
+                } else
+                    ref.child("Profit").setValue(totalPrice)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("NOPE!")
+            }
+        })
+    }
+
 }

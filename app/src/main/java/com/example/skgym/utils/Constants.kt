@@ -1,6 +1,8 @@
 package com.example.skgym.utils
 
 object Constants {
+    const val PRODUCT_STATS = "ProductStats"
+    const val STATS = "Stats"
     const val KEY_ID = "rzp_test_MbMaA0scjOVfmP"
     const val BRANCHES_SPINNER = "BranchesNames"
     const val USERS = "Users"
