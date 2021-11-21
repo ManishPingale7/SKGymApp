@@ -1,7 +1,6 @@
 package com.example.skgym.mvvm.viewmodles
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.skgym.Interfaces.BranchInterface
 import com.example.skgym.Interfaces.DataAdded
@@ -56,9 +55,9 @@ class MainViewModel constructor(var repository: MainRepository) : ViewModel() {
         repository.getUserCurrentPlanKey(branch, isMemberCallBack)
     }
 
-    fun fetchPlan(planKey: String): MutableLiveData<Plan> {
-        return repository.fetchPlan(planKey)
-    }
+    fun fetchPlan(planKey: String) =
+        repository.fetchPlan(planKey)
+
 
     fun pushStats(totalPrice: Int) = repository.updateStats(totalPrice)
 }
