@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/subtotaltext"
@@ -19,8 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/montserratsemibold"
-            android:layout_marginTop="20dp"
             android:text="@string/subtotal"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -30,10 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/montserratsemibold"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@id/subtotaltext"
             android:contentDescription="@string/todo"
+            android:fontFamily="@font/montserratsemibold"
             android:text="@string/_0"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -42,11 +42,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/proceed_toBuy"
-            android:layout_width="200dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_btn_green"
             android:text="@string/proceed_to_buy"
